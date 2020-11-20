@@ -1,0 +1,1 @@
+Object, 客观的, Subject, 主观的

@@ -1,0 +1,63 @@
+<div>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6">书名:</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <input nz-input type="text" name="bookName" [(ngModel)]="bookName" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6">作者:</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <input nz-input type="text" name="author" [(ngModel)]="author" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6">价格:</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <input nz-input type="text" name="price" [(ngModel)]="price" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control [nzSpan]="24">
+      <button nz-button class="login-form-button" nzType="primary" (click)="submit()">提交</button>
+    </nz-form-control>
+  </nz-form-item>
+
+
+
+
+  <form nz-form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6">书名:</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input nz-input type="text" formControlName="bookName" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6">作者:</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input nz-input type="text" formControlName="author" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6">价格:</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input nz-input type="text" formControlName="price" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control [nzSpan]="24">
+        <button nz-input type="submit" class="login-form-button" nz-button nzType="primary"
+          [disabled]="!profileForm.valid">提交</button>
+      </nz-form-control>
+    </nz-form-item>
+  <nz-form-item>
+    <nz-form-control [nzSpan]="24">
+      <button  nz-input  class="login-form-button" (click)="updateProfile()">更新</button>
+    </nz-form-control>
+  </nz-form-item>
+
+  </form>
+
+
+</div>
