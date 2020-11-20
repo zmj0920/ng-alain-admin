@@ -1,10 +1,10 @@
 import { ActionReducerMap, MetaReducer } from '@ngrx/store';
-import { environment } from '@/environments/environment';
+import { environment } from '../../../environments/environment';
 import { BookState, bookReducer } from './book.reducer';
 
 // 项目中全部的状态
 export interface State {
-  book: BookState;
+  book: BookState
 }
 
 // 全部的reducer函数

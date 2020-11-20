@@ -1,10 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit,Input,Output,EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { filter, map  } from 'rxjs/internal/operators';
 import { Observable, Observer } from 'rxjs';
-import { BookService } from '@service/book.service';
-
-
+import { BookService } from '../../service/book.service';
 @Component({
   selector: 'app-book3',
   templateUrl: './book3.component.html',
@@ -23,12 +21,12 @@ export class Book3Component implements OnInit {
     setInterval(() => observer.next(new Date().toString()), 1000);
   });
  // @Input() myTitle: string; 直接取值使用变量名字
-  @Input('myTitle') id: string; // 接收并更改变量名字赋值
+  @Input('myTitle') id: string; //接收并更改变量名字赋值
 
   @Output() deleteEvent: EventEmitter<any> = new EventEmitter();
 
-  del(data) {
-    this.deleteEvent.emit(data);
+  del(data){
+    this.deleteEvent.emit(data)
   }
 
   sendMessage() {
@@ -37,7 +35,7 @@ export class Book3Component implements OnInit {
 
 
   ngOnInit() {
-
+    
     this.form = this.formBuilder.group({
       username: ['', Validators.required],
       hobby: [''],
@@ -49,7 +47,7 @@ export class Book3Component implements OnInit {
       filter(() => this.form.valid),
       map(data => {
         data.lastTime = new Date();
-        return data;
+        return data
      })
     )
     .subscribe(res => console.log(res));

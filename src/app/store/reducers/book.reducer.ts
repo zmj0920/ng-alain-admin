@@ -4,12 +4,12 @@ import { createReducer, on, Action } from '@ngrx/store';
 
 // 定义初始化值的类型
 export interface BookState {
-  bookList: Array<BookType>;
+  bookList: Array<BookType>
 }
 
 export const initStateBook: BookState = {
   bookList: []
-};
+}
 
 const reducer = createReducer(
   initStateBook,
@@ -19,7 +19,7 @@ const reducer = createReducer(
   on(delBook, (state, { book }) => {
     return { bookList: state.bookList.filter(item => item !== book) };
   })
-);
+)
 
 export function bookReducer(state: BookState, action: Action) {
   return reducer(state, action);

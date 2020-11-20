@@ -3,8 +3,8 @@ import { AppStoreModule } from '@store/store.module';
 import { Component, OnInit, Attribute } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Subscription, of, Observable, from, timer, Subject, interval } from 'rxjs';
-import { filter, map, take, multicast, refCount, first } from 'rxjs/operators';
+import { Subscription, of, Observable, from, timer, Subject, interval} from 'rxjs';
+import { filter, map, take, multicast, refCount, first} from 'rxjs/operators';
 
 interface Lengthwise {
   num: number;
@@ -33,17 +33,19 @@ export class Book1Component implements OnInit {
     this.title = title;
     console.log(this.title);
    }
+
+  // tslint:disable-next-line: typedef
   demo1() {
     first()(of(1, 2, 3)).subscribe((v) => console.log(`value: ${v}`));
   }
+
   ngOnInit() {
-    this.demo1();
+    this.demo1()
     // this.loggingIdentity({ length: 10, value: 3 });
     this.subscription = of('桃子', '鲤鱼').pipe(
       filter(v => v === '桃子'),
       map(v => v + '罐头')
     ).subscribe(console.log);
-
 
     // const num$ = of(1, 2, 3, 4).pipe(
     //   map((item) => console.log(item)),
@@ -70,12 +72,14 @@ export class Book1Component implements OnInit {
     }
   }
 
+  // tslint:disable-next-line: typedef
   onSubmit() {
-    // TODO: Use EventEmitter with form value
+
     console.warn(this.profileForm.value);
     this.store.dispatch(addBook({ book: { ...this.profileForm.value } }));
   }
 
+  // tslint:disable-next-line: typedef
   updateProfile() {
     this.profileForm.patchValue({
       bookName: 'Nancy'
