@@ -4,11 +4,11 @@
   <p>{{id}}</p>
     <form [formGroup]="form">
         username: <input type="text" name="username" formControlName="username">
-        hobby: 
+        hobby:
           <select name="hobby" formControlName="hobby">
             <option value="sleep">sleep</option>
             <option value="play">play</option>
-          </select>    
+          </select>
     </form>
     <div><code>observable|async</code>: Time: {{ time | async }}</div>
     <p>A: {{123 | currency}}</p>

@@ -9,6 +9,7 @@ export class BookService {
   constructor() { }
 
   private msg = new Subject<string>();
+  
   // 发送消息
   sendMessage(message: string) {
     this.msg.next(message);

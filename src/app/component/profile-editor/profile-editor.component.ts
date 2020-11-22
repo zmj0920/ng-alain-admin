@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { FormBuilder,FormArray ,Validators} from '@angular/forms';
-
+import { FormBuilder } from '@angular/forms';
+import { Validators } from '@angular/forms';
+import { FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-profile-editor',
@@ -8,7 +9,6 @@ import { FormBuilder,FormArray ,Validators} from '@angular/forms';
   styleUrls: ['./profile-editor.component.css']
 })
 export class ProfileEditorComponent {
-  constructor(private fb: FormBuilder) { }
   profileForm = this.fb.group({
     firstName: ['', Validators.required],
     lastName: [''],
@@ -27,7 +27,7 @@ export class ProfileEditorComponent {
     return this.profileForm.get('aliases') as FormArray;
   }
 
-
+  constructor(private fb: FormBuilder) { }
 
 
   updateProfile() {

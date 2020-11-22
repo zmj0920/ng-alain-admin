@@ -1,7 +1,31 @@
 <app-book1></app-book1>
-<table class="table table-striped table-bordered">
+<nz-table #basicTable [nzData]="bookList">
   <thead>
-    <tr appTest>
+    <tr>
+      <th>No.</th>
+      <th>作者</th>
+      <th>书名</th>
+      <th>价格</th>
+      <th>创建时间</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of basicTable.data;let i = index;">
+      <td>{{i+1}}</td>
+      <td>{{data.author}}</td>
+      <td>{{data.bookName}}</td>
+      <td>{{data.price}}</td>
+      <td>{{data.createAt | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+      <td>
+        <button (click)="delBook(book)" class="btn btn-danger">删除</button>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
+<!-- <table class="table table-striped table-bordered">
+  <thead>
+    <tr>
       <th>No.</th>
       <th>作者</th>
       <th>书名</th>
@@ -22,9 +46,9 @@
       </td>
     </tr>
   </tbody>
-</table>
+</table> -->
 {{alertMsg}}
 <button id="searchBox">监听</button>
-<app-book3 myTitle="父组件传值：hello" account-id="4747" (value)="alertMsg"  (deleteEvent)="rcvMsg($event)"></app-book3>
+<!-- <app-book3 myTitle="父组件传值：hello" account-id="4747" (value)="alertMsg"  (deleteEvent)="rcvMsg($event)"></app-book3> -->
 
 <app-profile-editor></app-profile-editor>

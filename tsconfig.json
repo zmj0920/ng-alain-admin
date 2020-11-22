@@ -31,14 +31,17 @@
       "@component/*": [
         "src/app/component/*"
       ],
-      "@service/*": [
-        "src/app/service/*"
+      "@services/*": [
+        "src/app/core/services/*"
       ],
       "@pipe/*": [
-        "src/app/utils/pipe/*"
+        "src/app/core/pipe/*"
       ],
       "@directive/*": [
-        "src/app/utils/directive/*"
+        "src/app/core/directive/*"
+      ],
+      "@core/*": [
+        "src/app/core/*"
       ],
       "@/*": ["./src/*"]
     }
