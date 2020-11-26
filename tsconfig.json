@@ -7,29 +7,26 @@
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
-    "module": "esnext",
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2015",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
+    "module": "es2020",
     "lib": [
       "es2018",
       "dom"
     ],
     "paths": {
-      "@store/*": [
-        "src/app/store/*"
+      "@shared": [
+        "src/app/shared/index"
       ],
-      "@routes/*": [
-        "src/app/routes/*"
+      "@core": [
+        "src/app/core/index"
       ],
-      "@pages/*": [
-        "src/app/pages/*"
+      "@core/*": [
+        "src/app/core/*"
       ],
-      "@component/*": [
-        "src/app/component/*"
+      "@env/*": [
+        "src/environments/*"
       ],
       "@services/*": [
         "src/app/core/services/*"
@@ -40,14 +37,6 @@
       "@directive/*": [
         "src/app/core/directive/*"
       ],
-      "@core/*": [
-        "src/app/core/*"
-      ],
-      "@/*": ["./src/*"]
     }
-  },
-  "angularCompilerOptions": {
-    "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true
   }
 }

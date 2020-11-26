@@ -9,13 +9,13 @@ export class BookService {
   constructor() { }
 
   private msg = new Subject<string>();
-  
+
   // 发送消息
-  sendMessage(message: string) {
+  sendMessage(message: string): void  {
     this.msg.next(message);
   }
   // 清除消息
-  clearMessage() {
+  clearMessage(): void {
     this.msg.next();
   }
   // 获取消息

@@ -3,11 +3,21 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "ng s -o",
+    "build": "node --max_old_space_size=5120 ./node_modules/@angular/cli/bin/ng build --prod",
     "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "lint": "npm run lint:ts && npm run lint:style",
+    "e2e": "ng e2e",
+    "analyze": "node --max_old_space_size=5120 ./node_modules/@angular/cli/bin/ng build --prod --stats-json",
+    "test-coverage": "ng test --code-coverage --watch=false",
+    "color-less": "ng-alain-plugin-theme -t=colorLess",
+    "theme": "ng-alain-plugin-theme -t=themeCss",
+    "icon": "ng g ng-alain:plugin icon",
+    "lint:ts": "ng lint --fix",
+    "lint:style": "stylelint \"src/**/*.less\" --syntax less --fix",
+    "pretty-quick": "pretty-quick",
+    "tslint-check": "tslint-config-prettier-check ./tslint.json",
+    "hmr": "ng serve -c=hmr"
   },
   "private": true,
   "dependencies": {
@@ -19,11 +29,24 @@
     "@angular/platform-browser": "~10.2.0",
     "@angular/platform-browser-dynamic": "~10.2.0",
     "@angular/router": "~10.2.0",
-    "@ngrx/store": "^10.0.1",
-    "ng-zorro-antd": "^10.1.2",
+    "ng-alain": "^10.1.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.10.2",
+    "ng-zorro-antd": "^10.1.1",
+    "screenfull": "^5.0.2",
+    "ajv": "^6.12.4",
+    "@delon/abc": "^10.1.2",
+    "@delon/acl": "^10.1.2",
+    "@delon/auth": "^10.1.2",
+    "@delon/cache": "^10.1.2",
+    "@delon/form": "^10.1.2",
+    "@delon/mock": "^10.1.2",
+    "@delon/theme": "^10.1.2",
+    "@delon/util": "^10.1.2",
+    "@delon/chart": "^10.1.2",
+    "@ngx-translate/core": "^13.0.0",
+    "@ngx-translate/http-loader": "^6.0.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1002.0",
@@ -32,7 +55,6 @@
     "@types/node": "^12.11.1",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
-    "@ngrx/store-devtools": "^10.0.1",
     "codelyzer": "^6.0.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
@@ -44,6 +66,28 @@
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
-    "typescript": "~4.0.2"
+    "typescript": "~4.0.2",
+    "ng-alain": "^10.1.2",
+    "ng-alain-codelyzer": "^0.0.1",
+    "ng-alain-plugin-theme": "^10.0.3",
+    "@delon/testing": "^10.1.2",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-language-service": "^0.9.9",
+    "pretty-quick": "^3.0.2",
+    "husky": "^4.2.3",
+    "prettier": "^2.1.2",
+    "stylelint": "^13.7.0",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-rational-order": "^0.1.2",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-declaration-block-no-ignored-properties": "^2.3.0",
+    "stylelint-order": "^4.1.0",
+    "nz-tslint-rules": "^0.901.2",
+    "@angularclass/hmr": "^3.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   }
 }
