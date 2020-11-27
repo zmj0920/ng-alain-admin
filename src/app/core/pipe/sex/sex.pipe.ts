@@ -1,12 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { retry } from 'rxjs/internal/operators';
 
-@Pipe({
-  name: 'sex'
-})
+@Pipe({name: 'sex'})
 export class SexPipe implements PipeTransform {
 
-  transform(value: any, ...args: any[]): any {
+  transform(value: unknown, ...args: unknown[]): unknown {
     if (value === 0){
       return '女';
     }

@@ -78,6 +78,7 @@ const GLOBAL_THIRD_MODULES = [
 
 // #region Startup Service
 import { StartupService } from '@core';
+// tslint:disable-next-line: typedef
 export function StartupServiceFactory(startupService: StartupService) {
   return () => startupService.load();
 }
@@ -99,10 +100,9 @@ import { LayoutModule } from './layout/layout.module';
 import { RoutesModule } from './routes/routes.module';
 import { SharedModule } from './shared/shared.module';
 import { STWidgetModule } from './shared/st-widget/st-widget.module';
-
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
