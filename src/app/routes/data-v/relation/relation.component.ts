@@ -2,19 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { _HttpClient } from '@delon/theme';
 import { BookService } from '@services/book/book.service';
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
+  selector: 'app-data-v-relation',
+  templateUrl: './relation.component.html',
 })
-export class DashboardComponent implements OnInit {
+export class RelationComponent implements OnInit {
   public alertMsg: string;
   birthday = new Date('Fri Nov 27 2020 10:46:58 GMT+0800');
   myInput = 0;
-  constructor(private http: _HttpClient, private bookService: BookService) { }
+  constructor(private http: _HttpClient, private bookService: BookService) {}
 
   // tslint:disable-next-line: typedef
   ngOnInit() {
-     // 消息提示 从service获取消息内容
-     this.bookService.getMessage().subscribe(value => {
+    // 消息提示 从service获取消息内容
+    this.bookService.getMessage().subscribe((value) => {
       this.alertMsg = value;
     });
   }
@@ -23,5 +23,4 @@ export class DashboardComponent implements OnInit {
   sendMessage() {
     this.bookService.sendMessage('显示成功');
   }
-
 }

@@ -45,35 +45,32 @@ const I18NSERVICE_MODULES = [
     loader: {
       provide: TranslateLoader,
       useFactory: I18nHttpLoaderFactory,
-      deps: [HttpClient]
-    }
-  })
+      deps: [HttpClient],
+    },
+  }),
 ];
 
-const I18NSERVICE_PROVIDES = [
-  { provide: ALAIN_I18N_TOKEN, useClass: I18NService, multi: false }
-];
+const I18NSERVICE_PROVIDES = [{ provide: ALAIN_I18N_TOKEN, useClass: I18NService, multi: false }];
 // #region
 
 // #region JSON Schema form (using @delon/form)
 import { JsonSchemaModule } from '@shared';
-const FORM_MODULES = [ JsonSchemaModule ];
+const FORM_MODULES = [JsonSchemaModule];
 // #endregion
-
 
 // #region Http Interceptors
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DefaultInterceptor } from '@core';
 import { SimpleInterceptor } from '@delon/auth';
 const INTERCEPTOR_PROVIDES = [
-  { provide: HTTP_INTERCEPTORS, useClass: SimpleInterceptor, multi: true},
-  { provide: HTTP_INTERCEPTORS, useClass: DefaultInterceptor, multi: true}
+  { provide: HTTP_INTERCEPTORS, useClass: SimpleInterceptor, multi: true },
+  { provide: HTTP_INTERCEPTORS, useClass: DefaultInterceptor, multi: true },
 ];
 // #endregion
 
 // #region global third module
-const GLOBAL_THIRD_MODULES = [
-];
+// const GLOBAL_THIRD_MODULES = [
+// ];
 // #endregion
 
 // #region Startup Service
@@ -88,8 +85,8 @@ const APPINIT_PROVIDES = [
     provide: APP_INITIALIZER,
     useFactory: StartupServiceFactory,
     deps: [StartupService],
-    multi: true
-  }
+    multi: true,
+  },
 ];
 // #endregion
 
@@ -101,9 +98,7 @@ import { RoutesModule } from './routes/routes.module';
 import { SharedModule } from './shared/shared.module';
 import { STWidgetModule } from './shared/st-widget/st-widget.module';
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -116,14 +111,9 @@ import { STWidgetModule } from './shared/st-widget/st-widget.module';
     STWidgetModule,
     ...I18NSERVICE_MODULES,
     ...FORM_MODULES,
-    ...GLOBAL_THIRD_MODULES
+    // ...GLOBAL_THIRD_MODULES
   ],
-  providers: [
-    ...LANG_PROVIDES,
-    ...INTERCEPTOR_PROVIDES,
-    ...I18NSERVICE_PROVIDES,
-    ...APPINIT_PROVIDES
-  ],
-  bootstrap: [AppComponent]
+  providers: [...LANG_PROVIDES, ...INTERCEPTOR_PROVIDES, ...I18NSERVICE_PROVIDES, ...APPINIT_PROVIDES],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

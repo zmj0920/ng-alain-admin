@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { NgModule, Type } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { DelonACLModule } from '@delon/acl';
@@ -7,21 +7,20 @@ import { DelonFormModule } from '@delon/form';
 import { AlainThemeModule } from '@delon/theme';
 import { TranslateModule } from '@ngx-translate/core';
 
-// #region third libs
-import { DirectiveModule } from '@core/directive';
 import { SHARED_DELON_MODULES } from './shared-delon.module';
 import { SHARED_ZORRO_MODULES } from './shared-zorro.module';
 
-const THIRDMODULES = [ ];
+// #region third libs
+import { CountdownModule } from 'ngx-countdown';
+import { NgxTinymceModule } from 'ngx-tinymce';
+import { UEditorModule } from 'ngx-ueditor';
 
+const THIRDMODULES = [CountdownModule, UEditorModule, NgxTinymceModule];
 // #endregion
 
 // #region your componets & directives
-
-const COMPONENTS = [];
-const DIRECTIVES = [];
-
-
+const COMPONENTS: Type<any>[] = [];
+const DIRECTIVES: Type<any>[] = [];
 // #endregion
 
 @NgModule({
@@ -33,11 +32,10 @@ const DIRECTIVES = [];
     AlainThemeModule.forChild(),
     DelonACLModule,
     DelonFormModule,
-    DirectiveModule,
     ...SHARED_DELON_MODULES,
     ...SHARED_ZORRO_MODULES,
     // third libs
-    ...THIRDMODULES
+    ...THIRDMODULES,
   ],
   declarations: [
     // your components
@@ -59,7 +57,7 @@ const DIRECTIVES = [];
     ...THIRDMODULES,
     // your components
     ...COMPONENTS,
-    ...DIRECTIVES
-  ]
+    ...DIRECTIVES,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

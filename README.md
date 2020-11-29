@@ -4,86 +4,45 @@
   </a>
 </p>
 
-<h1 align="center">NG-ALAIN</h1>
+<h1 align="center">ng-learning</h1>
 
 <div align="center">
-  Out-of-box UI solution for enterprise applications, Let developers focus on business.
+  一个基于 Antd 中后台前端解决方案，提供更多通用性业务模块，让开发者更加专注于业务。
 
-  [![Build Status](https://dev.azure.com/ng-alain/ng-alain/_apis/build/status/ng-alain-CI?branchName=master)](https://dev.azure.com/ng-alain/ng-alain/_build/latest?definitionId=2&branchName=master)
-  [![Dependency Status](https://david-dm.org/ng-alain/ng-alain/status.svg?style=flat-square)](https://david-dm.org/ng-alain/ng-alain)
-  [![GitHub Release Date](https://img.shields.io/github/release-date/ng-alain/ng-alain.svg?style=flat-square)](https://github.com/ng-alain/ng-alain/releases)
-  [![NPM version](https://img.shields.io/npm/v/ng-alain.svg?style=flat-square)](https://www.npmjs.com/package/ng-alain)
-  [![prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://prettier.io/)
-  [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](https://github.com/ng-alain/ng-alain/blob/master/LICENSE)
-  [![Gitter](https://img.shields.io/gitter/room/ng-alain/ng-alain.svg?style=flat-square)](https://gitter.im/ng-alain/ng-alain)
-  [![ng-zorro-vscode](https://img.shields.io/badge/ng--zorro-VSCODE-brightgreen.svg?style=flat-square)](https://marketplace.visualstudio.com/items?itemName=cipchk.ng-zorro-vscode)
-  [![ng-alain-vscode](https://img.shields.io/badge/ng--alain-VSCODE-brightgreen.svg?style=flat-square)](https://marketplace.visualstudio.com/items?itemName=cipchk.ng-alain-vscode)
+  
 
 </div>
 
-English | [简体中文](README-zh_CN.md)
+[English](README.md) | 简体中文
 
-## Quickstart
+## 快速入门
 
-- [Getting Started](https://ng-alain.com/docs/getting-started)
 
-## Links
+## 链接
 
-+ [Document](https://ng-alain.com) ([Surge Mirror](https://ng-alain-doc.surge.sh))
-+ [@delon Source](https://github.com/ng-alain/delon)
-+ [DEMO](https://ng-alain.surge.sh) ([国内镜像](https://ng-alain.gitee.io/))
+## 特性
 
-## Features
-
-+ `ng-zorro-antd` based
-+ Responsive Layout
-+ I18n
-+ [@delon](https://github.com/ng-alain/delon)
-+ Lazy load Assets
-+ UI Router States
-+ Customize Theme
-+ Less preprocessor
-+ Well organized & commented code
-+ Simple upgrade
-+ Support Docker deploy
++ 基于 `ng-zorro-antd`
++ 响应式
++ 国际化
++ 基建类库 [@delon](https://github.com/ng-alain/delon)（包括：业务组件、ACL访问控制、缓存、授权、动态表单等）
++ 延迟加载及良好的启用画面
++ 良好的UI路由设计
++ 定制主题
++ Less预编译
++ 良好的目录组织结构
++ 简单升级
++ 支持Docker部署
 
 ## Architecture
 
 ![Architecture](https://raw.githubusercontent.com/ng-alain/delon/master/_screenshot/architecture.png)
 
-> [delon](https://github.com/ng-alain/delon) is a production-ready solution for admin business components packages, Built on the design principles developed by Ant Design.
+> [delon](https://github.com/ng-alain/delon) 是基于 Ant Design 设计理念的企业级中后台前端业务型组件库。
 
-## App Shots
+## 应用截图
 
 ![desktop](https://raw.githubusercontent.com/ng-alain/delon/master/_screenshot/desktop.png)
 ![ipad](https://raw.githubusercontent.com/ng-alain/delon/master/_screenshot/ipad.png)
 ![iphone](https://raw.githubusercontent.com/ng-alain/delon/master/_screenshot/iphone.png)
 
-## Contributing
-
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/ng-alain/ng-alain/pulls)
-
-We welcome all contributions. Please read our [CONTRIBUTING.md](https://github.com/ng-alain/ng-alain/blob/master/CONTRIBUTING.md) first. You can submit any ideas as [pull requests](https://github.com/ng-alain/ng-alain/pulls) or as [GitHub issues](https://github.com/ng-alain/ng-alain/issues).
-
-> If you're new to posting issues, we ask that you read [*How To Ask Questions The Smart Way*](http://www.catb.org/~esr/faqs/smart-questions.html) (**This guide does not provide actual support services for this project!**), [How to Ask a Question in Open Source Community](https://github.com/seajs/seajs/issues/545) and [How to Report Bugs Effectively](http://www.chiark.greenend.org.uk/~sgtatham/bugs.html) prior to posting. Well written bug reports help us help you!
-
-## Donation
-
-ng-alain is an MIT-licensed open source project. In order to achieve better and sustainable development of the project, we expect to gain more backers. You can support us in any of the following ways:
-
-- [patreon](https://www.patreon.com/cipchk)
-- [opencollective](https://opencollective.com/ng-alain)
-- [paypal](https://www.paypal.me/cipchk)
-- [支付宝或微信](https://ng-alain.com/assets/donate.png)
-
-Or purchasing our [business theme](https://e.ng-alain.com/).
-
-## Backers
-
-Thank you to all our backers! 🙏
-
-<a href="https://opencollective.com/ng-alain#backers" target="_blank"><img src="https://opencollective.com/ng-alain/backers.svg?width=890"></a>
-
-### License
-
-The MIT License (see the [LICENSE](https://github.com/ng-alain/ng-alain/blob/master/LICENSE) file for the full text)

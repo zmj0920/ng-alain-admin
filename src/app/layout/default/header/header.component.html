@@ -1,7 +1,7 @@
 <div class="alain-default__header-logo">
   <a [routerLink]="['/']" class="alain-default__header-logo-link">
-    <img class="alain-default__header-logo-expanded" src="./assets/logo-full.svg" alt="{{app.name}}" style="max-height:40px;" />
-    <img class="alain-default__header-logo-collapsed" src="./assets/logo.svg" alt="{{app.name}}" style="max-height:30px;" />
+    <img class="alain-default__header-logo-expanded" src="./assets/logo-full.svg" [attr.alt]="app.name" style="max-height: 40px" />
+    <img class="alain-default__header-logo-collapsed" src="./assets/logo.svg" [attr.alt]="app.name" style="max-height: 30px" />
   </a>
 </div>
 <div class="alain-default__nav-wrap">
@@ -9,7 +9,7 @@
     <!-- Menu -->
     <li>
       <div class="alain-default__nav-item" (click)="toggleCollapsedSidebar()">
-        <i nz-icon nzType="menu-{{collapsed ? 'unfold' : 'fold'}}"></i>
+        <i nz-icon nzType="menu-{{ collapsed ? 'unfold' : 'fold' }}"></i>
       </div>
     </li>
     <!-- Github Page -->
@@ -20,7 +20,7 @@
     </li>
     <!-- Lock Page -->
     <li class="hidden-mobile">
-      <div class="alain-default__nav-item" [routerLink]="['/lock']">
+      <div class="alain-default__nav-item" routerLink="/passport/lock">
         <i nz-icon nzType="lock"></i>
       </div>
     </li>
@@ -51,7 +51,7 @@
         <i nz-icon nzType="setting"></i>
       </div>
       <nz-dropdown-menu #settingsMenu="nzDropdownMenu">
-        <div nz-menu style="width:200px;">
+        <div nz-menu style="width: 200px">
           <div nz-menu-item>
             <header-fullscreen></header-fullscreen>
           </div>
