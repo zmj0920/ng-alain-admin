@@ -14,13 +14,13 @@ import { SHARED_ZORRO_MODULES } from './shared-zorro.module';
 import { CountdownModule } from 'ngx-countdown';
 import { NgxTinymceModule } from 'ngx-tinymce';
 import { UEditorModule } from 'ngx-ueditor';
-
+import { DIRECTIVES } from './directives';
+import { PROVIDERS_PIPES } from './pipes';
 const THIRDMODULES = [CountdownModule, UEditorModule, NgxTinymceModule];
 // #endregion
 
 // #region your componets & directives
 const COMPONENTS: Type<any>[] = [];
-const DIRECTIVES: Type<any>[] = [];
 // #endregion
 
 @NgModule({
@@ -41,6 +41,7 @@ const DIRECTIVES: Type<any>[] = [];
     // your components
     ...COMPONENTS,
     ...DIRECTIVES,
+    ...PROVIDERS_PIPES
   ],
   exports: [
     CommonModule,
@@ -58,6 +59,7 @@ const DIRECTIVES: Type<any>[] = [];
     // your components
     ...COMPONENTS,
     ...DIRECTIVES,
+    ...PROVIDERS_PIPES
   ],
 })
 export class SharedModule {}

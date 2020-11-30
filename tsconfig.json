@@ -31,12 +31,6 @@
       "@services/*": [
         "src/app/core/services/*"
       ],
-      "@pipe/*": [
-        "src/app/core/pipe/*"
-      ],
-      "@directive/*": [
-        "src/app/core/directive/*"
-      ],
     }
   }
 }
