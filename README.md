@@ -31,6 +31,16 @@
 
 ### 命名
 
+* 小驼峰形式（camelCase）：符号、属性、方法、管道名、非组件指令的选择器、常量。 小驼峰（也叫标准驼峰）形式的第一个字母要使用小写形式。比如 "selectedHero"。
+
+* 大驼峰形式（UpperCamelCase）或叫帕斯卡形式（PascalCase）：类名（包括用来定义组件、接口、NgModule、指令、管道等的类）。 大驼峰形式的第一个字母要使用大写形式。比如 "HeroListComponent"。
+
+* 中线形式（dash-case）或叫烤串形式（kebab-case）：文件名中的描述部分，组件的选择器。比如 "app-hero-list"。
+
+* 下划线形式（underscore_case）或叫蛇形形式（snake_case）：在 Angular 中没有典型用法。蛇形形式使用下划线连接各个单词。 比如 "convert_link_mode"。
+
+* 大写下划线形式（UPPER_UNDERSCORE_CASE）或叫大写蛇形形式（UPPER_SNAKE_CASE）：传统的常量写法（可以接受，但更推荐用小驼峰形式（camelCase）） 大蛇形形式使用下划线分隔的全大写单词。比如 "FIX_ME"。
+
 #### 坚持所有符号使用一致的命名规则。
 
 
@@ -433,10 +443,210 @@ export class LifecircleComponent {
         this.msg = "数据改变了";
     }
 }
-
-
 ```
 
+### 常用的内置结构型指令
+
+* 星号（*）前缀
+* 星号是一个用来简化更复杂语法的“语法糖”。 从内部实现来说，`Angular` 把 `*ngIf` 属性 翻译成一个 <ng-template> 元素, 并用它来包裹宿主元素
+
+* `Angular` 不允许`*ngFor` 和 `*ngIf` 放在同一个宿主元素上
+
+>【`ngIf`】表达式结果为真，显示元素；表达式结果为假，移除元素。
+
+```html
+<div *ngIf="a > b"></div> 
+```
+
+>【`ngSwitch`】对表达式进行一次求值，然后根据其结果来决定如何显示指令内的嵌套元素。
+
+*　一旦表达式有了结果，就可以
+
+* 使用`ngSwitchCase`指令描述已知结果；
+
+* 使用`ngSwitchDefault`指令处理所有其他未知情况。
+
+* 当你需要根据一个条件来渲染不同元素的时候，如下代码使用了`ngIf`来实现：
+
+```html
+<div class="container"> 
+　　<div *ngIf="myVar == 'A'">Var is A</div> 
+　　<div *ngIf="myVar == 'B'">Var is B</div> 
+　　<div *ngIf="myVar == 'C'">Var is C</div> 
+　　<div *ngIf="myVar != 'A' && myVar != 'B' && myVar != 'C'">Var is something else</div> 
+</div>
+```
+
+* 如你所见，`myVar` 的取值越多，最后的条件就变得非常繁琐。
+
+* 如果用 `ngSwitch` 指令重写：
+
+```html
+<div class="container" [ngSwitch]="myVar"> 
+    <div *ngSwitchCase="'A'">Var is A</div> 
+    <div *ngSwitchCase="'B'">Var is B</div> 
+    <div *ngSwitchCase="'C'">Var is C</div>
+    <div *ngSwitchDefault>Var is something else</div> 
+</div>
+```
+* `ngSwitchDefault`元素是可选的。如果我们不用它，那么当myVar没有匹配到任何期望的值时就不会渲染任何东西。
+
+* 你也可以为不同的元素声明同样的`*ngSwitchCase`值：
+
+* 这样，当`choice`的值为2时，第二个和第五个`<li></li>`都会被渲染。
+
+```html
+<div class="ui raised segment"> 
+    <ul [ngSwitch]="choice"> 
+        <li *ngSwitchCase="1">First choice</li> 
+        <li *ngSwitchCase="2">Second choice</li> 
+        <li *ngSwitchCase="3">Third choice</li> 
+        <li *ngSwitchCase="4">Fourth choice</li> 
+        <li *ngSwitchCase="2">Second choice, again</li> 
+        <li *ngSwitchDefault>Default choice</li> 
+    </ul> 
+</div>    
+```
+
+> 【`ngStyle`】根据表达式的结果给特定的DOM元素设定CSS属性
+
+* 该指令最简单的用法就是`[style.<cssproperty>]="value"`的形式：
+
+* `ngStyle`指令把`CSS`的`background-color`属性设置为字符串字面量 `yellow`。
+
+```html
+<div [style.background-color]="'yellow'"> 
+    Uses fixed yellow background 
+</div>
+```
+
+* 设置固定值的方式就是使用`ngStyle`属性，使用键值对来设置每个属性：
+```html
+
+<div 
+[ngStyle]="{color: 'white','background-color':'blue'}"> 
+    Uses fixed white text on blue background 
+</div>
+```
+
+
+>【`ngClass`】动态设置和改变一个给定`DOM`元素的`CSS`类
+
+* 传入一个对象字面量
+
+* 假设我们有一个叫作bordered的CSS类，用来给元素添加一个黑色虚线边框：
+
+* 使用ngClass指令来动态分配CSS类：
+
+```css
+.bordered { 
+    border: 1px dashed black; 
+    background-color: #eee; 
+} 
+```
+
+```html　
+<div [ngClass]="{bordered: isBordered}"> 
+    Using object literal. Border {{ isBordered ? "ON" : "OFF" }} 
+</div>
+```
+
+* 或者在组件中定义该对象，并且直接使用它：
+
+
+```ts
+export class NgClassSampleApp { 
+    isBordered: boolean; 
+    classesObj: Object; 
+    classList: string[];
+}
+```
+
+```html
+<div [ngClass]="classesObj"> 
+    Using object var. Border 
+    {{ classesObj.bordered ? "ON" : "OFF" }} 
+</div>
+```
+
+* 传入一个数组型字面量
+
+```html
+<div class="base" [ngClass]="['blue', 'round']"> 
+    This will always have a blue background and round corners 
+</div>
+```
+
+
+* 或者在组件中声明一个数组对象，并把它传进来：
+
+```html
+this.classList = ['blue', 'round'];
+
+<div class="base" [ngClass]="classList"> 
+    This is {{ classList.indexOf('blue') > -1 ? "" : "NOT" }} blue and {{ classList.indexOf('round') > -1 ? "" : "NOT" }} round 
+</div> 
+```
+
+>【`ngFor`】重复一个给定的`DOM`元素（或一组`DOM`元素），每次重复都会从数组中取一个不同的值
+
+* 它的语法是 `*ngFor="let item of items"`
+
+* `let item`语法指定一个用来接收`items`数组中每个元素的（模板）变量。
+
+* `items`是来自组件控制器的一组项的集合。
+
+* 假设在组件控制器中声明了一个城市的数组：
+
+```html
+this.cities = ['Miami', 'Sao Paulo', 'New York'];
+
+<div  *ngFor="let c of cities"> 
+    <div>{{ c }}</div> 
+</div> 
+```
+
+* 获取索引
+
+* 我们可以在`ngFor`指令的值中插入语法`let idx = index`并用分号分隔开，这样就可以获取索引了。
+
+* 例如，对第一个例子进行修改，添加代码段`let num = index`。
+
+```html
+<div *ngFor="let c of cities; let num = index"> 
+    <div>{{ num+1 }} - {{ c }}</div> 
+</div>
+```
+
+
+> 【`ngNonBindable`】当我们想告诉`Angular`不要编译或者绑定页面中的某个特殊部分时，要使用`ngNodBindable`指令
+
+* 假设我们想要用一个`div`来渲染变量`content`的内容，紧接着输出文本 `this is what {{ content }} rendered`来指向变量实际的值。通常情况下，`{{content}}`会被绑定到`content`变量的值，因为使用了`{{ }}`模板语法，为了能够渲染出纯文本，我们使用`ngNonBindable`指令：
+
+* 有了ngNonBindable属性，Angular不会编译第二个span里的内容，而是原封不动地将其显示出来：
+
+```html
+<div> 
+    <span>{{ content }}</span> 
+    <span ngNonBindable> 
+        &larr; This is what {{ content }} rendered 
+    </span> 
+</div> 
+```
+![](./README/0001.png)
+
+>【NgModle】 双向绑定到html表单元素
+
+* 虽然 ngModel 是一个有效的 Angular 指令，不过它在默认情况下是不可用的。
+
+* 它属于一个可选模块 FormsModule，必须自行添加此模块才能使用该指令。
+
+
+```html
+<div>
+  <input type="text" placeholder="name" [(ngModel)]="hero.name"/>
+</div>
+```
 
 
 API相关
@@ -450,3 +660,4 @@ API相关
 ng-content 表示组件内容占位符
 
 #tpl 开头表示 〈ng-template #tpl〉
+https://cloud.tencent.com/developer/news/492069
