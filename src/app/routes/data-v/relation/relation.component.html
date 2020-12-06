@@ -1,8 +1,8 @@
 <page-header [title]="'asdf'"></page-header>
-<div>
-  {{ alertMsg }}
-</div>
+<app-header (outer)="runParent($event)"></app-header>
+
 <button (click)="sendMessage()">Send Message</button>
+
 <div>{{ myInput| sex }}</div>
 <p appTest>My birthday is</p>
 {{ birthday | date }}

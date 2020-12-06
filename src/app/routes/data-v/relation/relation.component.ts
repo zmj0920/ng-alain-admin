@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { _HttpClient } from '@delon/theme';
 import { BookService } from '@services/book/book.service';
@@ -9,6 +9,8 @@ import { BookService } from '@services/book/book.service';
 })
 export class RelationComponent implements OnInit {
   public alertMsg: string;
+  public title: string = "我是父组件标题";
+
   birthday = new Date('Fri Nov 27 2020 10:46:58 GMT+0800');
   myInput = 0;
   constructor(private http: _HttpClient, private bookService: BookService) { }
@@ -19,7 +21,17 @@ export class RelationComponent implements OnInit {
     this.bookService.getMessage().subscribe((value) => {
       this.alertMsg = value;
     });
+
+    let observableAsny = this.bookService.observableAsny();
+
+    // 订阅
+    observableAsny.subscribe((data) => {
+      console.log(data)
+    })
+
+
   }
+
 
   // tslint:disable-next-line: typedef
   sendMessage() {
@@ -30,4 +42,10 @@ export class RelationComponent implements OnInit {
     console.log(f.value);  // { first: '', last: '' }
     console.log(f.valid);  // false
   }
+
+  //接收子组件传递过来的数据
+  runParent(msg: string) {
+    alert(msg);
+  }
+
 }

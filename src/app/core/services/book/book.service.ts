@@ -11,7 +11,7 @@ export class BookService {
   private msg = new Subject<string>();
 
   // 发送消息
-  sendMessage(message: string): void  {
+  sendMessage(message: string): void {
     this.msg.next(message);
   }
   // 清除消息
@@ -22,4 +22,17 @@ export class BookService {
   getMessage(): Observable<string> {
     return this.msg.asObservable();
   }
+
+  observableAsny() {
+    //异步处理
+    return new Observable((observer) => {
+      setTimeout(() => {
+        let userName = '张三'
+        observer.next(userName)
+        observer.error("失败")
+      }, 1000);
+    })
+  }
+
+
 }
