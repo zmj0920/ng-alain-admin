@@ -659,7 +659,7 @@ this.cities = ['Miami', 'Sao Paulo', 'New York'];
     </span> 
 </div> 
 ```
-![](./README/0001.png)
+![](https://github.com/zmj0920/ng-learning/blob/master/README/0001.png)
 
 >【`NgModle`】 双向绑定到`html`表单元素
 
@@ -913,7 +913,7 @@ return value * value
 
 >Imports 方式改变
 
-![](./README/rxjs1.png)
+![](https://github.com/zmj0920/ng-learning/blob/master/README/rxjs1.png)
 
 
 
@@ -921,15 +921,15 @@ return value * value
 
 > `operator`的改变
 
-![](./README/rxjs2.png)
+![](https://github.com/zmj0920/ng-learning/blob/master/README/rxjs2.png)
 
 > `pipeable observable`
 
-![](./README/rxjs3.png)
+![](https://github.com/zmj0920/ng-learning/blob/master/README/rxjs3.png)
 
 >被重新命名的`API`
 
-![](./README/rxjs4.png)
+![](https://github.com/zmj0920/ng-learning/blob/master/README/rxjs4.png)
 
 
 
