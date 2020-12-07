@@ -371,20 +371,17 @@ export class HeroArena {
 
 * 当`Angular` 使用构造函数新建一个组件或指令后，就会按下面的顺序在特定时刻调用这些生命周期钩子方法。
 
-| 钩子                      | 用途及时机                                                   |
-| ------------------------- | ------------------------------------------------------------ |
+| 钩子     | 用途及时机 |
+| ------------------------- |------------------------------------------------------------ |
 |`constructor()`          | `constructor`，来初始化类。`Angular`中的组件就是基于`class`类实现的，在`Angular`中，`constructor`用于注入依赖。组件的构造函数会在所有的生命周期钩子之前被调用，它主要用于依赖注入或执行简单的数据初始化操作。|
 | `ngOnChanges()`           | 当 `Angular`（重新）设置数据绑定输入属性时响应。 该方法接受当前和上一属性值的 `SimpleChanges` 对象在 `ngOnInit()` 之前以及所绑定的一个或多个输入属性的值发生变化时都会调用。 |
-| `ngOnInit()`              | 在 `Angular` 第一次显示数据绑定和设置指令/组件的输入属性之后，初始化指令/组件。在第一轮 `ngOnChanges()` 完成之后调用，只调用**一次**。<br>使用 `ngOnInit()` 有两个原因:<br>1.在构造函数之后马上执行复杂的初始化逻辑 <br> 2.在 `Angular` 设置完输入属性之后，对该组件进行准备。有经验的开发者会认同组件的构建应该很便宜和安全
- |
+| `ngOnInit()`              | 在 `Angular` 第一次显示数据绑定和设置指令/组件的输入属性之后，初始化指令/组件。在第一轮 `ngOnChanges()` 完成之后调用，只调用**一次**。<br>使用 `ngOnInit()` 有两个原因:<br>1.在构造函数之后马上执行复杂的初始化逻辑 <br> 2.在 `Angular` 设置完输入属性之后，对该组件进行准备。有经验的开发者会认同组件的构建应该很便宜和安全|
 | `ngDoCheck()`             | 检测，并在发生 `Angular` 无法或不愿意自己检测的变化时作出反应。在每个变更检测周期中，紧跟在 `ngOnChanges()` 和 `ngOnInit()` 后面调用。 |
 | `ngAfterContentInit()`    | 当 `Angular` 把外部内容投影进组件/指令的视图之后调用。第一次 `ngDoCheck()` 之后调用，只调用一次。 |
 | `ngAfterContentChecked()` | 每当 Angular 完成被投影组件内容的变更检测之后调用。`ngAfterContentInit()` 和每次 `ngDoCheck()` 之后调用 |
 | `ngAfterViewInit()`       | 当 `Angular` 初始化完组件视图及其子视图之后调用。第一次 `ngAfterContentChecked()` 之后调用，只调用一次。在这里可以操作DOM |
 | `ngAfterViewChecked()`    | 每当 `Angular` 做完组件视图和子视图的变更检测之后调用。`ngAfterViewInit()` 和每次 `ngAfterContentChecked()` 之后调用。 |
 | `ngOnDestroy()`           | 当 `Angular` 每次销毁指令/组件之前调用并清扫。在这儿反订阅可观察对象和分离事件处理器，以防内存泄 漏。在 `Angular` 销毁指令/组件之前调用。比如：移除事件监听、清除定时器、退订 `Observable` 等。 |
-
-
 
 
 ```ts
@@ -763,17 +760,18 @@ public today=new Date();
 *  `WelcomePipe` 定义
 
    ```ts
-   import { Pipe, PipeTransform } from '@angular/core';
-   [@Pipe](/user/Pipe)({ name: 'welcome' })
-   export class WelcomePipe implements PipeTransform {
-     transform(value: string): string {
-       if(!value) return value;
-       if(typeof value !== 'string') {
-         throw new Error('Invalid pipe argument for WelcomePipe');
-       }
-       return "Welcome to " + value;
-     }
-   } 
+  import { Pipe, PipeTransform } from '@angular/core';
+
+  @Pipe({ name: 'welcome' })
+  export class WelcomePipe implements PipeTransform {
+    transform(value: string): string {
+      if(!value) return value;
+      if(typeof value !== 'string') {
+        throw new Error('Invalid pipe argument for WelcomePipe');
+      }
+      return "Welcome to " + value;
+    }
+  } 
    ```
 
    `WelcomePipe` 使用
@@ -789,13 +787,14 @@ public today=new Date();
    `RepeatPipe` 定义
 
    ```typescript
-   import {Pipe, PipeTransform} from '@angular/core';
-   [@Pipe](/user/Pipe)({name: 'repeat'})
-   export class RepeatPipe implements PipeTransform {
-       transform(value: any, times: number) {
-           return value.repeat(times);
-       }
-   }
+  import {Pipe, PipeTransform} from '@angular/core';
+
+  @Pipe({name: 'repeat'})
+  export class RepeatPipe implements PipeTransform {
+      transform(value: any, times: number) {
+          return value.repeat(times);
+      }
+  }
    ```
 
    `RepeatPipe` 使用
@@ -1192,7 +1191,6 @@ ngAfterViewInit(){
 
 ## `Angular` 中的数据交互（`get jsonp post`）
 
-
 ### `Angular get` 请求数据
 
 * `Angular5.x` 以后`get、post` 和服务器交互使用的是`HttpClientModule` 模块。
@@ -1231,7 +1229,6 @@ export class BookService {
 
 ```
 
-
 > `get` 请求数据
 
 ```ts
@@ -1239,6 +1236,7 @@ this.http.get("https://nest.521em.cn/article/findLimitAll/1/10").subscribe(respo
 	console.log(response);
 });
 ```
+
 > `post` 提交数据
 
 ```ts
@@ -1261,14 +1259,313 @@ this.http.jsonp(api,'callback').subscribe(response => {
 ```
 
 
+## 执行css3 动画
 
 
 
+> 创建transition子组件
+
+```css
+#aside{
+      width: 200px;
+      height: 100%;
+      position: absolute;
+      right: 0px;
+      top:0px;
+      background: #000;
+      color:#fff;
+      transform: translate(100%,0);
+      transition: all 2s;
+}
+```
+
+```ts
+
+<div class="content">
+  内容区域
+  <button (click)="showAside()">弹出侧边栏</button>
+  <button (click)="hideAside()">隐藏侧边栏</button>
+</div>
+
+<aside id="aside">
+  这是一个侧边栏
+</aside>
+
+export class TransitionComponent implements OnInit {
+  constructor() { }
+  ngOnInit() {
+  }
+  showAside(){
+     //原生js获取dom节点
+     var asideDom:any=document.getElementById('aside');
+     asideDom.style.transform="translate(0,0)";
+  }
+ hideAside(){
+    //原生js获取dom节点
+    var asideDom:any=document.getElementById('aside');
+    asideDom.style.transform="translate(100%,0)";
+ }
+}
+
+```
+
+>引入transation模块
+
+```
+<app-transition></app-transition>
+```
+
+## Angular 中的路由
+
+### 配置路由
+
+```typescript
+import { HomeComponent } from './home/home.component';
+import { NewsComponent } from './news/news.component';
+import { NewscontentComponent } from './newscontent/newscontent.component';
+const routes: Routes = [
+	{path: 'home', component: HomeComponent},
+	{path: 'news', component: NewsComponent},
+	{path: 'newscontent/:id', component: NewscontentComponent},
+	{
+        path: '',
+        redirectTo: '/home',
+        pathMatch: 'full'
+	}
+];
+```
+
+> 父子路由
+
+```typescript
+import { NewsaddComponent } from './components/newsadd/newsadd.component';
+import { NewslistComponent } from './components/newslist/newslist.component';
+const routes: Routes = [
+  //匹配不到路由的时候加载的组件或者跳转的路由
+  {
+    path: '**', /*任意的路由*/
+    component:HomeComponent
+    redirectTo:'home'
+  },
+	{
+	path: 'news',
+	component:NewsComponent,
+    children: [
+        {
+        path:'newslist',
+        component:NewslistComponent
+        },
+        {
+        path:'newsadd',
+        component:NewsaddComponent
+        }
+	]
+   }
+];
+
+```
 
 
+> loadChildren配置懒加载
+
+```typescript
+const routes: Routes = [
+ {
+        path: 'widgets',
+        loadChildren: () => import('./widgets/widgets.module').then((m) => m.WidgetsModule),
+ }
+];
+```
+
+### Angular routerLink 跳转页面
+
+```html
+<h1>
+	<a routerLink="/home">首页</a>
+	<a routerLink="/news">新闻</a>
+</h1>
+```
+
+> routerLinkActive 设置routerLink 默认选中路由
+
+```css
+.active{
+	color:red;
+}
+```
+
+```html
+<h1>
+	<a routerLink="/home" routerLinkActive="active">首页</a>
+	<a routerLink="/news" routerLinkActive="active">新闻</a>
+</h1>
+
+<h1>
+	<a [routerLink]="[ '/home' ]" routerLinkActive="active">首页</a>
+	<a [routerLink]="[ '/news' ]" routerLinkActive="active">新闻</a>
+</h1>
+```
+
+### 配置动态路由
 
 
+> routerLink跳转传值
 
+```html
+<a [routerLink]="[ '/newscontent/',aid]">跳转到详情</a>
+<a routerLink="/newscontent/{{aid}}">跳转到详情</a>
+```
+
+> 获取动态路由的值
+
+```ts
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute} from '@angular/router';
+@Component({
+  selector: 'app-data-v-relation',
+  templateUrl: './relation.component.html',
+})
+export class RelationComponent implements OnInit {
+
+  constructor(private route: ActivatedRoute) { }
+
+  ngOnInit() {
+    console.log(this.route.params);
+    this.route.params.subscribe(data=>this.id=data.id);
+  }	
+}
+
+```
+
+
+### get路由和动态路由
+
+>get传值跳转
+
+```html
+<li *ngFor="let item of list;let key=index;">
+     <!-- <a href="/newscontent?aid=123">{{key}}--{{item}}</a> -->              
+     <a [routerLink]="['/newscontent']" [queryParams]="{aid:key}">{{key}}--{{item}}</a>
+</li>
+```
+
+>get传值接收
+
+```ts
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute} from '@angular/router';
+@Component({
+  selector: 'app-data-v-relation',
+  templateUrl: './relation.component.html',
+})
+export class RelationComponent implements OnInit {
+
+  constructor(private route: ActivatedRoute) { }
+
+  ngOnInit() {
+      this.route.queryParams.subscribe((data)=>{
+        console.log(data);
+      })
+  }	
+}
+
+```
+
+>配置动态路由
+
+```typescript
+const routes: Routes = [
+  {
+    path:'newscontent/:aid',component:NewscontentComponent
+  }
+];
+```
+
+```HTML
+ <ul>
+    <li *ngFor="let item of list;let key=index;">
+      <a [routerLink]="[ '/newscontent/', key ]">{{key}}---{{item}}</a>
+    </li>
+ </ul>
+```
+
+>接收值
+
+```typescript
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute} from '@angular/router';
+
+@Component({
+  selector: 'app-data-v-relation',
+  templateUrl: './relation.component.html',
+})
+export class RelationComponent implements OnInit {
+
+  constructor(private route: ActivatedRoute) { }
+
+  ngOnInit() {
+    this.route.params.subscribe((data)=>{
+          console.log(data);
+    })
+  }	
+}
+
+```
+
+### 动态路由的js 跳转
+
+
+```typescript
+import { Router } from '@angular/router';
+export class HomeComponent implements OnInit {
+constructor(private router: Router) {
+}
+ngOnInit() {
+}
+goNews(){
+	this.router.navigate(['/news', hero.id]);
+	this.router.navigate(['/news']);
+}
+}
+```
+
+>路由get 传值js 跳转
+
+
+#### 定义一个goNewsContent 方法执行跳转，用NavigationExtras 配置传参
+
+```typescript
+import { Router ,NavigationExtras} from '@angular/router';
+
+goNewsContent(){
+	let navigationExtras: NavigationExtras = {
+		queryParams: { 'session_id': '123' },
+		fragment: 'anchor'
+	};
+	this.router.navigate(['/news'],navigationExtras);
+}
+```
+
+#### 获取get 的传值
+
+```typescript
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute} from '@angular/router';
+@Component({
+  selector: 'app-data-v-relation',
+  templateUrl: './relation.component.html',
+})
+export class RelationComponent implements OnInit {
+
+  constructor(private route: ActivatedRoute) { }
+
+  ngOnInit() {
+      this.route.queryParams.subscribe((data)=>{
+        console.log(data);
+      })
+  }	
+}
+```
 
 
 

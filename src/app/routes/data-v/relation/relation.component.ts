@@ -9,7 +9,8 @@ import { BookService } from '@services/book/book.service';
 })
 export class RelationComponent implements OnInit {
   public alertMsg: string;
-  public title: string = "我是父组件标题";
+
+  public title: string = '我是父组件标题';
 
   birthday = new Date('Fri Nov 27 2020 10:46:58 GMT+0800');
   myInput = 0;
@@ -26,8 +27,8 @@ export class RelationComponent implements OnInit {
 
     // 订阅
     observableAsny.subscribe((data) => {
-      console.log(data)
-    })
+      console.log(data);
+    });
 
 
   }
@@ -43,7 +44,7 @@ export class RelationComponent implements OnInit {
     console.log(f.valid);  // false
   }
 
-  //接收子组件传递过来的数据
+  // 接收子组件传递过来的数据
   runParent(msg: string) {
     alert(msg);
   }

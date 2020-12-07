@@ -1,5 +1,2 @@
-import { SexPipe } from './sex/sex.pipe';
-
-export const PROVIDERS_PIPES = [
-  SexPipe
-];
+// tslint:disable-next-line:eofline
+export * from './pipe.module';
