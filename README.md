@@ -759,7 +759,7 @@ public today=new Date();
 
 *  `WelcomePipe` 定义
 
-   ```ts
+```ts
   import { Pipe, PipeTransform } from '@angular/core';
 
   @Pipe({ name: 'welcome' })
@@ -772,21 +772,21 @@ public today=new Date();
       return "Welcome to " + value;
     }
   } 
-   ```
+```
 
-   `WelcomePipe` 使用
+* `WelcomePipe` 使用
 
-   ```html
+```html
    <div>
       <p ngNonBindable>{{ 'semlinker' | welcome }}</p>
       <p>{{ 'semlinker' | welcome }}</p> 
       <!-- Output: Welcome to semlinker -->
    </div>
-   ```
+```
 
-   `RepeatPipe` 定义
+* `RepeatPipe` 定义
 
-   ```typescript
+ ```typescript
   import {Pipe, PipeTransform} from '@angular/core';
 
   @Pipe({name: 'repeat'})
@@ -797,14 +797,14 @@ public today=new Date();
   }
    ```
 
-   `RepeatPipe` 使用
+* `RepeatPipe` 使用
 
-   ```html
+```html
    <div>
       <p ngNonBindable>{{ 'lo' | repeat:3 }}</p>
       <p>{{ 'lo' | repeat:3 }}</p> <!-- Output: lololo -->
    </div>
-   ```
+```
 
 
 ## `Rxjs` 异步数据流编
