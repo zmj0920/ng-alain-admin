@@ -555,8 +555,8 @@ this.h="<h2>这是一个h2 用[innerHTML]来解析</h2>"
 
 ```css
 .bordered { 
-    border: 1px dashed black; 
     background-color: #eee; 
+    border: 1px dashed black; 
 } 
 ```
 
@@ -695,6 +695,88 @@ setData(){
 //设置值
 this.msg='这是设置的值';
 }
+```
+
+> ng-template
+
+* 动态插槽ngTemplteOutlet 使用ng-container跟ngTemplateOutlet可以在组件的任何地方动态插入你想要的模板
+
+* url:https://blog.csdn.net/ctrlxv/article/details/104646328/
+
+```html
+<ng-template #loading>
+  <div>Loading...</div>
+</ng-template>
+
+<ng-template #dynamicTpl>
+  <div class="deep-red">动态插槽ngTemplteOutlet 使用ng-container跟ngTemplateOutlet可以在组件的任何地方动态插入你想要的模板</div>
+</ng-template>
+
+
+<div class="lessons-list" *ngIf="lessons; else loading"></div>
+<ng-template [ngIf]="lessons" [ngIfElse]="loading">
+  <div class="hero-list">...</div>
+</ng-template>
+<ng-container *ngTemplateOutlet="dynamicTpl"></ng-container>
+```
+
+
+
+>ng-container
+
+* ng-container是逻辑容器标签，可以用作组节点，不会被渲染成DOM,但会被解析为HTML的Comment相当于一个容器
+
+* 所以在你想用 *ngIF或者 *ngFor的时候，不想用带语义的标签，可以用ng-container。
+
+```html
+<div>
+  <ng-container *ngIf="true">
+    <h2>Title</h2><div>Content</div>
+    </ng-container>
+</div>
+
+<!-- 渲染后 -->
+<div>
+  <h2>Title</h2><div>Content</div>
+</div>
+```
+
+
+>ng-content
+
+ng-content：父组件调用子组件时，将父组件内容投射到子组件指定位置（子组件中 ng-content 所在位置）
+
+
+* 子组件
+
+```ts
+<ng-content></ng-content>
+<ng-content select="header"></ng-content>
+<ng-content select="#demo"></ng-content>
+<ng-content select="[name=demo]"></ng-content>
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-demo',
+  templateUrl: './demo.component.html',
+  styles: [],
+})
+export class DemoComponent implements OnInit {
+  constructor() {}
+
+  ngOnInit(): void {}
+}
+```
+
+* 父组件
+
+```html
+<app-demo>
+  <p>no select属性</p>
+  <header>header - parent component content !!! -</header>
+  <div id="demo">id selector - parent component content !!! -</div>
+  <div name="demo">name - parent component content !!! -</div>
+</app-demo>
 ```
 
 #### 表单事件
@@ -1267,13 +1349,13 @@ this.http.jsonp(api,'callback').subscribe(response => {
 
 ```css
 #aside{
+      position: absolute;
+      top:0;
+      right: 0;
       width: 200px;
       height: 100%;
-      position: absolute;
-      right: 0px;
-      top:0px;
-      background: #000;
       color:#fff;
+      background: #000;
       transform: translate(100%,0);
       transition: all 2s;
 }
@@ -1572,21 +1654,86 @@ export class RelationComponent implements OnInit {
 使用FormGroup、FormBuilder和Validators对象控制表单（取值、赋值、校验和是否可编辑等）
 
 FormGroup,      //表单对象类
+
 FormBuilder,   //表单生成工具类
+
+
 Validators    //表单验证类
 
 
 
-解决异步方法
-
-1. 回调函数
-
-2. Promise
+### @Attribute装饰器
 
 
+* 假设我们有一个按钮组件，它的 class 属性接收名为 type 的值，type 的值可以是 primary 或者 secondary 。
+
+* 这种方式有一个缺点，因为我们使用了 Input()，Angular 仍然会为 type 属性创建绑定，并将在任何变更检测周期中检查它。即使这是一个静态字符串。
+
+* 当我们点击按钮触发变更检测后，Angular 检测这个值。
+
+```ts
+export type ButtonType = 'primary' | 'secondary';
+
+@Component({
+  selector: 'app-button',
+  template: `
+    <button [ngClass]="type">
+      <ng-content></ng-content>
+    </button>
+  `
+})
+export class ButtonComponent {
+  @Input() type: ButtonType = 'primary';
+}
+
+<app-button type="secondary" (click)="click()">Click</app-button>
+```
 
 
 
+
+* 在这种情况下，我们可以使用 @Attribute 更有效地处理这种情况。
+
+* 使用这种方式，Angular 将仅仅计算一次并忘记它。作为一般性的规则，当字符串是固定值且永不变化的时候，我倾向于使用 @Attribute()。
+
+```ts
+import { Component, Attribute } from '@angular/core';
+
+export type ButtonType = 'primary' | 'secondary';
+
+@Component({
+  selector: 'app-button',
+  template: `
+    <button [ngClass]="type">
+      <ng-content></ng-content>
+    </button>
+  `
+})
+export class ButtonComponent {
+  constructor(@Attribute('type') public type: ButtonType = 'primary') { }
+}
+
+<app-button type="secondary" (click)="click()">Click</app-button>
+
+```
+
+组件样式
+
+
+
+
+
+
+
+
+http://www.ngbeijing.cn/2018/08/27/2018-8-27-angular-attribute/
+
+
+
+
+组件级注入和模块级注入区别
+
+模块级注入是单例模式，组件级注入是非单例注入
 
 
 
@@ -1603,21 +1750,17 @@ Validators    //表单验证类
 
 API相关
 
-[] 表示属性
-
-() 表示事件
-
-[()] 表示双向绑定
-
-
 插值 {{}}
 
 属性绑定 []
 
 事件绑定 ()
-
+双向绑定 [()]
 
 ng-content 表示组件内容占位符
 
 #tpl 开头表示 〈ng-template #tpl〉
+
+
+
 https://cloud.tencent.com/developer/news/492069

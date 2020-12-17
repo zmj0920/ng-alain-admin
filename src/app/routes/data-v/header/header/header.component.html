@@ -1,6 +1,36 @@
 <div>
-  子组件
+  <div>子组件</div>
+  <button (click)="sendParent()">sendParent</button>
+
+  <!-- 在模板中，要使用井号 # 来声明一个模板变量。下列模板变量 #phone 语法在 <input> 元素上声明了一个名为 phone 的变量 -->
+  <input #phone placeholder="phone number" />
+
+  <!-- 你可以在组件模板中的任何地方引用某个模板变量。这里的 <button> 就引用了 phone 变量 -->
+  <button (click)="callPhone(phone.value)">Call</button>
+  <br />
+  <hr />
+
+  <ng-container *ngTemplateOutlet="dynamicTpl"></ng-container>
+  <ng-container *ngIf="true"
+    ><h2>Title</h2>
+    <div>Content</div>
+  </ng-container>
+
+  <div class="lessons-list" *ngIf="lessons; else loading"></div>
+  <ng-template [ngIf]="lessons" [ngIfElse]="loading">
+    <div class="hero-list">...</div>
+  </ng-template>
+
+  <ng-template #loading>
+    <div>Loading...</div>
+  </ng-template>
+
+  <ng-template #dynamicTpl>
+    <div class="deep-red">动态插槽ngTemplteOutlet 使用ng-container跟ngTemplateOutlet可以在组件的任何地方动态插入你想要的模板</div>
+  </ng-template>
+
+  <ng-content></ng-content>
+  <ng-content select="header"></ng-content>
+  <ng-content select="#demo"></ng-content>
+  <ng-content select="[name=demo]"></ng-content>
 </div>
-<button (click)="sendParent()">sendParent</button>
-<br>
-<hr>

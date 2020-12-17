@@ -1,15 +1,15 @@
 <page-header [title]="'asdf'"></page-header>
 <app-header (outer)="runParent($event)"></app-header>
-<div>{{alertMsg}}</div>
+<div>{{ alertMsg }}</div>
 <button (click)="sendMessage()">Send Message</button>
 
-<div>{{ myInput| sex }}</div>
+<div>{{ myInput | sex }}</div>
 <p appTest>My birthday is</p>
 {{ birthday | date }}
 
 <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
-  <input name="first" ngModel required #first="ngModel">
-  <input name="last" ngModel>
+  <input name="first" ngModel required #first="ngModel" />
+  <input name="last" ngModel />
   <button>Submit</button>
 </form>
 
@@ -17,3 +17,10 @@
 <p>First name valid: {{ first.valid }}</p>
 <p>Form value: {{ f.value | json }}</p>
 <p>Form valid: {{ f.valid }}</p>
+
+<app-header>
+  <p>no select属性</p>
+  <header>header - parent component content !!! -</header>
+  <div id="demo">id selector - parent component content !!! -</div>
+  <div name="demo">name - parent component content !!! -</div>
+</app-header>

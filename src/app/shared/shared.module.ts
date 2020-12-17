@@ -14,8 +14,8 @@ import { SHARED_ZORRO_MODULES } from './shared-zorro.module';
 import { CountdownModule } from 'ngx-countdown';
 import { NgxTinymceModule } from 'ngx-tinymce';
 import { UEditorModule } from 'ngx-ueditor';
-import { DirectiveModule } from './directives';
-import { PipeModule } from './pipes';
+import { DIRECTIVES } from './directives';
+import { PROVIDERS_PIPES } from './pipes';
 const THIRDMODULES = [CountdownModule, UEditorModule, NgxTinymceModule];
 // #endregion
 
@@ -32,8 +32,6 @@ const COMPONENTS: Type<any>[] = [];
     AlainThemeModule.forChild(),
     DelonACLModule,
     DelonFormModule,
-    DirectiveModule,
-    PipeModule,
     ...SHARED_DELON_MODULES,
     ...SHARED_ZORRO_MODULES,
     // third libs
@@ -42,6 +40,8 @@ const COMPONENTS: Type<any>[] = [];
   declarations: [
     // your components
     ...COMPONENTS,
+    ...DIRECTIVES,
+    ...PROVIDERS_PIPES
   ],
   exports: [
     CommonModule,
@@ -52,14 +52,14 @@ const COMPONENTS: Type<any>[] = [];
     DelonACLModule,
     DelonFormModule,
     TranslateModule,
-    DirectiveModule,
-    PipeModule,
     ...SHARED_DELON_MODULES,
     ...SHARED_ZORRO_MODULES,
     // third libs
     ...THIRDMODULES,
     // your components
     ...COMPONENTS,
+    ...DIRECTIVES,
+    ...PROVIDERS_PIPES
   ],
 })
-export class SharedModule { }
+export class SharedModule {}
