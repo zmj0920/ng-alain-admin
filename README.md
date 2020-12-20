@@ -17,9 +17,10 @@
 
 https://cn.rx.js.org/
 
-http://bbs.itying.com/topic/5bfce189b110d80f905ae545
-
-
+https://rxviz.com/
+https://rxmarbles.com/
+https://rxjs-cn.github.io/learn-rxjs-operators/about/
+https://reactive.how/rxjs/
 
 ### 开发风格用法
 
