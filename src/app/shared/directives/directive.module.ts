@@ -1,9 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Type } from '@angular/core';
+import { RainbowDirective } from './rainbow/rainbow.directive';
 import { TestDirective } from './test/test.directive';
-
-@NgModule({
-    declarations: [
-        TestDirective,
-    ]
-})
-export class DirectiveModule { }
+export const DIRECTIVES_MODULES: Type<any>[] = [TestDirective, RainbowDirective];

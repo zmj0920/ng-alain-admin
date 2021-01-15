@@ -148,6 +148,11 @@
               "text": "Zip",
               "link": "/delon/zip",
               "i18n": "menu.delon.zip"
+            },
+            {
+              "text": "PDF",
+              "link": "/delon/pdf-design",
+              "i18n": "menu.delon.pdfDesign"
             }
           ]
         }
@@ -159,6 +164,19 @@
       "group": true,
       "hideInBreadcrumb": true,
       "children": [
+        {
+          "text": "表格列表",
+          "i18n": "menu.crud",
+          "icon": "anticon-rocket",
+          "shortcutRoot": true,
+          "children": [
+            {
+              "text": "数据表格",
+              "link": "/crud/list",
+              "i18n": "menu.crud.list"
+            }
+          ]
+        },
         {
           "text": "Form Page",
           "i18n": "menu.form",

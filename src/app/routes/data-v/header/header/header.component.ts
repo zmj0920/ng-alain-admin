@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +10,7 @@ import { Component, OnInit, Output, EventEmitter, ViewEncapsulation } from '@ang
       }
     `,
   ],
-  // encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.None,
 })
 export class HeaderComponent implements OnInit {
   @Output() private outer = new EventEmitter<string>();
@@ -18,11 +18,11 @@ export class HeaderComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
-  sendParent() {
+  sendParent(): void {
     this.outer.emit('msg from child');
   }
 
-  callPhone(value) {
+  callPhone(value: string): void {
     console.log(value);
   }
 }

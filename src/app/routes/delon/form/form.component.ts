@@ -15,6 +15,10 @@ export class DelonFormComponent {
         type: 'string',
         title: '编号',
       },
+      number: {
+        type: 'number',
+        title: '调用次数'
+      }
     },
   };
   columns: STColumn[] = [

@@ -39,14 +39,6 @@ const LANGS: { [key: string]: LangData } = {
     delon: delonZhCn,
     abbr: '🇨🇳',
   },
-  'zh-TW': {
-    text: '繁体中文',
-    ng: ngZhTw,
-    zorro: zorroZhTW,
-    date: dfZhTw,
-    delon: delonZhTw,
-    abbr: '🇭🇰',
-  },
   'en-US': {
     text: 'English',
     ng: ngEn,

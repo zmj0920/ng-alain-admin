@@ -25,13 +25,13 @@
     "contextual-lifecycle": true,
     "directive-class-suffix": true,
     "directive-selector": [
-      true,
+      false,
       "attribute",
       ["app", "passport", "exception", "layout", "header"],
       "camelCase"
     ],
     "component-selector": [
-      true,
+      false,
       "element",
       ["app", "passport", "exception", "layout", "header"],
       "kebab-case"
@@ -140,7 +140,7 @@
       ]
     },
     "no-conflicting-lifecycle": true,
-    "no-host-metadata-property": true,
+    "no-host-metadata-property": false,
     "no-input-rename": true,
     "no-inputs-metadata-property": true,
     "no-output-native": true,

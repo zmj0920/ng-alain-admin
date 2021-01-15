@@ -186,8 +186,8 @@
     </nz-card>
     <nz-card nzTitle="Personal access tokens" [nzExtra]="extra" *ngIf="active === 6">
       <ng-template #extra>
-        <button nz-button (click)="msg.info('Generate new token')" [nzSize]="'small'">Generate new token</button>
-        <button nz-button (click)="msg.info('Revoke all')" [nzSize]="'small'" [nzType]="'danger'" class="ml-sm">Revoke all</button>
+        <button nz-button (click)="msg.info('Generate new token')" nzSize="small">Generate new token</button>
+        <button nz-button (click)="msg.info('Revoke all')" nzSize="small" nzDanger class="ml-sm">Revoke all</button>
       </ng-template>
       <p>Tokens you have generated that can be used to access the GitHub API.</p>
       <nz-list nzBordered class="mt-sm">
@@ -197,7 +197,7 @@
             Last used within the last day
             <nz-button-group>
               <button nz-button>Edit</button>
-              <button nz-button [nzType]="'danger'">Delete</button>
+              <button nz-button nzDanger>Delete</button>
             </nz-button-group>
           </nz-col>
         </nz-list-item>

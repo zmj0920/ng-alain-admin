@@ -42,13 +42,13 @@ if (!environment.production) {
  *  </section>
  *  ```
  */
-// import { RouteReuseStrategy } from '@angular/router';
-// import { ReuseTabService, ReuseTabStrategy } from '@delon/abc/reuse-tab';
-// alainProvides.push({
-//   provide: RouteReuseStrategy,
-//   useClass: ReuseTabStrategy,
-//   deps: [ReuseTabService],
-// } as any);
+import { RouteReuseStrategy } from '@angular/router';
+import { ReuseTabService, ReuseTabStrategy } from '@delon/abc/reuse-tab';
+alainProvides.push({
+  provide: RouteReuseStrategy,
+  useClass: ReuseTabStrategy,
+  deps: [ReuseTabService],
+} as any);
 
 // #endregion
 
@@ -59,7 +59,11 @@ if (!environment.production) {
 
 import { NzConfig, NZ_CONFIG } from 'ng-zorro-antd/core/config';
 
-const ngZorroConfig: NzConfig = {};
+const ngZorroConfig: NzConfig = {
+  // message: { nzTop: 120 },
+  form: { nzNoColon: true },
+  notification: { nzTop: 80 }
+};
 
 const zorroProvides = [{ provide: NZ_CONFIG, useValue: ngZorroConfig }];
 

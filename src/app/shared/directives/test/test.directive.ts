@@ -1,25 +1,26 @@
 import { Directive, ElementRef, HostListener } from '@angular/core';
 
 @Directive({
-  selector: '[appTest]'
+  selector: '[appTest]',
+  // tslint:disable-next-line: no-host-metadata-property
+  host: {
+    name: 'appTest指令扩展属性',
+  },
 })
 export class TestDirective {
-
   constructor(private el: ElementRef) {
     el.nativeElement.style.backgroundColor = 'red';
   }
-  // tslint:disable-next-line: typedef
-  @HostListener('mouseenter') onMouseEnter() {
+
+  @HostListener('mouseenter') onMouseEnter(): void {
     this.highlight('yellow');
   }
 
-  // tslint:disable-next-line: typedef
-  @HostListener('mouseleave') onMouseLeave() {
+  @HostListener('mouseleave') onMouseLeave(): void {
     this.highlight('red');
   }
 
-  // tslint:disable-next-line: typedef
-  private highlight(color: string) {
+  private highlight(color: string): void {
     this.el.nativeElement.style.backgroundColor = color;
   }
 }

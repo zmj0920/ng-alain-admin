@@ -68,9 +68,9 @@ const DATA = [
 ];
 
 export const GEOS = {
-  '/geo/province': () => DATA.filter((w) => w.id.endsWith('0000')),
+  '/geo/province': () => DATA.filter(w => w.id.endsWith('0000')),
   '/geo/:id': (req: MockRequest) => {
     const pid = (req.params.id || '310000').slice(0, 2);
-    return DATA.filter((w) => w.id.slice(0, 2) === pid && !w.id.endsWith('0000'));
+    return DATA.filter(w => w.id.slice(0, 2) === pid && !w.id.endsWith('0000'));
   },
 };

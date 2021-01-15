@@ -1,9 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Type } from '@angular/core';
 import { SexPipe } from './sex/sex.pipe';
 
-@NgModule({
-    declarations: [
-        SexPipe,
-    ]
-})
-export class PipeModule { }
+export const PROVIDERS_PIPES_MODULES: Type<any>[] = [SexPipe];
