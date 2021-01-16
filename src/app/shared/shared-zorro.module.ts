@@ -1,4 +1,5 @@
 import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
@@ -18,6 +19,7 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
@@ -33,38 +35,40 @@ import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 export const SHARED_ZORRO_MODULES = [
-  NzButtonModule,
-  NzMessageModule,
-  NzDropDownModule,
-  NzGridModule,
-  NzCheckboxModule,
-  NzToolTipModule,
-  NzPopoverModule,
-  NzSelectModule,
-  NzIconModule,
-  NzBadgeModule,
   NzAlertModule,
-  NzModalModule,
-  NzTableModule,
-  NzDrawerModule,
-  NzTabsModule,
-  NzInputModule,
-  NzDatePickerModule,
-  NzTimePickerModule,
-  NzTagModule,
-  NzInputNumberModule,
-  NzBreadCrumbModule,
-  NzListModule,
-  NzSwitchModule,
-  NzRadioModule,
-  NzFormModule,
+  NzAutocompleteModule,
   NzAvatarModule,
-  NzSpinModule,
+  NzBadgeModule,
+  NzBreadCrumbModule,
+  NzButtonModule,
   NzCardModule,
+  NzCheckboxModule,
+  NzDatePickerModule,
   NzDividerModule,
-  NzProgressModule,
-  NzPopconfirmModule,
-  NzUploadModule,
+  NzDrawerModule,
+  NzDropDownModule,
   NzEmptyModule,
-  NzPaginationModule
+  NzFormModule,
+  NzGridModule,
+  NzIconModule,
+  NzInputModule,
+  NzInputNumberModule,
+  NzListModule,
+  NzMessageModule,
+  NzModalModule,
+  NzNotificationModule,
+  NzPaginationModule,
+  NzPopconfirmModule,
+  NzPopoverModule,
+  NzProgressModule,
+  NzRadioModule,
+  NzSelectModule,
+  NzSpinModule,
+  NzSwitchModule,
+  NzTableModule,
+  NzTabsModule,
+  NzTagModule,
+  NzTimePickerModule,
+  NzToolTipModule,
+  NzUploadModule
 ];

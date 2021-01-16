@@ -2,11 +2,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { DelonACLModule } from '@delon/acl';
-import { DelonFormModule } from '@delon/form';
 import { AlainThemeModule } from '@delon/theme';
 import { TranslateModule } from '@ngx-translate/core';
-
 import { SHARED_COMPOENT_MODULES } from './components/shared-component.module';
 import { DIRECTIVES_MODULES } from './directives/directive.module';
 import { PROVIDERS_PIPES_MODULES } from './pipes/pipe.module';
@@ -21,8 +18,6 @@ import { THIRDMODULES } from './third.module';
     RouterModule,
     ReactiveFormsModule,
     AlainThemeModule.forChild(),
-    DelonACLModule,
-    DelonFormModule,
     ...SHARED_DELON_MODULES,
     ...SHARED_ZORRO_MODULES,
     ...THIRDMODULES,
@@ -34,8 +29,6 @@ import { THIRDMODULES } from './third.module';
     ReactiveFormsModule,
     RouterModule,
     AlainThemeModule,
-    DelonACLModule,
-    DelonFormModule,
     TranslateModule,
     ...SHARED_DELON_MODULES,
     ...SHARED_ZORRO_MODULES,

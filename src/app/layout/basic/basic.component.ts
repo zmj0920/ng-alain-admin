@@ -74,9 +74,9 @@ import { environment } from '@env/environment';
         </nz-dropdown-menu>
       </ng-template>
       <ng-template #contentTpl>
-        <!-- <reuse-tab  #reuseTab nzSize="small" tabType="card" debug="true" tabBarGutter="1" max="20"> </reuse-tab>
-        <router-outlet (activate)="reuseTab.activate($event)"></router-outlet> -->
-        <router-outlet></router-outlet>
+        <reuse-tab  #reuseTab nzSize="small" tabType="card" debug="true" tabBarGutter="1" max="20"> </reuse-tab>
+        <router-outlet (activate)="reuseTab.activate($event)"></router-outlet>
+        <!-- <router-outlet></router-outlet> -->
       </ng-template>
     </layout-default>
 
