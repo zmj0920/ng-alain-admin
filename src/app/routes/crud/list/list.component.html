@@ -46,6 +46,7 @@
   </nz-card>
   <st #st [loading]="loading" [data]="dataSet"  [columns]="columns" [header]="extraTemplate"
     (change)="stChange($event)"></st>
+    
   <ng-template #extraTemplate>
     <div nz-row>
       <div nz-col nzFlex="1">
