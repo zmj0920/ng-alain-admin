@@ -10,3 +10,50 @@
 @alain-default-header-bg: #722ed1;
 @alain-default-aside-nav-text-hover-color: #722ed1;
 @alain-default-aside-nav-selected-text-color: #722ed1;
+
+@btn-warning-color: rgba(0, 0, 0, 0.65);
+@btn-warning-bg: #fffbe6;
+@btn-warning-border: #ffe58f;
+@btn-info-color: rgba(0, 0, 0, 0.65);
+@btn-info-bg: #e6f7ff;
+@btn-info-border: #91d5ff;
+@btn-success-color: rgba(0, 0, 0, 0.65);
+@btn-success-bg: #fff1f0;
+@btn-success-border: #b7eb8f;
+@btn-error-color: rgba(0, 0, 0, 0.65);
+@btn-error-bg: #f6ffed;
+@btn-error-border: #ffa39e;
+
+.btn-warning() {
+  .button-variant-other(@btn-warning-color, @btn-warning-bg, @btn-warning-border);
+}
+
+.btn-info() {
+  .button-variant-other(@btn-info-color, @btn-info-bg, @btn-info-border);
+}
+
+.btn-success() {
+  .button-variant-other(@btn-success-color, @btn-success-bg, @btn-success-border);
+}
+
+.btn-error() {
+  .button-variant-other(@btn-error-color, @btn-error-bg, @btn-error-border);
+}
+
+.@{btn-prefix-cls} {
+  &-warning {
+    .btn-warning;
+  }
+
+  &-info {
+    .btn-info;
+  }
+
+  &-success {
+    .btn-success;
+  }
+
+  &-error {
+    .btn-error;
+  }
+}

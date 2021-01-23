@@ -21,8 +21,4 @@ export class HeaderComponent implements OnInit {
   sendParent(): void {
     this.outer.emit('msg from child');
   }
-
-  callPhone(value: string): void {
-    console.log(value);
-  }
 }

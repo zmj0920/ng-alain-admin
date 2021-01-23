@@ -56,7 +56,7 @@
       140
     ],
     "member-ordering": [
-      true,
+      false,
       {
         "order": [
           "static-field",
@@ -152,7 +152,7 @@
     "use-lifecycle-interface": true,
     "use-pipe-transform-interface": true,
     "ordered-imports": [
-      true,
+      false,
       {
         "import-sources-order": "case-insensitive",
         "named-imports-order": "case-insensitive"

@@ -1,9 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { _HttpClient } from '@delon/theme';
+import { Clipboard } from '@angular/cdk/clipboard';
+import { Component, OnInit } from '@angular/core';
 import { BookService } from '@services/book/book.service';
-import { Subject } from 'rxjs';
-
 @Component({
   selector: 'app-data-v-relation',
   styleUrls: ['./relation.component.less'],
@@ -11,15 +8,9 @@ import { Subject } from 'rxjs';
 })
 export class RelationComponent implements OnInit {
   public alertMsg!: string;
-
+  demoValue = 1;
   public title = '我是父组件标题';
-  colorClassName = 'color';
-
-  birthday = new Date('Fri Nov 27 2020 10:46:58 GMT+0800');
-  myInput = 0;
-  demo6Result = '';
-  constructor(private http: _HttpClient, private bookService: BookService) {}
-
+  constructor( private bookService: BookService, private clipboard: Clipboard) { }
   ngOnInit(): void {
     // 消息提示 从service获取消息内容
     this.bookService.getMessage().subscribe((value) => {
@@ -39,13 +30,14 @@ export class RelationComponent implements OnInit {
     this.bookService.sendMessage('显示成功');
   }
 
-  onSubmit(f: NgForm): void {
-    console.log(f.value); // { first: '', last: '' }
-    console.log(f.valid); // false
-  }
-
   // 接收子组件传递过来的数据
   runParent(msg: string): void {
     alert(msg);
+  }
+
+  /** 点击复制 */
+  copy(): void {
+   const pending =  this.clipboard.copy('复制这段文本1');
+  //  pending.destroy();
   }
 }

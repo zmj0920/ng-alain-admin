@@ -1,28 +1,64 @@
 <page-header [title]="'asdf'"></page-header>
-<div class="{{ colorClassName }}">我是个快乐的肥宅!</div>
-<app-header (outer)="runParent($event)"></app-header>
-<div>{{ alertMsg }}</div>
-<button (click)="sendMessage()">Send Message</button>
-
-<div>{{ myInput | sex }}</div>
-<p appTest>My birthday is</p>
-{{ birthday | date }}
-
-<form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
-  <input name="first" ngModel required #first="ngModel" />
-  <input name="last" ngModel />
-  <button>Submit</button>
-</form>
-
-<p>First name value: {{ first.value }}</p>
-<p>First name valid: {{ first.valid }}</p>
-<p>Form value: {{ f.value | json }}</p>
-<p>Form valid: {{ f.valid }}</p>
-
-<app-header>
-  <p>no select属性</p>
-  <header>header - parent component content !!! -</header>
-  <div id="demo">id selector - parent component content !!! -</div>
-  <div name="demo">name - parent component content !!! -</div>
-</app-header>
-<app-operators> </app-operators>
+<!-- <app-operators> </app-operators> -->
+<nz-tag [nzColor]="'orange'">RTL</nz-tag>
+<nz-divider></nz-divider>
+<p dir="RTL" style="border: solid 1px #ccc;">
+  从右到左排列
+</p>
+<nz-timeline>
+  <nz-timeline-item nzColor="green">
+    <nz-tag [nzColor]="'magenta'">扩展按钮样式</nz-tag>
+    <nz-divider></nz-divider>
+    <zm-button (click)="runParent()" nzType="success">
+      <i nz-icon nzType="plus" style="color: #d4d4da;" nzTheme="outline"></i>
+    </zm-button>
+    <nz-divider nzType="vertical"></nz-divider>
+    <zm-button (click)="runParent()" nzType="default">
+      <i nz-icon nzType="plus" style="color: #d4d4da;" nzTheme="outline"></i>
+    </zm-button>
+    <nz-divider nzType="vertical"></nz-divider>
+    <zm-button (click)="runParent()" nzType="warning">
+      <i nz-icon nzType="plus" style="color: #d4d4da;" nzTheme="outline"></i>
+    </zm-button>
+    <nz-divider nzType="vertical"></nz-divider>
+    <zm-button (click)="runParent()" nzType="error">
+      <i nz-icon nzType="plus" style="color: #d4d4da;" nzTheme="outline"></i>
+    </zm-button>
+    <nz-divider nzType="vertical"></nz-divider>
+    <zm-button (click)="runParent()" nzType="info">
+      <i nz-icon nzType="plus" style="color: #d4d4da;" nzTheme="outline"></i>
+    </zm-button>
+  </nz-timeline-item>
+  <nz-timeline-item nzColor="green">
+    <nz-tag [nzColor]="'volcano'">扩展InputNumber</nz-tag>
+    <nz-divider></nz-divider>
+    <app-number-input [nzMin]="1" [nzMax]="10" [(ngModel)]="demoValue"></app-number-input>
+  </nz-timeline-item>
+  <nz-timeline-item nzColor="red">
+    <nz-tag [nzColor]="'orange'">ng-content select属性</nz-tag>
+    <nz-divider></nz-divider>
+    <app-header (outer)="runParent($event)">
+      <header>header - parent component content !!! -</header>
+      <div id="demo">id selector - parent component content !!! -</div>
+      <div name="demo">name - parent component content !!! -</div>
+    </app-header>
+  </nz-timeline-item>
+  <nz-timeline-item>
+    <nz-tag [nzColor]="'orange'">cdkCopyToClipboard</nz-tag>
+    <nz-divider></nz-divider>
+    <textarea nz-input [(ngModel)]="title"></textarea>
+    <button nz-button (click)="copy()">Copy to clipboard</button>
+    <button nz-button [cdkCopyToClipboard]="title">复制</button>
+  </nz-timeline-item>
+  <nz-timeline-item nzColor="red">
+    <nz-tag [nzColor]="'orange'">Subject 多播</nz-tag>
+    <nz-divider></nz-divider>
+    <div>{{ alertMsg }}</div>
+    <button nz-button (click)="sendMessage()">Send Message</button>
+  </nz-timeline-item>
+  <nz-timeline-item nzColor="gray">
+    <nz-tag [nzColor]="'orange'">自定义指令</nz-tag>
+    <nz-divider></nz-divider>
+    <input nz-input appRainbow />
+  </nz-timeline-item>
+</nz-timeline>

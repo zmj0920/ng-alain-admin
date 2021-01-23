@@ -52,13 +52,6 @@ const I18NSERVICE_PROVIDES = [{ provide: ALAIN_I18N_TOKEN, useClass: I18NService
 
 // #endregion
 
-// #region global third module
-
-import { BidiModule } from '@angular/cdk/bidi';
-const GLOBAL_THIRD_MODULES: Type<any>[] = [BidiModule];
-
-// #endregion
-
 // #region JSON Schema form (using @delon/form)
 import { JsonSchemaModule } from '@shared';
 const FORM_MODULES = [JsonSchemaModule];
@@ -106,7 +99,6 @@ import { RoutesModule } from './routes/routes.module';
     LayoutModule,
     RoutesModule,
     ...I18NSERVICE_MODULES,
-    ...GLOBAL_THIRD_MODULES,
     ...FORM_MODULES,
   ],
   providers: [...LANG_PROVIDES, ...INTERCEPTOR_PROVIDES, ...I18NSERVICE_PROVIDES, ...APPINIT_PROVIDES],

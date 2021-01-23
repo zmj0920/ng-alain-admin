@@ -34,6 +34,8 @@ import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzTimePickerModule } from 'ng-zorro-antd/time-picker';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
+import { NzTimelineModule } from 'ng-zorro-antd/timeline';
+
 export const SHARED_ZORRO_MODULES = [
   NzAlertModule,
   NzAutocompleteModule,
@@ -70,5 +72,6 @@ export const SHARED_ZORRO_MODULES = [
   NzTagModule,
   NzTimePickerModule,
   NzToolTipModule,
-  NzUploadModule
+  NzUploadModule,
+  NzTimelineModule
 ];

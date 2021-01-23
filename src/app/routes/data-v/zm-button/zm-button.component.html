@@ -1,0 +1,7 @@
+<button nz-button #buttonElement [class.ant-btn-warning]="nzType === 'warning'"
+    [class.ant-btn-success]="nzType === 'success'" [class.ant-btn-error]="nzType === 'error'"
+    [class.ant-btn-info]="nzType === 'info'" [nzType]="nzType" [nzBlock]="nzBlock" [nzGhost]="nzGhost"
+    [disabled]="disabled" [nzShape]="nzShape" [nzSearch]="nzSearch" [nzLoading]="nzLoading" [nzDanger]="nzDanger"
+    [tabIndex]="tabIndex" [nzSize]="nzSize">
+    <ng-content></ng-content>
+</button>

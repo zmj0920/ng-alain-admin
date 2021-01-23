@@ -1,28 +1,63 @@
 <page-header [title]="'查询表格'"></page-header>
-
-<full-content (fullscreenChange)="fullChange($event)">
-  <nz-card>
-
-    <div nz-row>
-      <div class="mb-md pb-md border-bottom-1">
-        <button class="test1-1" nz-button nzType="primary" (click)="handleClick()">First Button</button>
-        <button class="test1-2" nz-button nzType="link">Second Button</button>
-        <button class="test1-3" nz-button nzType="dashed">Third Button</button>
-      </div>
-      <button nz-button (click)="start()">Start</button>
-      <button nz-button (click)="viaHttp()">Start Via Http</button>
+  <div nz-row>
+    <div>
+      <button class="test1-1" nz-button nzType="primary" (click)="handleClick()">First Button</button>
+      <button class="test1-2" nz-button nzType="link">Second Button</button>
+      <button class="test1-3" nz-button nzType="dashed">Third Button</button>
     </div>
+    <button nz-button (click)="start()">Start</button>
+    <button nz-button (click)="viaHttp()">Start Via Http</button>
+  </div>
+  <div nz-row>
+    <div>
+      <button class="test1-1" nz-button nzType="primary" (click)="handleClick()">First Button</button>
+      <button class="test1-2" nz-button nzType="link">Second Button</button>
+      <button class="test1-3" nz-button nzType="dashed">Third Button</button>
+    </div>
+    <button nz-button (click)="start()">Start</button>
+    <button nz-button (click)="viaHttp()">Start Via Http</button>
+  </div>
+  <div nz-row>
+    <div>
+      <button class="test1-1" nz-button nzType="primary" (click)="handleClick()">First Button</button>
+      <button class="test1-2" nz-button nzType="link">Second Button</button>
+      <button class="test1-3" nz-button nzType="dashed">Third Button</button>
+    </div>
+    <button nz-button (click)="start()">Start</button>
+    <button nz-button (click)="viaHttp()">Start Via Http</button>
+  </div>
+  <div nz-row>
+    <div>
+      <button class="test1-1" nz-button nzType="primary" (click)="handleClick()">First Button</button>
+      <button class="test1-2" nz-button nzType="link">Second Button</button>
+      <button class="test1-3" nz-button nzType="dashed">Third Button</button>
+    </div>
+    <button nz-button (click)="start()">Start</button>
+    <button nz-button (click)="viaHttp()">Start Via Http</button>
+  </div>
+<!-- <full-content (fullscreenChange)="fullChange($event)"> -->
 
-   
-    <div nz-row class="mb-md">
+    <!-- <div nz-row class="mb-md">
       <div nz-col nzSpan="12">
         <form nz-form nzLayout="inline" se-container>
           <se label="User ID" labelWidth="0">
             <input nz-input [(ngModel)]="args.userid" name="userid" id="userid" />
           </se>
+          <se label="User ID" labelWidth="0">
+            <input nz-input [(ngModel)]="args.userid" name="userid" id="userid" />
+          </se>
+          <se label="User ID" labelWidth="0">
+            <input nz-input [(ngModel)]="args.userid" name="userid" id="userid" />
+          </se>
+          <se label="User ID" labelWidth="0">
+            <input nz-input [(ngModel)]="args.userid" name="userid" id="userid" />
+          </se>
+          <se label="User ID" labelWidth="0">
+            <input nz-input [(ngModel)]="args.userid" name="userid" id="userid" />
+          </se>
           <se>
-            <button nz-button [nzType]="'primary'" (click)="searchClick($event)" [nzLoading]="loading">Search</button>
-            <button nz-button [disabled]="loading">Clear</button>
+            <button nz-button [nzType]="'primary'" (click)="st.load()" [nzLoading]="http.loading">Search</button>
+            <button nz-button (click)="st.load(1, { _allow_anonymous: true })" [disabled]="http.loading">Clear</button>
           </se>
         </form>
       </div>
@@ -42,11 +77,11 @@
           <button nz-button [nzType]="'default'" full-toggle class="ml-sm">Full</button>
         </div>
       </div>
-    </div>
-  </nz-card>
-  <st #st [loading]="loading" [data]="dataSet"  [columns]="columns" [header]="extraTemplate"
-    (change)="stChange($event)"></st>
-    
+    </div> -->
+    <st #st [loading]="loading" [scroll]="scroll" [data]="dataSet" [header]="extraTemplate" [columns]="columns"
+      (change)="stChange($event)">
+    </st>
+
   <ng-template #extraTemplate>
     <div nz-row>
       <div nz-col nzFlex="1">
@@ -83,7 +118,7 @@
     </div>
   </ng-template>
 
-</full-content>
+<!-- </full-content> -->
 
 
 <ng-template #modalContent>

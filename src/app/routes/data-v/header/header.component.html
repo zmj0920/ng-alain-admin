@@ -1,22 +1,11 @@
 <div>
-  <div>子组件</div>
-
-  <input appRainbow />
-  <br />
-  <hr />
-  <button (click)="sendParent()">sendParent</button>
-
-  <!-- 在模板中，要使用井号 # 来声明一个模板变量。下列模板变量 #phone 语法在 <input> 元素上声明了一个名为 phone 的变量 -->
-  <input #phone placeholder="phone number" />
-
-  <!-- 你可以在组件模板中的任何地方引用某个模板变量。这里的 <button> 就引用了 phone 变量 -->
-  <button (click)="callPhone(phone.value)">Call</button>
-  <br />
+  <h1>app-header子组件</h1>
+  <h3>Output 子组件向父组件发送数据</h3>
+  <button nz-button (click)="sendParent()">sendParent</button>
   <hr />
 
   <ng-container *ngTemplateOutlet="dynamicTpl"></ng-container>
-  <ng-container *ngIf="true"
-    ><h2>Title</h2>
+  <ng-container *ngIf="true">
     <div>Content</div>
   </ng-container>
 
@@ -37,5 +26,4 @@
   <ng-content select="header"></ng-content>
   <ng-content select="#demo"></ng-content>
   <ng-content select="[name=demo]"></ng-content>
-  <button app-button appButtonType="primary">按钮</button>
 </div>
