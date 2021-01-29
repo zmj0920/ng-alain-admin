@@ -1,87 +1,8 @@
 <page-header [title]="'查询表格'"></page-header>
-  <div nz-row>
-    <div>
-      <button class="test1-1" nz-button nzType="primary" (click)="handleClick()">First Button</button>
-      <button class="test1-2" nz-button nzType="link">Second Button</button>
-      <button class="test1-3" nz-button nzType="dashed">Third Button</button>
-    </div>
-    <button nz-button (click)="start()">Start</button>
-    <button nz-button (click)="viaHttp()">Start Via Http</button>
-  </div>
-  <div nz-row>
-    <div>
-      <button class="test1-1" nz-button nzType="primary" (click)="handleClick()">First Button</button>
-      <button class="test1-2" nz-button nzType="link">Second Button</button>
-      <button class="test1-3" nz-button nzType="dashed">Third Button</button>
-    </div>
-    <button nz-button (click)="start()">Start</button>
-    <button nz-button (click)="viaHttp()">Start Via Http</button>
-  </div>
-  <div nz-row>
-    <div>
-      <button class="test1-1" nz-button nzType="primary" (click)="handleClick()">First Button</button>
-      <button class="test1-2" nz-button nzType="link">Second Button</button>
-      <button class="test1-3" nz-button nzType="dashed">Third Button</button>
-    </div>
-    <button nz-button (click)="start()">Start</button>
-    <button nz-button (click)="viaHttp()">Start Via Http</button>
-  </div>
-  <div nz-row>
-    <div>
-      <button class="test1-1" nz-button nzType="primary" (click)="handleClick()">First Button</button>
-      <button class="test1-2" nz-button nzType="link">Second Button</button>
-      <button class="test1-3" nz-button nzType="dashed">Third Button</button>
-    </div>
-    <button nz-button (click)="start()">Start</button>
-    <button nz-button (click)="viaHttp()">Start Via Http</button>
-  </div>
-<!-- <full-content (fullscreenChange)="fullChange($event)"> -->
 
-    <!-- <div nz-row class="mb-md">
-      <div nz-col nzSpan="12">
-        <form nz-form nzLayout="inline" se-container>
-          <se label="User ID" labelWidth="0">
-            <input nz-input [(ngModel)]="args.userid" name="userid" id="userid" />
-          </se>
-          <se label="User ID" labelWidth="0">
-            <input nz-input [(ngModel)]="args.userid" name="userid" id="userid" />
-          </se>
-          <se label="User ID" labelWidth="0">
-            <input nz-input [(ngModel)]="args.userid" name="userid" id="userid" />
-          </se>
-          <se label="User ID" labelWidth="0">
-            <input nz-input [(ngModel)]="args.userid" name="userid" id="userid" />
-          </se>
-          <se label="User ID" labelWidth="0">
-            <input nz-input [(ngModel)]="args.userid" name="userid" id="userid" />
-          </se>
-          <se>
-            <button nz-button [nzType]="'primary'" (click)="st.load()" [nzLoading]="http.loading">Search</button>
-            <button nz-button (click)="st.load(1, { _allow_anonymous: true })" [disabled]="http.loading">Clear</button>
-          </se>
-        </form>
-      </div>
-      <div nz-col nzSpan="12">
-        <div class="text-right">
-          <button nz-button nz-dropdown [nzDropdownMenu]="exportMenu">
-            <span>Export</span>
-            <i nz-icon nzType="down"></i>
-          </button>
-          <nz-dropdown-menu #exportMenu="nzDropdownMenu">
-            <ul nz-menu>
-              <li nz-menu-item>Excel</li>
-              <li nz-menu-item>JSON</li>
-              <li nz-menu-item>PNG</li>
-            </ul>
-          </nz-dropdown-menu>
-          <button nz-button [nzType]="'default'" full-toggle class="ml-sm">Full</button>
-        </div>
-      </div>
-    </div> -->
-    <st #st [loading]="loading" [scroll]="scroll" [data]="dataSet" [header]="extraTemplate" [columns]="columns"
-      (change)="stChange($event)">
-    </st>
-
+<full-content (fullscreenChange)="fullChange($event)">
+  <st #st [loading]="loading" [scroll]="scroll" [data]="dataSet" [header]="extraTemplate" [columns]="columns" (change)="stChange($event)">
+  </st>
   <ng-template #extraTemplate>
     <div nz-row>
       <div nz-col nzFlex="1">
@@ -99,28 +20,33 @@
         </div>
       </div>
       <div style="margin-top: 5px" nz-col nzFlex="0 0 100px">
-        <a nz-tooltip [nzTooltipTitle]="'刷新'" (click)="getData()" [nzTooltipColor]="'#2db7f5'"
-          class="ant-pro-table-list-toolbar-setting-item">
+        <a
+          nz-tooltip
+          [nzTooltipTitle]="'刷新'"
+          (click)="getData()"
+          [nzTooltipColor]="'#2db7f5'"
+          class="ant-pro-table-list-toolbar-setting-item"
+        >
           <i nz-icon nzType="reload" style="font-size: 18px"></i>
         </a>
         <nz-divider nzType="vertical"></nz-divider>
-        <a nz-tooltip [nzTooltipTitle]="'列设置'" [nzTooltipColor]="'#2db7f5'"
-          class="ant-pro-table-list-toolbar-setting-item">
+        <a nz-tooltip [nzTooltipTitle]="'列设置'" [nzTooltipColor]="'#2db7f5'" class="ant-pro-table-list-toolbar-setting-item">
           <i nz-icon nzType="setting" style="font-size: 18px"></i>
         </a>
         <nz-divider nzType="vertical"></nz-divider>
-        <a full-toggle nz-tooltip
+        <a
+          full-toggle
+          nz-tooltip
           [nzTooltipTitle]="(screenfullStatus ? 'menu.fullscreen.exit' : 'menu.fullscreen') | translate"
-          [nzTooltipColor]="'#2db7f5'" class="ant-pro-table-list-toolbar-setting-item">
+          [nzTooltipColor]="'#2db7f5'"
+          class="ant-pro-table-list-toolbar-setting-item"
+        >
           <i nz-icon [nzType]="screenfullStatus ? 'fullscreen-exit' : 'fullscreen'" style="font-size: 18px"></i>
         </a>
       </div>
     </div>
   </ng-template>
-
-<!-- </full-content> -->
-
-
+</full-content>
 <ng-template #modalContent>
   <nz-form-item>
     <nz-form-label nzFor="no">描述</nz-form-label>

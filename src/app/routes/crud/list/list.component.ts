@@ -1,6 +1,5 @@
-import { ChangeDetectorRef, Component, OnInit, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, TemplateRef, ViewEncapsulation, ViewChild } from '@angular/core';
 import { I18NService } from '@core';
-import { OnboardingService } from '@delon/abc/onboarding';
 import { STChange, STColumn, STData, STPage } from '@delon/abc/st';
 import { _HttpClient } from '@delon/theme';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -8,6 +7,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { Observable, of, zip } from 'rxjs';
 import { catchError, finalize, tap } from 'rxjs/operators';
+import { SFComponent, SFSchema } from '@delon/form';
 import { CrudConfigurationItemModalComponent } from '../configuration-item-modal/configuration-item-modal.component';
 type ModelType = 'configure' | 'restore';
 
@@ -15,7 +15,6 @@ type ModelType = 'configure' | 'restore';
   selector: 'app-table-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.less'],
-  // changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
 export class CrudListComponent implements OnInit {
@@ -26,9 +25,8 @@ export class CrudListComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private i18n: I18NService,
     private notification: NzNotificationService,
-    private srv: OnboardingService,
-  ) { }
-
+  ) {}
+  @ViewChild('sf', { static: true }) sf!: SFComponent;
   description = '';
   screenfullStatus = false;
   dataSet = [
@@ -113,7 +111,7 @@ export class CrudListComponent implements OnInit {
         item.currentConfig = res.address.current;
         item.defaultConfig = res.address.default;
         this.dataSet = [...this.dataSet];
-      })
+      }),
     );
   }
 
@@ -151,30 +149,35 @@ export class CrudListComponent implements OnInit {
   }
 
   setRootServerApiAddress(address: string): void {
-    this.http.post('/api/domain/current', { newaddress: address }).pipe(
-      tap(() => {
-        this.notification.success(``, `API根域名更新成功。`);
-        this.getRootServerApiAddress().subscribe(() => this.cdr.detectChanges());
-      }),
-      catchError(() => {
-        this.notification.success(``, `API根域名更新失败`);
-        return of(false);
-      })
-    ).subscribe();
+    this.http
+      .post('/api/domain/current', { newaddress: address })
+      .pipe(
+        tap(() => {
+          this.notification.success(``, `API根域名更新成功。`);
+          this.getRootServerApiAddress().subscribe(() => this.cdr.detectChanges());
+        }),
+        catchError(() => {
+          this.notification.success(``, `API根域名更新失败`);
+          return of(false);
+        }),
+      )
+      .subscribe();
   }
 
   setExternalAccessAddress(address: string): void {
-
-    this.http.post('/api/config/public_address', { newaddress: address }).pipe(
-      tap(() => {
-        this.notification.success(``, `外部访问地址更新成功`);
-        this.getExternalAccessAddress().subscribe(() => this.cdr.detectChanges());
-      }),
-      catchError(() => {
-        this.notification.success(``, `外部访问地址更新失败`);
-        return of(false);
-      })
-    ).subscribe();
+    this.http
+      .post('/api/config/public_address', { newaddress: address })
+      .pipe(
+        tap(() => {
+          this.notification.success(``, `外部访问地址更新成功`);
+          this.getExternalAccessAddress().subscribe(() => this.cdr.detectChanges());
+        }),
+        catchError(() => {
+          this.notification.success(``, `外部访问地址更新失败`);
+          return of(false);
+        }),
+      )
+      .subscribe();
   }
 
   add(item: STData, mode: ModelType, modalTitle: string): void {
@@ -187,12 +190,15 @@ export class CrudListComponent implements OnInit {
       },
       nzMaskClosable: false,
       nzOnOk: (m) => {
-        return m.setConfigurationItem().pipe(
-          tap((observer) => {
-            this.getConfigurationItemData(item, observer);
-          }),
-          catchError(() => of(false))
-        ).toPromise();
+        return m
+          .setConfigurationItem()
+          .pipe(
+            tap((observer) => {
+              this.getConfigurationItemData(item, observer);
+            }),
+            catchError(() => of(false)),
+          )
+          .toPromise();
       },
     });
   }
@@ -201,7 +207,6 @@ export class CrudListComponent implements OnInit {
     this.screenfullStatus = true;
     this.scroll = val ? { y: '350px' } : { y: '230px' };
   }
-
 
   showModal(tpl: TemplateRef<{}>): void {
     this.modalSrv.create({
@@ -214,50 +219,7 @@ export class CrudListComponent implements OnInit {
     });
   }
 
-  searchClick(): void {
+  searchClick(e: any): void {
     this.getData();
   }
-
-
-  handleClick(): void {
-    this.msg.info(`click`);
-  }
-
-  start(): void {
-    this.srv.start({
-      items: [
-        { 
-          selectors: '.test1-1', 
-          content: 'The user guidance is to help users better understand and use the product', 
-          width: 300,
-          next: `Go to home`,
-          url: '/crud/list',
-        },
-        { 
-          selectors: '.test1-2', 
-          title: 'Test2', 
-          content: 'The user guidance is to help users better understand and use the product',
-          next: `Go to home`,
-          url: '/',
-          before: 200,
-        },
-        { 
-          selectors: '.test1-3', 
-          title: 'Test3', 
-          content: 'The user guidance is to help users better understand and use the product',
-          next: `Go to home`,
-          url: '/crud/list', 
-        },
-      ],
-    });
-  }
-
-  viaHttp(): void {
-    this.http.get(`./assets/tmp/on-boarding.json`).subscribe(res => {
-      console.log(res);
-      this.srv.start(res);
-    });
-  }
-
-
 }

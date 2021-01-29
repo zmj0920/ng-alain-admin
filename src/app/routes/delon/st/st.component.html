@@ -1,17 +1,29 @@
-<div class="alain-default__content-title">
-  <h1>
-    Fullscreen & ST
-    <small>使用 <a href="//ng-alain.com/components/table" target="_blank">st</a>、
-      <a href="//ng-alain.com/components/full-content" target="_blank">full-content</a> 组合，由于 nz-table
-      固定表头暂不支持自适应，因此表格的展示的效果在响应式里面效果并不是特别好。</small>
-  </h1>
-</div>
 <div>
-  <h1 class="pressed">Hello, you have pressed keys {{counter}} {{isPressed}} number of times!</h1> Press any key to
-  increment the counter.
+  <h1 class="pressed">Hello, you have pressed keys {{ counter }} {{ isPressed }} number of times!</h1>
+  Press any key to increment the counter.
   <button (click)="resetCounter()">Reset Counter</button>
 </div>
 <full-content (fullscreenChange)="fullChange($event)">
+  <div class="alain-default__content-title">
+    <h1>
+      Fullscreen & ST
+      <small
+        >使用 <a href="//ng-alain.com/components/table" target="_blank">st</a>、
+        <a href="//ng-alain.com/components/full-content" target="_blank">full-content</a> 组合，由于 nz-table
+        固定表头暂不支持自适应，因此表格的展示的效果在响应式里面效果并不是特别好。</small
+      >
+    </h1>
+  </div>
+  <div nz-row style="margin-bottom: 50px">
+    <div>
+      <button class="test1-1" nz-button nzType="primary">First Button</button>
+      <button class="test1-2" nz-button nzType="link">Second Button</button>
+      <button class="test1-3" nz-button nzType="dashed">Third Button</button>
+    </div>
+    <button nz-button (click)="start()">Start</button>
+    <button nz-button (click)="viaHttp()">Start Via Http</button>
+  </div>
+
   <nz-card>
     <div nz-row class="mb-md">
       <div nz-col nzSpan="12">
@@ -42,12 +54,172 @@
         </div>
       </div>
     </div>
-    <st #st [data]="url" [req]="{ params: args }" [res]="{ reName: { list: 'results' } }" [total]="total" [ps]="ps"
-      [columns]="columns" [scroll]="scroll">
-      <ng-template st-row="events" let-item let-index="index">
-        <g2-mini-bar height="15" theme="mini" color="#999" borderWidth="3" [padding]="[0, 0, 0, 0]" [data]="events"
-          tooltipType="mini"></g2-mini-bar>
-      </ng-template>
-    </st>
+    <div nz-row class="mb-md">
+      <div nz-col nzSpan="12">
+        <form nz-form nzLayout="inline" se-container>
+          <se label="User ID" labelWidth="0">
+            <input nz-input [(ngModel)]="args.userid" name="userid" id="userid" />
+          </se>
+          <se>
+            <button nz-button [nzType]="'primary'" (click)="st.load()" [nzLoading]="http.loading">Search</button>
+            <button nz-button (click)="st.load(1, { _allow_anonymous: true })" [disabled]="http.loading">Clear</button>
+          </se>
+        </form>
+      </div>
+      <div nz-col nzSpan="12">
+        <div class="text-right">
+          <button nz-button nz-dropdown [nzDropdownMenu]="exportMenu">
+            <span>Export</span>
+            <i nz-icon nzType="down"></i>
+          </button>
+          <nz-dropdown-menu #exportMenu="nzDropdownMenu">
+            <ul nz-menu>
+              <li nz-menu-item>Excel</li>
+              <li nz-menu-item>JSON</li>
+              <li nz-menu-item>PNG</li>
+            </ul>
+          </nz-dropdown-menu>
+          <button nz-button [nzType]="'default'" full-toggle class="ml-sm">Full</button>
+        </div>
+      </div>
+    </div>
+    <div nz-row class="mb-md">
+      <div nz-col nzSpan="12">
+        <form nz-form nzLayout="inline" se-container>
+          <se label="User ID" labelWidth="0">
+            <input nz-input [(ngModel)]="args.userid" name="userid" id="userid" />
+          </se>
+          <se>
+            <button nz-button [nzType]="'primary'" (click)="st.load()" [nzLoading]="http.loading">Search</button>
+            <button nz-button (click)="st.load(1, { _allow_anonymous: true })" [disabled]="http.loading">Clear</button>
+          </se>
+        </form>
+      </div>
+      <div nz-col nzSpan="12">
+        <div class="text-right">
+          <button nz-button nz-dropdown [nzDropdownMenu]="exportMenu">
+            <span>Export</span>
+            <i nz-icon nzType="down"></i>
+          </button>
+          <nz-dropdown-menu #exportMenu="nzDropdownMenu">
+            <ul nz-menu>
+              <li nz-menu-item>Excel</li>
+              <li nz-menu-item>JSON</li>
+              <li nz-menu-item>PNG</li>
+            </ul>
+          </nz-dropdown-menu>
+          <button nz-button [nzType]="'default'" full-toggle class="ml-sm">Full</button>
+        </div>
+      </div>
+    </div>
+    <div nz-row class="mb-md">
+      <div nz-col nzSpan="12">
+        <form nz-form nzLayout="inline" se-container>
+          <se label="User ID" labelWidth="0">
+            <input nz-input [(ngModel)]="args.userid" name="userid" id="userid" />
+          </se>
+          <se>
+            <button nz-button [nzType]="'primary'" (click)="st.load()" [nzLoading]="http.loading">Search</button>
+            <button nz-button (click)="st.load(1, { _allow_anonymous: true })" [disabled]="http.loading">Clear</button>
+          </se>
+        </form>
+      </div>
+      <div nz-col nzSpan="12">
+        <div class="text-right">
+          <button nz-button nz-dropdown [nzDropdownMenu]="exportMenu">
+            <span>Export</span>
+            <i nz-icon nzType="down"></i>
+          </button>
+          <nz-dropdown-menu #exportMenu="nzDropdownMenu">
+            <ul nz-menu>
+              <li nz-menu-item>Excel</li>
+              <li nz-menu-item>JSON</li>
+              <li nz-menu-item>PNG</li>
+            </ul>
+          </nz-dropdown-menu>
+          <button nz-button [nzType]="'default'" full-toggle class="ml-sm">Full</button>
+        </div>
+      </div>
+    </div>
+    <div nz-row class="mb-md">
+      <div nz-col nzSpan="12">
+        <form nz-form nzLayout="inline" se-container>
+          <se label="User ID" labelWidth="0">
+            <input nz-input [(ngModel)]="args.userid" name="userid" id="userid" />
+          </se>
+          <se>
+            <button nz-button [nzType]="'primary'" (click)="st.load()" [nzLoading]="http.loading">Search</button>
+            <button nz-button (click)="st.load(1, { _allow_anonymous: true })" [disabled]="http.loading">Clear</button>
+          </se>
+        </form>
+      </div>
+      <div nz-col nzSpan="12">
+        <div class="text-right">
+          <button nz-button nz-dropdown [nzDropdownMenu]="exportMenu">
+            <span>Export</span>
+            <i nz-icon nzType="down"></i>
+          </button>
+          <nz-dropdown-menu #exportMenu="nzDropdownMenu">
+            <ul nz-menu>
+              <li nz-menu-item>Excel</li>
+              <li nz-menu-item>JSON</li>
+              <li nz-menu-item>PNG</li>
+            </ul>
+          </nz-dropdown-menu>
+          <button nz-button [nzType]="'default'" full-toggle class="ml-sm">Full</button>
+        </div>
+      </div>
+    </div>
+    <div nz-row class="mb-md">
+      <div nz-col nzSpan="12">
+        <form nz-form nzLayout="inline" se-container>
+          <se label="User ID" labelWidth="0">
+            <input nz-input [(ngModel)]="args.userid" name="userid" id="userid" />
+          </se>
+          <se>
+            <button nz-button [nzType]="'primary'" (click)="st.load()" [nzLoading]="http.loading">Search</button>
+            <button nz-button (click)="st.load(1, { _allow_anonymous: true })" [disabled]="http.loading">Clear</button>
+          </se>
+        </form>
+      </div>
+      <div nz-col nzSpan="12">
+        <div class="text-right">
+          <button nz-button nz-dropdown [nzDropdownMenu]="exportMenu">
+            <span>Export</span>
+            <i nz-icon nzType="down"></i>
+          </button>
+          <nz-dropdown-menu #exportMenu="nzDropdownMenu">
+            <ul nz-menu>
+              <li nz-menu-item>Excel</li>
+              <li nz-menu-item>JSON</li>
+              <li nz-menu-item>PNG</li>
+            </ul>
+          </nz-dropdown-menu>
+          <button nz-button [nzType]="'default'" full-toggle class="ml-sm">Full</button>
+        </div>
+      </div>
+    </div>
   </nz-card>
+  <st
+    #st
+    [data]="url"
+    [req]="{ params: args }"
+    [res]="{ reName: { list: 'results' } }"
+    [total]="total"
+    [ps]="ps"
+    [columns]="columns"
+    [scroll]="scroll"
+  >
+    <ng-template st-row="events" let-item let-index="index">
+      <g2-mini-bar
+        height="15"
+        theme="mini"
+        color="#999"
+        borderWidth="3"
+        [padding]="[0, 0, 0, 0]"
+        [data]="events"
+        tooltipType="mini"
+      ></g2-mini-bar>
+    </ng-template>
+  </st>
 </full-content>

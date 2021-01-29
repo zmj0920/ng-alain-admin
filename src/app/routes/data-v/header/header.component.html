@@ -10,7 +10,8 @@
   </ng-container>
 
   <div class="lessons-list" *ngIf="lessons; else loading"></div>
-  <ng-template [ngIf]="lessons" [ngIfElse]="loading">
+
+  <ng-template [ngIf]="heroListLessons" [ngIfElse]="loading">
     <div class="hero-list">...</div>
   </ng-template>
 
@@ -26,4 +27,15 @@
   <ng-content select="header"></ng-content>
   <ng-content select="#demo"></ng-content>
   <ng-content select="[name=demo]"></ng-content>
+
+  <ng-container *ngTemplateOutlet="defaultTabButtons"></ng-container>
+
+  <ng-template #defaultTabButtons>
+    <button class="tab-button" (click)="login()">
+      {{ loginText }}
+    </button>
+    <button class="tab-button" (click)="signUp()">
+      {{ signUpText }}
+    </button>
+  </ng-template>
 </div>

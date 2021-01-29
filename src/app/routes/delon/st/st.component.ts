@@ -5,27 +5,28 @@ import { _HttpClient } from '@delon/theme';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { switchMap } from 'rxjs/operators';
 import { from, fromEvent, interval, of, throwError, timer } from 'rxjs';
+import { OnboardingService } from '@delon/abc/onboarding';
 @Component({
   selector: 'app-st',
   templateUrl: './st.component.html',
-  styles:[
+  styles: [
     `
-    :host ::ng-deep .ant-input-group.ant-input-group-compact > *:not(:last-child) {
-       margin-right: 0px !important;
-     }
-    :host ::ng-deep .ant-input-number-handler-wrap {
-      display: none;
-    }
-    :host ::ng-deep .ant-input-number-input {
+      :host ::ng-deep .ant-input-group.ant-input-group-compact > *:not(:last-child) {
+        margin-right: 0px !important;
+      }
+      :host ::ng-deep .ant-input-number-handler-wrap {
+        display: none;
+      }
+      :host ::ng-deep .ant-input-number-input {
         text-align: center;
-    }
-    `
-  ]
+      }
+    `,
+  ],
 })
 export class STDemoComponent implements OnInit {
-   demoValue = 1;
-   minusState = false;
-  constructor(public http: _HttpClient, private message: NzMessageService) { }
+  demoValue = 1;
+  minusState = false;
+  constructor(public http: _HttpClient, private message: NzMessageService, private srv: OnboardingService) {}
   data: any = 'dataVar';
   ps = 20;
   total = 200; // mock total
@@ -87,7 +88,6 @@ export class STDemoComponent implements OnInit {
   handleKeyDown(event: KeyboardEvent): void {
     this.isPressed = false;
     this.counter++;
-    
   }
 
   // @HostListener('mouseenter') onMouseEnter(): void {
@@ -98,57 +98,58 @@ export class STDemoComponent implements OnInit {
   //   this.isPressed = true;
   // }
 
-
   resetCounter(): void {
     this.counter = 0;
   }
 
   ngOnInit(): void {
-    this.http.get('/chart/visit').pipe(
-      switchMap((res: G2MiniBarData[]) => this.events = res.slice(0, 8))
-    ).subscribe();
+    this.http
+      .get('/chart/visit')
+      .pipe(switchMap((res: G2MiniBarData[]) => (this.events = res.slice(0, 8))))
+      .subscribe();
   }
 
   fullChange(val: boolean): void {
     this.scroll = val ? { y: '350px' } : { y: '230px' };
 
     const names = ['Ben', 'Jafar', 'Matt', 'Priya', 'Brian'];
-    
+
     of(names).subscribe(console.log);
-    
-   
   }
 
-  // Array.prototype.map = function(callback) {
-  //   var result = []; // map 最後一定會返回一個新陣列，所以我們先宣告一個新陣列
-    
-  //   this.forEach(function(element, index) {
-  //     // this 就是呼叫 map 的陣列
-  //     result.push(callback(element, index));
-  //     // 執行使用者定義的 callback， callback 會回傳使用者預期的元素，所以我們把它 push 進新陣列
-  //   })
-    
-  //   return result;
-  // }
+  start(): void {
+    this.srv.start({
+      items: [
+        {
+          selectors: '.test1-1',
+          content: 'The user guidance is to help users better understand and use the product',
+          width: 300,
+          next: `Go to home`,
+          url: '/crud/list',
+        },
+        {
+          selectors: '.test1-2',
+          title: 'Test2',
+          content: 'The user guidance is to help users better understand and use the product',
+          next: `Go to home`,
+          url: '/',
+          before: 200,
+        },
+        {
+          selectors: '.test1-3',
+          title: 'Test3',
+          content: 'The user guidance is to help users better understand and use the product',
+          next: `Go to home`,
+          url: '/crud/list',
+        },
+      ],
+    });
+  }
 
-
-  // Array.prototype.filter = function(callback) {
-  //   var result = [];
-  //   this.forEach((item, index) => {
-  //     if(callback(item, index))
-  //       result.push(item);
-  //   });
-  //   return result;
-  // }
-
-  // newMap(callback: Function) {
-  //   const result: any[] = [];
-  //   this.forEach((item, index) => {
-  //     if(callback(item, index))
-  //       result.push(item);
-  //   });
-  //   return result;
-  // }
-
-
+  viaHttp(): void {
+    this.http.get(`./assets/tmp/on-boarding.json`).subscribe((res) => {
+      console.log(res);
+      this.srv.start(res);
+    });
+  }
 }

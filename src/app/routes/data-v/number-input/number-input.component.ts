@@ -11,8 +11,8 @@ import { NzInputNumberComponent } from 'ng-zorro-antd/input-number';
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => NumberInputComponent),
-      multi: true
-    }
+      multi: true,
+    },
   ],
 })
 export class NumberInputComponent implements OnInit, ControlValueAccessor {
@@ -25,7 +25,7 @@ export class NumberInputComponent implements OnInit, ControlValueAccessor {
     value
       .trim()
       .replace(/。/g, '.')
-      .replace(/[^\w\.-]+/g, '')
+      .replace(/[^\w\.-]+/g, '');
   @Input() nzPrecision?: number;
   @Input() nzPrecisionMode: 'cut' | 'toFixed' | ((value: number | string, precision?: number) => number) = 'toFixed';
   @Input() nzPlaceHolder = '';
@@ -34,12 +34,11 @@ export class NumberInputComponent implements OnInit, ControlValueAccessor {
   @Input() nzId: string | null = null;
   @Input() @InputBoolean() nzDisabled = false;
   @Input() @InputBoolean() nzAutoFocus = false;
-  @Input() nzFormatter: (value: number) => string | number = value => value;
+  @Input() nzFormatter: (value: number) => string | number = (value) => value;
   @ViewChild('inputElement', { static: true }) inputElement!: NzInputNumberComponent;
 
-  constructor() {
+  constructor() {}
 
-  }
   writeValue(obj: any): void {
     this.inputElement.writeValue(obj);
   }
@@ -50,9 +49,5 @@ export class NumberInputComponent implements OnInit, ControlValueAccessor {
     this.inputElement.registerOnTouched(fn);
   }
 
-
-  ngOnInit(): void {
-
-  }
-
+  ngOnInit(): void {}
 }

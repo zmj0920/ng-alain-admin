@@ -7,6 +7,7 @@ import {
   from,
   interval,
   Observable,
+  Observer,
   of,
   ReplaySubject,
   Subject,
@@ -15,6 +16,11 @@ import {
 } from 'rxjs';
 import { mapTo, mergeMap, multicast, retry, take, tap } from 'rxjs/operators';
 
+export interface Hero {
+  id: number;
+  name: string;
+  tid: string; // tax id
+}
 @Injectable({
   providedIn: 'root',
 })
@@ -219,5 +225,21 @@ export class BookService {
         console.log(res);
         return res;
       });
+  }
+
+  getName() {
+    return 'Angular';
+  }
+
+  heroes: Hero[] = [
+    { id: 1, name: 'RubberMan', tid: '082-27-5678' },
+    { id: 2, name: 'Tornado', tid: '099-42-4321' },
+  ];
+
+  getHeroes(): Observable<Hero[]> {
+    return new Observable<Hero[]>((observer: Observer<Hero[]>) => {
+      observer.next(this.heroes);
+      observer.complete();
+    });
   }
 }
