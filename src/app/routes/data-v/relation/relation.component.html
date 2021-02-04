@@ -2,37 +2,35 @@
 <!-- <app-operators> </app-operators> -->
 <nz-tag [nzColor]="'orange'">RTL</nz-tag>
 <nz-divider></nz-divider>
-<p dir="RTL" style="border: solid 1px #ccc;">
-  从右到左排列
-</p>
+<p dir="RTL" style="border: solid 1px #ccc">从右到左排列</p>
 <nz-timeline>
   <nz-timeline-item nzColor="green">
     <nz-tag [nzColor]="'magenta'">扩展按钮样式</nz-tag>
     <nz-divider></nz-divider>
     <zm-button (click)="runParent()" nzType="success">
-      <i nz-icon nzType="plus" style="color: #d4d4da;" nzTheme="outline"></i>
+      <i nz-icon nzType="plus" style="color: #d4d4da" nzTheme="outline"></i>
     </zm-button>
     <nz-divider nzType="vertical"></nz-divider>
     <zm-button (click)="runParent()" nzType="default">
-      <i nz-icon nzType="plus" style="color: #d4d4da;" nzTheme="outline"></i>
+      <i nz-icon nzType="plus" style="color: #d4d4da" nzTheme="outline"></i>
     </zm-button>
     <nz-divider nzType="vertical"></nz-divider>
     <zm-button (click)="runParent()" nzType="warning">
-      <i nz-icon nzType="plus" style="color: #d4d4da;" nzTheme="outline"></i>
+      <i nz-icon nzType="plus" style="color: #d4d4da" nzTheme="outline"></i>
     </zm-button>
     <nz-divider nzType="vertical"></nz-divider>
     <zm-button (click)="runParent()" nzType="error">
-      <i nz-icon nzType="plus" style="color: #d4d4da;" nzTheme="outline"></i>
+      <i nz-icon nzType="plus" style="color: #d4d4da" nzTheme="outline"></i>
     </zm-button>
     <nz-divider nzType="vertical"></nz-divider>
     <zm-button (click)="runParent()" nzType="info">
-      <i nz-icon nzType="plus" style="color: #d4d4da;" nzTheme="outline"></i>
+      <i nz-icon nzType="plus" style="color: #d4d4da" nzTheme="outline"></i>
     </zm-button>
   </nz-timeline-item>
   <nz-timeline-item nzColor="green">
     <nz-tag [nzColor]="'volcano'">扩展InputNumber</nz-tag>
     <nz-divider></nz-divider>
-    <app-number-input [nzMin]="1" [nzMax]="10" [(ngModel)]="demoValue"></app-number-input>
+    <app-input-number [nzMin]="1" [nzMax]="10" [(ngModel)]="demoValue"></app-input-number>
   </nz-timeline-item>
   <nz-timeline-item nzColor="red">
     <nz-tag [nzColor]="'orange'">ng-content select属性</nz-tag>

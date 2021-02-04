@@ -1,0 +1,8 @@
+:host ::ng-deep {
+  .ng-input-group {
+    width: 112px;
+    .ng-input-number {
+      width: 48px;
+    }
+  }
+}

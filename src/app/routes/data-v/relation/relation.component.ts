@@ -3,14 +3,14 @@ import { Component, OnInit } from '@angular/core';
 import { BookService } from '@services/book/book.service';
 @Component({
   selector: 'app-data-v-relation',
-  styleUrls: ['./relation.component.less'],
+  styleUrls: ['./relation.component.scss'],
   templateUrl: './relation.component.html',
 })
 export class RelationComponent implements OnInit {
   public alertMsg!: string;
   demoValue = 1;
   public title = '我是父组件标题';
-  constructor( private bookService: BookService, private clipboard: Clipboard) { }
+  constructor(private bookService: BookService, private clipboard: Clipboard) {}
   ngOnInit(): void {
     // 消息提示 从service获取消息内容
     this.bookService.getMessage().subscribe((value) => {
@@ -37,7 +37,7 @@ export class RelationComponent implements OnInit {
 
   /** 点击复制 */
   copy(): void {
-   const pending =  this.clipboard.copy('复制这段文本1');
-  //  pending.destroy();
+    const pending = this.clipboard.copy('复制这段文本1');
+    //  pending.destroy();
   }
 }

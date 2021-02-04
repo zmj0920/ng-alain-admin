@@ -1,0 +1,36 @@
+:host ::ng-deep .deep-red {
+  color: red;
+}
+
+@mixin supports-hover() {
+  @media (any-hover: hover), (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    @content;
+  }
+}
+
+@mixin supports-touch() {
+  @media (any-hover: none), (any-pointer: coarse) {
+    @content;
+  }
+}
+
+@mixin has-focus() {
+  @include supports-hover {
+    &:hover,
+    &:focus {
+      @content;
+    }
+  }
+
+  @include supports-touch {
+    &:active {
+      color: #03ad36;
+    }
+  }
+}
+
+.btn {
+  @include has-focus {
+    color: red;
+  }
+}

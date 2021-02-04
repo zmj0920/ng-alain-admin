@@ -4,13 +4,7 @@ import { BookService } from '@services/book/book.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styles: [
-    `
-      :host ::ng-deep .deep-red {
-        color: red;
-      }
-    `,
-  ],
+  styleUrls: ['./header.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
 export class HeaderComponent implements OnInit, AfterViewInit {

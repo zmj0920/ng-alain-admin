@@ -1,0 +1,79 @@
+$border-color: #d9d9d9;
+$border-color-input: #7a5fe3;
+$border-color-input-error: #ee6b63;
+$icon-color: #d4d4da;
+
+:host ::ng-deep {
+  .ant-input-group.ant-input-group-compact > *:not(:last-child) {
+    margin-right: 0 !important;
+  }
+
+  .ng-input-group {
+    .ant-input-number-handler-wrap {
+      display: none;
+    }
+
+    .ant-input-number-input {
+      text-align: center;
+    }
+
+    .ant-btn-down {
+      border-right: none !important;
+
+      .icon-minus {
+        color: $icon-color;
+      }
+
+      &:hover > .icon-minus {
+        color: $border-color-input;
+      }
+    }
+
+    .ant-btn-up {
+      border-left: none !important;
+
+      .icon-plus {
+        color: $icon-color;
+      }
+
+      &:hover > .icon-plus {
+        color: $border-color-input;
+      }
+    }
+
+    .ant-input-number-handler-down-disabled:hover > .icon-minus,
+    .ant-input-number-handler-up-disabled:hover > .icon-plus {
+      color: $icon-color;
+    }
+
+    .ant-input-number:focus,
+    .ant-input-number-focused {
+      box-shadow: none;
+      border-color: $border-color;
+    }
+
+    &:hover > button {
+      border-color: $border-color-input;
+    }
+
+    &:hover > .ant-input-number {
+      border-color: $border-color-input;
+      border-left-color: $border-color;
+      border-right-color: $border-color;
+    }
+  }
+
+  .ng-input-group-error {
+    &:hover > .ant-input-number,
+    & > .ant-input-number {
+      border-color: $border-color-input-error;
+      border-left-color: $border-color;
+      border-right-color: $border-color;
+    }
+
+    &:hover > .btn-error,
+    & > .btn-error {
+      border-color: $border-color-input-error;
+    }
+  }
+}

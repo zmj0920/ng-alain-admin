@@ -1,0 +1,44 @@
+<nz-input-group class="ng-input-group" [class.ng-input-group-error]="nzError" nzCompact>
+  <button
+    nz-button
+    nzType="default"
+    [class.ant-input-number-handler-down-disabled]="inputElement.disabledDown"
+    (mousedown)="inputElement.down($event)"
+    (mouseup)="inputElement.stop()"
+    (mouseleave)="inputElement.stop()"
+    class="ant-btn-down"
+    [class.btn-error]="nzError"
+  >
+    <i nz-icon nzType="minus" class="icon-minus" nzTheme="outline"></i>
+  </button>
+  <nz-input-number
+    class="ng-input-number"
+    [nzSize]="nzSize"
+    [nzMin]="nzMin"
+    [nzMax]="nzMax"
+    [nzParser]="nzParser"
+    [nzPrecision]="nzPrecision"
+    [nzPlaceHolder]="nzPlaceHolder"
+    [nzStep]="nzStep"
+    [nzId]="nzId"
+    [nzDisabled]="nzDisabled"
+    [nzAutoFocus]="nzAutoFocus"
+    [nzFormatter]="nzFormatter"
+    (nzFocus)="nzFocus.emit($event)"
+    (nzBlur)="nzBlur.emit($event)"
+    #inputElement
+  >
+  </nz-input-number>
+  <button
+    nz-button
+    nzType="default"
+    [class.ant-input-number-handler-up-disabled]="inputElement.disabledUp"
+    (mousedown)="inputElement.up($event)"
+    (mouseup)="inputElement.stop()"
+    (mouseleave)="inputElement.stop()"
+    class="ant-btn-up"
+    [class.btn-error]="nzError"
+  >
+    <i nz-icon nzType="plus" class="icon-plus" nzTheme="outline"></i>
+  </button>
+</nz-input-group>
