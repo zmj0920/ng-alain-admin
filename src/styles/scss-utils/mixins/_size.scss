@@ -1,0 +1,18 @@
+//@include size(100px, 200px)
+
+// .btn {
+//     width: 100px;
+//     height: 200px;
+//  }
+
+// @include size(100px)
+
+// .btn {
+//   width: 100px;
+//   height: 100px;
+// }
+
+@mixin size($w, $h: $w) {
+  width: $w;
+  height: $h;
+}

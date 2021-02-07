@@ -1,0 +1,12 @@
+/// Visually hide content but leave it accessible for screen readers and search engines
+///
+@mixin hide-visually {
+  position: absolute;
+  overflow: hidden;
+  max-width: 1px;
+  max-height: 1px;
+  padding: 0;
+  border: 0;
+  margin: -1px;
+  clip: rect(0 0 0 0);
+}

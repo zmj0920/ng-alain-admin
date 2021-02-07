@@ -1,0 +1,9 @@
+/// Add a value to the front of a list
+/// @link https://hugogiraudel.com/2013/08/08/advanced-sass-list-functions/#adding-values-to-a-list
+/// @param {List} $list - The input list
+/// @param {*} $value - The term to be prepended
+/// @return {*} - The output list
+///
+@function list-prepend($list, $value) {
+  @return join($value, $list);
+}

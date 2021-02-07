@@ -1,0 +1,240 @@
+// url https://www.familyscss.xyz
+@use 'text-ellipsis' as *;
+
+@mixin selected {
+  background: mix($al-pink-dark, $al-pink-light, 50%);
+  //background: linear-gradient(to bottom, $al-pink-light, $al-pink-dark);
+  font-weight: bold;
+  color: white;
+}
+
+ul {
+  @include line-text-ellipsis(10px) {
+    overflow: auto;
+  }
+  &.first {
+    li {
+      @include first(3) {
+        @include selected;
+      }
+    }
+  }
+
+  &.last {
+    li {
+      @include last(3) {
+        @include selected;
+      }
+    }
+  }
+
+  &.after-first {
+    li {
+      @include after-first(5) {
+        @include selected;
+      }
+    }
+  }
+
+  &.from-end {
+    li {
+      @include from-end(3) {
+        @include selected;
+      }
+    }
+  }
+
+  &.between {
+    li {
+      @include between(3, 6) {
+        @include selected;
+      }
+    }
+  }
+
+  &.even-between {
+    li {
+      @include even-between(3, 12) {
+        @include selected;
+      }
+    }
+  }
+
+  &.odd-between {
+    li {
+      @include odd-between(3, 13) {
+        @include selected;
+      }
+    }
+  }
+
+  &.n-between {
+    li {
+      @include n-between(3, 3, 12) {
+        @include selected;
+      }
+    }
+  }
+
+  &.all-but {
+    li {
+      @include all-but(3) {
+        @include selected;
+      }
+    }
+  }
+
+  &.each {
+    li {
+      @include each(3) {
+        @include selected;
+      }
+    }
+  }
+
+  // &.each-after {
+  //   li {
+  //     @include each-after(3, 6) {
+  //       @include selected;
+  //     }
+  //   }
+  // }
+
+  &.from-first-last {
+    li {
+      @include from-first-last(2) {
+        @include selected;
+      }
+    }
+  }
+
+  &.middle {
+    li {
+      @include middle(11) {
+        @include selected;
+      }
+    }
+  }
+
+  &.all-but-first-last {
+    li {
+      @include all-but-first-last(3) {
+        @include selected;
+      }
+    }
+  }
+
+  // Quantity-query mixins
+  &.first-of {
+    li {
+      @include first-of(10) {
+        @include selected;
+      }
+    }
+  }
+
+  &.last-of {
+    li {
+      @include last-of(10) {
+        @include selected;
+      }
+    }
+  }
+
+  &.at-least {
+    li {
+      @include at-least(5) {
+        @include selected;
+      }
+    }
+  }
+
+  &.at-most {
+    li {
+      @include at-most(5) {
+        @include selected;
+      }
+    }
+  }
+
+  &.in-between {
+    li {
+      @include in-between(5, 10) {
+        @include selected;
+      }
+    }
+  }
+
+  // No arguments mixins
+  &.first-child {
+    li {
+      @include first-child {
+        @include selected;
+      }
+    }
+  }
+
+  &.last-child {
+    li {
+      @include last-child {
+        @include selected;
+      }
+    }
+  }
+
+  &.even {
+    li {
+      @include even {
+        @include selected;
+      }
+    }
+  }
+
+  &.odd {
+    li {
+      @include odd {
+        @include selected;
+      }
+    }
+  }
+
+  &.first-last {
+    li {
+      @include first-last {
+        @include selected;
+      }
+    }
+  }
+
+  &.unique {
+    li {
+      @include unique {
+        @include selected;
+      }
+    }
+  }
+
+  &.not-unique {
+    li {
+      @include not-unique {
+        @include selected;
+      }
+    }
+  }
+
+  // Functions
+  &.child-index {
+    display: block;
+
+    li {
+      @include child-index(10) {
+        @include selected;
+        position: relative;
+        width: calc(100% / 10 + 14px);
+        left: 0;
+        margin: 0;
+        margin-right: -16px;
+      }
+    }
+  }
+}

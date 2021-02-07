@@ -1,0 +1,25 @@
+// stylelint-disable scss/no-duplicate-dollar-variables
+
+/// Expand a given list to 4 items, similar to css padding shorthand expressions.
+/// Inspired by expansions used in css shorthand expressions (eg. margin or padding).
+/// @param {List} $list - List containing zero to four items
+/// @return {List} - Updated list expanded to always four entries
+///
+@function list-expand-directions($list) {
+  $result: ();
+  $len-list: length($list);
+
+  @if ($len-list == 0) {
+    $result: (null, null, null, null);
+  } @else if ($len-list == 1) {
+    $result: (nth($list, 1), nth($list, 1), nth($list, 1), nth($list, 1));
+  } @else if ($len-list == 2) {
+    $result: (nth($list, 1), nth($list, 2), nth($list, 1), nth($list, 2));
+  } @else if ($len-list == 3) {
+    $result: (nth($list, 1), nth($list, 2), nth($list, 3), nth($list, 2));
+  } @else {
+    $result: (nth($list, 1), nth($list, 2), nth($list, 3), nth($list, 4));
+  }
+
+  @return $result;
+}

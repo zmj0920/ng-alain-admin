@@ -1,0 +1,11 @@
+/// Checks if a given list contains a certain value
+/// @param {List} $list - The haystack
+/// @param {*} $val - The needle
+///
+@function list-contains($list, $val) {
+  @if index($list, $val) {
+    @return true;
+  }
+
+  @return false;
+}

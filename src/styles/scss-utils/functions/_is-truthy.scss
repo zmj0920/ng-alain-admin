@@ -1,0 +1,7 @@
+/// Check if a value has a truthy value
+/// @param {*} $value - The input value
+/// @return {boolean} - A flag indicating if the value is truthy
+///
+@function is-truthy($value) {
+  @return if($value == null, false, $value and $value != null and $value != '' and $value != ());
+}

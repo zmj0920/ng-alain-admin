@@ -1,0 +1,20 @@
+/// Add ios native overflow scrolling to an element
+/// @param {string} $orientation - The scroll direction
+///
+@mixin ios-native-scrolling($orientation: y) {
+  -webkit-overflow-scrolling: touch;
+
+  @if (not index((x, y), $orientation)) {
+    @error '`#{$orientation}` must be either `x` or `y`';
+  }
+
+  @if ($orientation == y) {
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+
+  @if ($orientation == x) {
+    overflow-x: scroll;
+    overflow-y: hidden;
+  }
+}

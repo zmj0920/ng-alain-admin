@@ -1,0 +1,11 @@
+@use 'list-replace-nth' as *;
+
+/// Remove a value at a certain index from a list
+/// @link https://hugogiraudel.com/2013/08/08/advanced-sass-list-functions/#removing-values-from-list
+/// @param {List} $list - The input list
+/// @param {number} $index - The target position to be removed
+/// @return {*} - The list's first item
+///
+@function list-remove-nth($list, $index) {
+  @return list-replace-nth($list, $index);
+}

@@ -1,0 +1,10 @@
+/// Slightly darken a color by mixing it with black
+/// @link http://sass-guidelin.es/#lightening-and-darkening-colors
+/// @access public
+/// @param {color} $color - Color to tint
+/// @param {number} $percentage - Percentage of `$color` in returned color
+/// @return {Color}
+///
+@function color-shade($color, $percentage) {
+  @return mix(black, $color, $percentage);
+}

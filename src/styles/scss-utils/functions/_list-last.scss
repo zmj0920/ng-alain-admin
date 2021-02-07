@@ -1,0 +1,8 @@
+/// Return the last item of a list
+/// @link https://hugogiraudel.com/2013/08/08/advanced-sass-list-functions/#selecting-values-from-list
+/// @param {List} $list - The input list
+/// @return {*} - The list's last item
+///
+@function list-last($list) {
+  @return nth($list, length($list));
+}

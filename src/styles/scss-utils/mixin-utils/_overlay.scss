@@ -1,0 +1,12 @@
+/// Add styles for a child to overlay its parent
+/// @param {string} $pos - A declaration value for the `position` property
+/// @param {string} $root-y - A vertical spacial property keyword
+/// @param {string} $root-x - A horizontal spacial property keyword
+///
+@mixin overlay($pos: absolute, $root-y: top, $root-x: left) {
+  position: $pos;
+  #{$root-y}: 0;
+  #{$root-x}: 0;
+  width: 100%;
+  height: 100%;
+}

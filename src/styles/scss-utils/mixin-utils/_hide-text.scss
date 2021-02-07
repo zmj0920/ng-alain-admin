@@ -1,16 +1,7 @@
-:host ::ng-deep .deep-red {
-  color: red;
-}
-@import 'src/styles/scss';
-
+/// Visually hide text but leave it accessible for screen readers and search engines
+///
 @mixin hide-text {
   font: 0/0 a; // stylelint-disable font-family-no-missing-generic-family-keyword
   text-shadow: none;
   color: transparent;
-}
-.btn {
-  @include has-focus {
-    color: red;
-  }
-  @include hide-text;
 }

@@ -1,0 +1,13 @@
+/// Returns a value from a nested list (without failsafe if one of the keys does not exist)
+/// @link https://css-tricks.com/snippets/sass/deep-getset-maps/
+/// @param {Map} $map - Map
+/// @param {...string} $keys - Key chain
+/// @return {*} - Desired value
+///
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+
+  @return $map;
+}

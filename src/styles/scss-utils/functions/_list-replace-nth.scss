@@ -1,0 +1,37 @@
+// stylelint-disable scss/no-duplicate-dollar-variables
+
+@use 'is-truthy' as *;
+
+/// Replace a value within a list by index
+/// @link https://hugogiraudel.com/2013/08/08/advanced-sass-list-functions/#replacing-values-from-list
+/// @param {List} $list - The input list
+/// @param {number} $index - The value's target list position
+/// @param {*} $value - The term to be inserted
+/// @return {*} - The output list
+///
+@function list-replace-nth($list, $index, $value: null) {
+  $result: null;
+
+  @if type-of($index) != number {
+    @warn '$index: #{quote($index)} is not a number for `replace-nth`';
+  } @else if $index == 0 {
+    @warn 'ist index 0 must be a non-zero integer for `replace-nth`.';
+  } @else if abs($index) > length($list) {
+    @warn 'ist index is #{$index} but list is only #{length($list)} item long for `replace-nth`.';
+  } @else {
+    $result: ();
+    $index: if($index < 0, length($list) + $index + 1, $index);
+
+    @for $i from 1 through length($list) {
+      @if $i == $index {
+        @if is-truthy($value) {
+          $result: append($result, $value);
+        }
+      } @else {
+        $result: append($result, nth($list, $i));
+      }
+    }
+  }
+
+  @return $result;
+}

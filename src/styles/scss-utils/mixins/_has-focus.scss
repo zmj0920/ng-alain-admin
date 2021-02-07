@@ -1,0 +1,38 @@
+@mixin supports-hover() {
+  /* one or more available input mechanism(s) can hover over elements with ease */
+  // The `-ms-high-contrast` directives are needed to target Internet Explorer 10 and 11
+  // @link https://stackoverflow.com/q/28417056/1602864
+  // TODO: Remove the `-ms-high-contrast` directives when IE will no longer be supported
+  @media (any-hover: hover), (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    @content;
+  }
+}
+
+@mixin supports-touch() {
+  /* one or more available input mechanism(s) cannot hover or there are no pointing input mechanisms */
+  /* or at least one input mechanism of the device includes a pointing device of limited accuracy. */
+  // see also https://css-tricks.com/touch-devices-not-judged-size/
+  @media (any-hover: none), (any-pointer: coarse) {
+    @content;
+  }
+}
+
+/// Styles touch/hover states according to browser capabilities
+/// @param {boolean} $toggle - State toggle; Available values: `true`, `false` or `default` (for both)
+///
+@mixin has-focus() {
+  @include supports-hover {
+    &:hover,
+    &:focus {
+      outline: 0;
+      @content;
+    }
+  }
+
+  @include supports-touch {
+    &:active {
+      outline: 0;
+      @content;
+    }
+  }
+}

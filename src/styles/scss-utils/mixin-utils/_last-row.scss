@@ -1,0 +1,12 @@
+/// Targets the last row in a grid of constant column count
+/// @link http://keithclark.co.uk/articles/targeting-first-and-last-rows-in-css-grid-layouts/
+/// @param {number} $num-cols - The number of columns within the context
+///
+@mixin last-row($num-cols) {
+  $selector: nth(nth(&, 1), length(nth(&, 1)));
+
+  &:nth-child(#{$num-cols}n + 1):nth-last-child(-n + #{$num-cols}),
+  &:nth-child(#{$num-cols}n + 1):nth-last-child(-n + #{$num-cols}) ~ #{$selector} {
+    @content;
+  }
+}

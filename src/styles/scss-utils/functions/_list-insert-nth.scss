@@ -1,0 +1,32 @@
+// stylelint-disable scss/no-duplicate-dollar-variables
+
+/// Add a value to an arbitrary position
+/// @link https://hugogiraudel.com/2013/08/08/advanced-sass-list-functions/#adding-values-to-a-list
+/// @param {List} $list - The input list
+/// @param {number} $index - The value's target list position
+/// @param {*} $value - The term to be added
+/// @return {*} - The output list
+///
+@function list-insert-nth($list, $index, $value) {
+  $result: null;
+
+  @if type-of($index) != number {
+    @warn '$index: #{quote($index)} is not a number for `insert-nth`.';
+  } @else if $index < 1 {
+    @warn 'List index 0 must be a non-zero integer for `insert-nth`';
+  } @else if $index > length($list) {
+    @warn 'List index is #{$index} but list is only #{length($list)} item long for `insert-nth`';
+  } @else {
+    $result: ();
+
+    @for $i from 1 through length($list) {
+      @if $i == $index {
+        $result: append($result, $value);
+      }
+
+      $result: append($result, nth($list, $i));
+    }
+  }
+
+  @return $result;
+}

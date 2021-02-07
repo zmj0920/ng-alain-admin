@@ -1,0 +1,35 @@
+@use '../functions/selector-get-element-name' as *;
+
+/// Use `@at-root` while adding classes (or attributes) `$classes` to an element node `$append-target`.
+/// If the element was not found a standard `@at-root` is used.
+/// @param {string} $append-target - $append-target string to append the classes (or attributes) to
+/// @param {string} $appended-selector - A single element selector containing classes and/or attributes to be appended
+///
+@mixin at-root($append-target, $appended-selector: '') {
+  $is-element-found: false;
+  $combined-selectors: '';
+  $selectors: nth(&, 1);
+
+  @if ($appended-selector) {
+    @each $selector in $selectors {
+      $pure-element-selector: selector-get-element-name($selector);
+
+      @if (($pure-element-selector == $append-target) and (not $is-element-found)) {
+        $is-element-found: true;
+        $combined-selectors: '#{$combined-selectors} #{$selector}#{$appended-selector}';
+      } @else {
+        $combined-selectors: '#{$combined-selectors} #{$selector}';
+      }
+    }
+  }
+
+  @if ($is-element-found) {
+    @at-root #{$combined-selectors} {
+      @content;
+    }
+  } @else {
+    @at-root #{$append-target}#{$appended-selector} & {
+      @content;
+    }
+  }
+}

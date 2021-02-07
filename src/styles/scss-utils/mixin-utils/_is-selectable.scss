@@ -1,0 +1,28 @@
+/// Controls the selection style of the current element and all its children
+/// @param {boolean} $toggle - State toggle
+///
+@mixin is-selectable($toggle) {
+  $c--label-selection: #accef7 !default; // provide a fallback value
+
+  @if $toggle {
+    & {
+      -webkit-touch-callout: text;
+      user-select: text;
+
+      &::selection,
+      ::selection {
+        background-color: $c--label-selection;
+      }
+    }
+  } @else {
+    & {
+      -webkit-touch-callout: none;
+      user-select: none;
+
+      &::selection,
+      ::selection {
+        background-color: transparent;
+      }
+    }
+  }
+}

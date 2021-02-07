@@ -1,0 +1,24 @@
+@use 'is-truthy' as *;
+
+/// Replace a value with another one in a list
+/// @link https://hugogiraudel.com/2013/08/08/advanced-sass-list-functions/#replacing-values-from-list
+/// @param {List} $list - The input list
+/// @param {*} $old-value - The term that is being replaced
+/// @param {*} $value - The term to replace it with
+/// @return {*} - The output list
+///
+@function list-replace($list, $old-value, $value: null) {
+  $result: ();
+
+  @for $i from 1 through length($list) {
+    @if nth($list, $i) == $old-value {
+      @if is-truthy($value) {
+        $result: append($result, $value);
+      }
+    } @else {
+      $result: append($result, nth($list, $i));
+    }
+  }
+
+  @return $result;
+}

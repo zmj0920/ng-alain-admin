@@ -1,0 +1,14 @@
+/// Takes multiple maps and merges them into one
+/// @link http://stackoverflow.com/questions/27740063/merge-multiple-sass-maps
+/// @param {...Map} $maps - Any number of maps
+/// @return {Map} - The resulting map
+///
+@function map-assign($maps...) {
+  $result: ();
+
+  @each $map in $maps {
+    $result: map-merge($result, $map);
+  }
+
+  @return $result;
+}

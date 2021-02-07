@@ -1,0 +1,8 @@
+/// Return the first item of a list
+/// @link https://hugogiraudel.com/2013/08/08/advanced-sass-list-functions/#selecting-values-from-list
+/// @param {List} $list - The input list
+/// @return {*} - The list's first item
+///
+@function list-first($list) {
+  @return nth($list, 1);
+}

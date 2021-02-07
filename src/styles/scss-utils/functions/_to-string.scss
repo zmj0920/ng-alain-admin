@@ -1,0 +1,8 @@
+/// Cast an arbitrary value to a string
+/// @link https://hugogiraudel.com/2014/01/27/casting-types-in-sass/#string
+/// @param {*} $value - The original value
+/// @return {string} - The cast string
+///
+@function to-string($value) {
+  @return inspect($value);
+}

@@ -1,0 +1,61 @@
+// stylelint-disable scss/no-duplicate-dollar-variables
+
+/// Animates an element in or out, including setting their visibility correctly
+/// The basic opacity transition can be extended with other properties or full transition descriptors
+/// @param {boolean} $toggle - State toggle
+/// @param {number} $speed - The targeted speed after which the element is hidden
+/// @param {...string|...List} $transition-params - One or more strings or lists containing additional transition params
+/// @example scss - Simple usage: input
+///     .my-elem.my-elem__is-hidden { @include dp-is-visible(false, 300ms); }
+///     .my-elem.my-elem__is-shown { @include dp-is-visible(true, 300ms); }
+/// @output css - Simple usage: output
+///     .my-elem.my-elem__is-hidden {
+///         transition: visibility 0ms linear 300ms, opacity 300ms ease 0ms;
+///         visibility: hidden;
+///         opacity: 0;
+///     }
+///     .my-elem.my-elem__is-shown {
+///         transition: visibility 0ms linear 0ms, opacity 300ms ease 0ms;
+///         visibility: inherit;
+///         opacity: 1;
+///     }
+///
+@mixin is-visible($toggle, $speed, $transition-params...) {
+  $transitions: ();
+  $has-params: length($transition-params) > 0;
+
+  @if type-of($speed) != 'number' {
+    @error 'Provided transition speed `#{$speed}` is not of type number!';
+  }
+
+  @if $has-params {
+    @for $i from 1 through length($transition-params) {
+      $param: nth($transition-params, $i);
+
+      @if type-of($param) == 'list' {
+        // If $param contains a space (a.k.a. a whole string)
+        $transitions: append($transitions, unquote('#{$param}'), comma);
+      } @else {
+        $transitions: append($transitions, unquote('#{$param} #{$speed} ease 0ms'), comma);
+      }
+    }
+  } @else {
+    $transitions: append($transitions, unquote('opacity #{$speed} ease 0ms'), comma);
+  }
+
+  @if $toggle {
+    transition: join(unquote('visibility 0ms linear 0ms'), $transitions, comma);
+    visibility: inherit;
+
+    @if not $has-params {
+      opacity: 1;
+    }
+  } @else {
+    transition: join(unquote('visibility 0ms linear #{$speed}'), $transitions, comma);
+    visibility: hidden;
+
+    @if not $has-params {
+      opacity: 0;
+    }
+  }
+}

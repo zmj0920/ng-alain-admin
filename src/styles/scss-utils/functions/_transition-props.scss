@@ -1,0 +1,14 @@
+/// Batch transition all properties with a single transition definition
+/// @param {string} $trs-defintion - The transition definition to be applied
+/// @param {...Map} $props - Any number of properties to be transitioned
+/// @return {List} - A list to be used as a value for a transition property
+///
+@function transition-props($trs-definition, $props...) {
+  $result: ();
+
+  @each $prop in $props {
+    $result: append($result, ($prop $trs-definition), 'comma');
+  }
+
+  @return $result;
+}

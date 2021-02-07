@@ -1,0 +1,16 @@
+@use 'str-split' as *;
+
+/// Remove classes, pseudo-classes and attributes from a selector part
+/// @param {string} $selector - The selector part to be cleaned
+/// @return {string}
+///
+@function selector-get-element-name($selector) {
+  $result: $selector;
+  $markers: (' ', '.', ':', '[');
+
+  @each $marker in $markers {
+    $result: nth(str-split($result, $marker), 1);
+  }
+
+  @return $result;
+}

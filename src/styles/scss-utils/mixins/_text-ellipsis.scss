@@ -1,0 +1,49 @@
+// @include text-ellipsis(100px) {
+//   color: red;
+// }
+
+// .btn {
+//   width: 100px;
+//   max-width: 100%;
+//   min-width: 100%;
+//   white-space: nowrap;
+//   overflow: hidden;
+//   text-overflow: ellipsis;
+//   color: red;
+// }
+
+@mixin text-ellipsis($w: 100%, $max-w: 100%, $min-w: 100%) {
+  width: $w;
+  max-width: $max-w;
+  min-width: $min-w;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  @content;
+}
+
+/// line-text-ellipsis
+/// @param {number} $line -
+/// @param {number} $w -
+/// @param {number} $max-w -
+/// @param {number} $min-w -
+///
+@mixin line-text-ellipsis($line, $w: 100%, $max-w: 100%, $min-w: 100%) {
+  @if type-of($line) != 'number' {
+    @error 'Provided line `#{$line}` is not of type number!';
+  } @else {
+    @if $line % 1 !=0 {
+      @error 'Provided line `#{$line}` is not of number!';
+    }
+  }
+
+  width: $w;
+  max-width: $max-w;
+  min-width: $min-w;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $line;
+  @content;
+}
