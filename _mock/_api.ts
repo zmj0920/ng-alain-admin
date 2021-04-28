@@ -265,20 +265,4 @@ export const APIS = {
   '/api/500': () => {
     throw new MockStatusError(500);
   },
-  'GET /api/domain/current': () => {
-    return domainAddress;
-  },
-  'GET /api/config/public_address': () => {
-    return publicAddress;
-  },
-  'POST /api/domain/current': (req: MockRequest) => {
-    domainAddress.address.current = req.body.newaddress;
-    return domainAddress;
-  },
-  'POST /api/config/public_address': (req: MockRequest) => {
-    console.log(req.body.newaddress);
-    publicAddress.address.current = req.body.newaddress;
-    console.log(publicAddress);
-    return publicAddress;
-  },
 };
