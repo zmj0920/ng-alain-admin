@@ -12,20 +12,21 @@ import { DelonFormModule } from '@delon/form';
 import { LayoutDefaultModule } from '@delon/theme/layout-default';
 import { SettingDrawerModule } from '@delon/theme/setting-drawer';
 import { ThemeBtnModule } from '@delon/theme/theme-btn';
-
+import { AvatarListModule } from '@delon/abc/avatar-list';
 export const SHARED_DELON_MODULES = [
-    GlobalFooterModule,
-    NoticeIconModule,
-    PageHeaderModule, 
-    PdfModule, 
-    ReuseTabModule, 
-    SEModule, 
-    STModule, 
-    SVModule, 
-    ResultModule, 
-    DelonACLModule,
-    DelonFormModule,
-    LayoutDefaultModule,
-    SettingDrawerModule,
-    ThemeBtnModule,
+  GlobalFooterModule,
+  NoticeIconModule,
+  PageHeaderModule,
+  PdfModule,
+  ReuseTabModule,
+  SEModule,
+  STModule,
+  SVModule,
+  ResultModule,
+  DelonACLModule,
+  DelonFormModule,
+  LayoutDefaultModule,
+  SettingDrawerModule,
+  ThemeBtnModule,
+  AvatarListModule,
 ];

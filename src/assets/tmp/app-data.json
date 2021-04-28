@@ -178,6 +178,19 @@
           ]
         },
         {
+          "text": "图标",
+          "i18n": "Chart",
+          "icon": "anticon-rocket",
+          "shortcutRoot": true,
+          "children": [
+            {
+              "text": "g2-chart-bar",
+              "link": "/g2-chart/g2-chart-bar",
+              "i18n": "g2-chart-bar"
+            }
+          ]
+        },
+        {
           "text": "Form Page",
           "i18n": "menu.form",
           "link": "/pro/form",

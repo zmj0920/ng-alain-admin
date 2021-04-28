@@ -1,9 +1,4 @@
-<div class="alain-default__content-title">
-  <h1>
-    Dashboard
-    <small>Welcome !</small>
-  </h1>
-</div>
+<page-header></page-header>
 <quick-menu>
   <nz-list [nzBordered]="false" [nzSplit]="false">
     <nz-list-item>
@@ -182,6 +177,17 @@
           </nz-dropdown-menu>
         </div>
       </div>
+    </nz-card>
+  </div>
+  <div nz-col nzXs="24" nzMd="12">
+    <nz-card nzTitle="用户头像列表" [nzBordered]="false" class="ant-card__body-nopadding">
+      <avatar-list size="mini">
+        <avatar-list-item tips="Jake" src="https://gw.alipayobjects.com/zos/rmsportal/zOsKZmFRdUtvpqCImOVY.png"> </avatar-list-item>
+        <avatar-list-item tips="Andy" src="https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png"> </avatar-list-item>
+        <avatar-list-item tips="Niko" src="https://gw.alipayobjects.com/zos/rmsportal/kZzEzemZyKLKFsojXItE.png"> </avatar-list-item>
+        <avatar-list-item tips="Cipchk" text="Cipchk"></avatar-list-item>
+        <avatar-list-item tips="heart-o" icon="heart-o"></avatar-list-item>
+      </avatar-list>
     </nz-card>
   </div>
 </div>

@@ -24,7 +24,9 @@ const routes: Routes = [
       { path: 'delon', loadChildren: () => import('./delon/delon.module').then((m) => m.DelonModule) },
       { path: 'extras', loadChildren: () => import('./extras/extras.module').then((m) => m.ExtrasModule) },
       { path: 'pro', loadChildren: () => import('./pro/pro.module').then((m) => m.ProModule) },
-    { path: 'crud', loadChildren: () => import('./crud/crud.module').then((m) => m.CrudModule) },],
+      { path: 'crud', loadChildren: () => import('./crud/crud.module').then((m) => m.CrudModule) },
+      { path: 'g2-chart', loadChildren: () => import('./g2-chart/g2-chart.module').then((m) => m.G2ChartModule) },
+    ],
   },
   // Blak Layout 空白布局
   {

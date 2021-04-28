@@ -18,7 +18,7 @@ import { TrendModule } from '@delon/chart/trend';
 import { G2WaterWaveModule } from '@delon/chart/water-wave';
 import { SharedModule } from '@shared';
 import { CountdownModule } from 'ngx-countdown';
-
+import { AvatarListModule } from '@delon/abc/avatar-list';
 import { DashboardAnalysisComponent } from './analysis/analysis.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardMonitorComponent } from './monitor/monitor.component';
@@ -49,6 +49,7 @@ const COMPONENTS = [DashboardV1Component, DashboardAnalysisComponent, DashboardM
     TrendModule,
     QuickMenuModule,
     OnboardingModule,
+    AvatarListModule,
   ],
   declarations: [...COMPONENTS],
 })
