@@ -11,6 +11,7 @@ import { SHARED_CDK_MODULES } from './shared-cdk.module';
 import { SHARED_DELON_MODULES } from './shared-delon.module';
 import { SHARED_ZORRO_MODULES } from './shared-zorro.module';
 import { THIRDMODULES } from './third.module';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -21,7 +22,7 @@ import { THIRDMODULES } from './third.module';
     ...SHARED_DELON_MODULES,
     ...SHARED_ZORRO_MODULES,
     ...THIRDMODULES,
-    ...SHARED_CDK_MODULES
+    ...SHARED_CDK_MODULES,
   ],
   declarations: [...SHARED_COMPOENT_MODULES, ...DIRECTIVES_MODULES, ...PROVIDERS_PIPES_MODULES],
   exports: [
@@ -41,7 +42,7 @@ import { THIRDMODULES } from './third.module';
     ...DIRECTIVES_MODULES,
     // your pipe
     ...PROVIDERS_PIPES_MODULES,
-    ...SHARED_CDK_MODULES
+    ...SHARED_CDK_MODULES,
   ],
 })
 export class SharedModule {}

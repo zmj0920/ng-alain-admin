@@ -1,7 +1,9 @@
+// tslint:disable: no-duplicate-imports
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { APP_INITIALIZER, LOCALE_ID, NgModule } from '@angular/core';
+import { APP_INITIALIZER, LOCALE_ID, NgModule, Type } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
 
 // #region default language
 // 参考：https://ng-alain.com/docs/i18n
@@ -52,6 +54,13 @@ const I18NSERVICE_PROVIDES = [{ provide: ALAIN_I18N_TOKEN, useClass: I18NService
 
 // #endregion
 
+// #region global third module
+
+import { BidiModule } from '@angular/cdk/bidi';
+const GLOBAL_THIRD_MODULES: Type<any>[] = [BidiModule];
+
+// #endregion
+
 // #region JSON Schema form (using @delon/form)
 import { JsonSchemaModule } from '@shared';
 const FORM_MODULES = [JsonSchemaModule];
@@ -88,6 +97,9 @@ import { CoreModule } from './core/core.module';
 import { GlobalConfigModule } from './global-config.module';
 import { LayoutModule } from './layout/layout.module';
 import { RoutesModule } from './routes/routes.module';
+import { SharedModule } from './shared/shared.module';
+import { STWidgetModule } from './shared/st-widget/st-widget.module';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -96,9 +108,13 @@ import { RoutesModule } from './routes/routes.module';
     HttpClientModule,
     GlobalConfigModule.forRoot(),
     CoreModule,
+    SharedModule,
     LayoutModule,
     RoutesModule,
+    STWidgetModule,
+    NzNotificationModule,
     ...I18NSERVICE_MODULES,
+    ...GLOBAL_THIRD_MODULES,
     ...FORM_MODULES,
   ],
   providers: [...LANG_PROVIDES, ...INTERCEPTOR_PROVIDES, ...I18NSERVICE_PROVIDES, ...APPINIT_PROVIDES],

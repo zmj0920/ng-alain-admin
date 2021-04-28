@@ -23,7 +23,7 @@ import { environment } from '@env/environment';
         </div>
       </layout-default-header-item>
       <layout-default-header-item direction="middle">
-        <header-search class="alain-default__search" [toggleChange]="searchToggleStatus"></header-search>
+        <header-search class="alain-default__search" [(toggleChange)]="searchToggleStatus"></header-search>
       </layout-default-header-item>
       <layout-default-header-item direction="right">
         <header-notify></header-notify>
@@ -74,7 +74,7 @@ import { environment } from '@env/environment';
         </nz-dropdown-menu>
       </ng-template>
       <ng-template #contentTpl>
-        <reuse-tab  #reuseTab nzSize="small" tabType="card" debug="true" tabBarGutter="1" max="20"> </reuse-tab>
+        <reuse-tab #reuseTab nzSize="small" tabType="card" debug="true" tabBarGutter="1" max="20"> </reuse-tab>
         <router-outlet (activate)="reuseTab.activate($event)"></router-outlet>
         <!-- <router-outlet></router-outlet> -->
       </ng-template>

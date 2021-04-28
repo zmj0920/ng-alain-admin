@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
-import { STWidgetRegistry } from '@delon/abc/st';
+// import { STWidgetRegistry } from '@delon/abc/st';
 import { SharedModule } from '../shared.module';
-import { STTooltipWidget } from './tooltip.widget';
 
-export const STWIDGET_COMPONENTS = [STTooltipWidget];
+export const STWIDGET_COMPONENTS = [];
 
 @NgModule({
   declarations: STWIDGET_COMPONENTS,
@@ -11,7 +10,7 @@ export const STWIDGET_COMPONENTS = [STTooltipWidget];
   exports: [...STWIDGET_COMPONENTS],
 })
 export class STWidgetModule {
-  constructor(widgetRegistry: STWidgetRegistry) {
-    widgetRegistry.register(STTooltipWidget.KEY, STTooltipWidget);
-  }
+  // constructor(widgetRegistry: STWidgetRegistry) {
+  //   widgetRegistry.register(STImgWidget.KEY, STImgWidget);
+  // }
 }
