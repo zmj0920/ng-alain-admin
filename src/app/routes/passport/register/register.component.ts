@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { _HttpClient } from '@delon/theme';
+import { MatchControl } from '@delon/util/form';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { finalize } from 'rxjs/operators';
 
@@ -9,18 +10,23 @@ import { finalize } from 'rxjs/operators';
   selector: 'passport-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserRegisterComponent implements OnDestroy {
   constructor(fb: FormBuilder, private router: Router, private http: _HttpClient, private cdr: ChangeDetectorRef) {
-    this.form = fb.group({
-      mail: [null, [Validators.required, Validators.email]],
-      password: [null, [Validators.required, Validators.minLength(6), UserRegisterComponent.checkPassword.bind(this)]],
-      confirm: [null, [Validators.required, Validators.minLength(6), UserRegisterComponent.passwordEquar]],
-      mobilePrefix: ['+86'],
-      mobile: [null, [Validators.required, Validators.pattern(/^1\d{10}$/)]],
-      captcha: [null, [Validators.required]],
-    });
+    this.form = fb.group(
+      {
+        mail: [null, [Validators.required, Validators.email]],
+        password: [null, [Validators.required, Validators.minLength(6), UserRegisterComponent.checkPassword.bind(this)]],
+        confirm: [null, [Validators.required, Validators.minLength(6)]],
+        mobilePrefix: ['+86'],
+        mobile: [null, [Validators.required, Validators.pattern(/^1\d{10}$/)]],
+        captcha: [null, [Validators.required]]
+      },
+      {
+        validators: MatchControl('password', 'confirm')
+      }
+    );
   }
 
   // #region fields
@@ -50,7 +56,7 @@ export class UserRegisterComponent implements OnDestroy {
   passwordProgressMap: { [key: string]: 'success' | 'normal' | 'exception' } = {
     ok: 'success',
     pass: 'normal',
-    pool: 'exception',
+    pool: 'exception'
   };
 
   // #endregion
@@ -64,6 +70,7 @@ export class UserRegisterComponent implements OnDestroy {
     if (!control) {
       return null;
     }
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const self: any = this;
     self.visible = !!control.value;
     if (control.value && control.value.length > 9) {
@@ -77,16 +84,6 @@ export class UserRegisterComponent implements OnDestroy {
     if (self.visible) {
       self.progress = control.value.length * 10 > 100 ? 100 : control.value.length * 10;
     }
-  }
-
-  static passwordEquar(control: FormControl): { equar: boolean } | null {
-    if (!control || !control.parent!) {
-      return null;
-    }
-    if (control.value !== control.parent!.get('password')!.value) {
-      return { equar: true };
-    }
-    return null;
   }
 
   getCaptcha(): void {
@@ -110,7 +107,7 @@ export class UserRegisterComponent implements OnDestroy {
 
   submit(): void {
     this.error = '';
-    Object.keys(this.form.controls).forEach((key) => {
+    Object.keys(this.form.controls).forEach(key => {
       this.form.controls[key].markAsDirty();
       this.form.controls[key].updateValueAndValidity();
     });
@@ -127,7 +124,7 @@ export class UserRegisterComponent implements OnDestroy {
         finalize(() => {
           this.loading = false;
           this.cdr.detectChanges();
-        }),
+        })
       )
       .subscribe(() => {
         this.router.navigate(['passport', 'register-result'], { queryParams: { email: data.mail } });

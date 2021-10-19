@@ -10,6 +10,6 @@ import { ZmButtonComponent } from './zm-button/zm-button.component';
 
 @NgModule({
   imports: [SharedModule, DataVRoutingModule],
-  declarations: [RelationComponent, HeaderComponent, OperatorsComponent, InputNumberComponent, ZmButtonComponent],
+  declarations: [RelationComponent, HeaderComponent, OperatorsComponent, InputNumberComponent, ZmButtonComponent]
 })
-export class DataVModule {}
+export class DataVModule { }

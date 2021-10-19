@@ -11,13 +11,13 @@ import { GuardAuthComponent } from './guard/auth.component';
 import { CanLeaveProvide } from './guard/can-leave.provide';
 import { GuardComponent } from './guard/guard.component';
 import { GuardLeaveComponent } from './guard/leave.component';
-import { PdfDesignComponent } from './pdf-design/pdf-design.component';
 import { PrintComponent } from './print/print.component';
 import { QRComponent } from './qr/qr.component';
 import { STDemoComponent } from './st/st.component';
 import { UtilComponent } from './util/util.component';
 import { XlsxComponent } from './xlsx/xlsx.component';
 import { ZipComponent } from './zip/zip.component';
+import { PdfDesignComponent } from './pdf-design/pdf-design.component';
 
 const routes: Routes = [
   { path: 'st', component: STDemoComponent },
@@ -31,21 +31,21 @@ const routes: Routes = [
       {
         path: 'leave',
         component: GuardLeaveComponent,
-        canDeactivate: [CanLeaveProvide],
+        canDeactivate: [CanLeaveProvide]
       },
       {
         path: 'auth',
         component: GuardAuthComponent,
         canActivate: [ACLGuard],
-        data: { guard: 'user1' },
+        data: { guard: 'user1' }
       },
       {
         path: 'admin',
         component: GuardAdminComponent,
         canActivate: [ACLGuard],
-        data: { guard: 'admin' },
-      },
-    ],
+        data: { guard: 'admin' }
+      }
+    ]
   },
   { path: 'cache', component: CacheComponent },
   { path: 'qr', component: QRComponent },
@@ -53,11 +53,11 @@ const routes: Routes = [
   { path: 'xlsx', component: XlsxComponent },
   { path: 'zip', component: ZipComponent },
   { path: 'form', component: DelonFormComponent },
-  { path: 'pdf-design', component: PdfDesignComponent },
+  { path: 'pdf-design', component: PdfDesignComponent }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
-export class DelonRoutingModule {}
+export class DelonRoutingModule { }

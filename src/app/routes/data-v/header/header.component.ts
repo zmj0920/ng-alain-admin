@@ -5,7 +5,7 @@ import { BookService } from '@services/book/book.service';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.None
 })
 export class HeaderComponent implements OnInit, AfterViewInit {
   @Output() private outer = new EventEmitter<string>();
@@ -17,18 +17,18 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   constructor(bookService: BookService) {
     this.name = bookService.getName();
   }
-  @ViewChild('defaultTabButtons', { static: true }) private defaultTabButtons!: TemplateRef<any>;
+  // @ViewChild('defaultTabButtons', { static: true }) private defaultTabButtons!: TemplateRef<any>;
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
   sendParent(): void {
     this.outer.emit('msg from child');
   }
 
   ngAfterViewInit(): void {
-    console.log(this.defaultTabButtons.elementRef);
+    // console.log(this.defaultTabButtons.elementRef);
   }
 
-  login(): void {}
+  login(): void { }
 
-  signUp(): void {}
+  signUp(): void { }
 }

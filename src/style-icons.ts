@@ -6,6 +6,18 @@ import {
   InfoOutline,
   LinkOutline,
   ProfileOutline,
+  CloudUploadOutline,
+  PlayCircleOutline,
+  PauseCircleOutline
 } from '@ant-design/icons-angular/icons';
 
-export const ICONS = [InfoOutline, BulbOutline, ProfileOutline, ExceptionOutline, LinkOutline];
+export const ICONS = [
+  InfoOutline,
+  BulbOutline,
+  ProfileOutline,
+  ExceptionOutline,
+  LinkOutline,
+  CloudUploadOutline,
+  PlayCircleOutline,
+  PauseCircleOutline
+];

@@ -4,6 +4,7 @@ import { NzButtonType, NzButtonShape, NzButtonSize, NzButtonComponent } from 'ng
 
 @Component({
   selector: 'zm-button',
+  styleUrls: [],
   templateUrl: './zm-button.component.html'
 })
 export class ZmButtonComponent implements AfterViewInit, OnInit {
@@ -16,7 +17,7 @@ export class ZmButtonComponent implements AfterViewInit, OnInit {
   @Input() @InputBoolean() nzDanger = false;
   @Input() @InputBoolean() disabled = false;
   @Input() tabIndex: number | string | null = null;
-  @Input() nzType: NzButtonType = null;
+  @Input() nzType: any = null;
   @Input() nzShape: NzButtonShape = null;
   @Input() nzSize: NzButtonSize = 'default';
 
@@ -24,7 +25,7 @@ export class ZmButtonComponent implements AfterViewInit, OnInit {
     private elementRef: ElementRef,
     private renderer: Renderer2,
 
-  ) {}
+  ) { }
 
   ngOnInit(): void {
   }

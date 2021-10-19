@@ -68,26 +68,25 @@ import { environment } from '@env/environment';
         </div>
         <nz-dropdown-menu #userMenu="nzDropdownMenu">
           <ul nz-menu>
-            <li nz-menu-item routerLink="/pro/account/center">{{ 'menu.account.center' | translate }}</li>
-            <li nz-menu-item routerLink="/pro/account/settings">{{ 'menu.account.settings' | translate }}</li>
+            <li nz-menu-item routerLink="/pro/account/center">{{ 'menu.account.center' | i18n }}</li>
+            <li nz-menu-item routerLink="/pro/account/settings">{{ 'menu.account.settings' | i18n }}</li>
           </ul>
         </nz-dropdown-menu>
       </ng-template>
       <ng-template #contentTpl>
-        <reuse-tab #reuseTab nzSize="small" tabType="card" debug="true" tabBarGutter="1" max="20"> </reuse-tab>
+      <reuse-tab #reuseTab nzSize="small" tabType="card" debug="true" [tabBarGutter]="1" max="20"> </reuse-tab>
         <router-outlet (activate)="reuseTab.activate($event)"></router-outlet>
-        <!-- <router-outlet></router-outlet> -->
       </ng-template>
     </layout-default>
 
     <setting-drawer *ngIf="showSettingDrawer"></setting-drawer>
     <theme-btn></theme-btn>
-  `,
+  `
 })
 export class LayoutBasicComponent {
   options: LayoutDefaultOptions = {
     logoExpanded: `./assets/logo-full.svg`,
-    logoCollapsed: `./assets/logo.svg`,
+    logoCollapsed: `./assets/logo.svg`
   };
   searchToggleStatus = false;
   showSettingDrawer = !environment.production;
@@ -95,5 +94,5 @@ export class LayoutBasicComponent {
     return this.settings.user;
   }
 
-  constructor(private settings: SettingsService) {}
+  constructor(private settings: SettingsService) { }
 }

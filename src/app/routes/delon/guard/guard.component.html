@@ -1,7 +1,5 @@
 <div class="alain-default__content-title">
-  <h1>
-    路由守卫
-  </h1>
+  <h1> 路由守卫 </h1>
 </div>
 <nz-button-group>
   <button nz-button [routerLink]="['/delon/guard/leave']">
@@ -9,7 +7,7 @@
   </button>
 </nz-button-group>
 <nz-button-group class="ml-sm">
-  <button nz-button (click)="setRole(true)">
+  <button nz-button (click)="setRole('admin')">
     <span>设置管理员</span>
   </button>
   <button nz-button (click)="setRole('user1')">

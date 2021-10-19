@@ -4,13 +4,13 @@ import { BookService } from '@services/book/book.service';
 @Component({
   selector: 'app-data-v-relation',
   styleUrls: ['./relation.component.scss'],
-  templateUrl: './relation.component.html',
+  templateUrl: './relation.component.html'
 })
 export class RelationComponent implements OnInit {
   public alertMsg!: string;
   demoValue = 1;
   public title = '我是父组件标题';
-  constructor(private bookService: BookService, private clipboard: Clipboard) {}
+  constructor(private bookService: BookService, private clipboard: Clipboard) { }
   ngOnInit(): void {
     // 消息提示 从service获取消息内容
     this.bookService.getMessage().subscribe((value) => {
@@ -31,7 +31,7 @@ export class RelationComponent implements OnInit {
   }
 
   // 接收子组件传递过来的数据
-  runParent(msg: string): void {
+  runParent(msg?: string): void {
     alert(msg);
   }
 

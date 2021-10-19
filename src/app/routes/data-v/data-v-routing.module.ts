@@ -6,6 +6,6 @@ const routes: Routes = [{ path: 'relation', component: RelationComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
-export class DataVRoutingModule {}
+export class DataVRoutingModule { }

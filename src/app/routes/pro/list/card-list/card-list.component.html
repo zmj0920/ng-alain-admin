@@ -18,7 +18,7 @@
         <i nz-icon nzType="plus"></i>
         <span>新增产品</span>
       </button>
-      <nz-card nzHoverable *ngIf="item !== null" [nzActions]="[op1, op2]">
+      <nz-card nzHoverable *ngIf="item != null" [nzActions]="[op1, op2]">
         <ng-template #op1>
           <a (click)="show('操作一：' + item.id)">操作一</a>
         </ng-template>
@@ -33,7 +33,7 @@
             <a (click)="show('标题：' + item.id)">{{ item.title }}</a>
           </ng-template>
           <ng-template #nzDescription>
-            <ellipsis length="10" tooltip>{{ item.description }}</ellipsis>
+            <ellipsis>{{ item.description }}</ellipsis>
           </ng-template>
         </nz-card-meta>
       </nz-card>

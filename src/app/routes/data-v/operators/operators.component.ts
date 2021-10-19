@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { concat, from, fromEvent, interval, of, throwError, timer } from 'rxjs';
+import { combineLatest, concat, from, fromEvent, interval, of, race, Subject, throwError, timer } from 'rxjs';
 import {
   audit,
   buffer,
@@ -30,20 +30,33 @@ import {
 @Component({
   selector: 'app-operators',
   templateUrl: './operators.component.html',
-  styles: [],
+  styles: []
 })
 export class OperatorsComponent implements OnInit {
   isLoadingOne = false;
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
-    // 每1秒发出值
-    const source = interval(1000);
-    // 5秒后发出值
-    const timer$ = timer(6000);
-    // 当5秒后 timer 发出值时， source 则完成
-    const example = source.pipe(takeUntil(timer$));
-    // 输出: 0,1,2,3
-    const subscribe = example.subscribe((val) => console.log(val));
+    const a: Subject<number> = new Subject();
+    const b: Subject<number> = new Subject();
+    const c: Subject<number> = new Subject();
+
+    const d = combineLatest([a, b, c])
+      .pipe(
+        map(data => {
+          let [a, b, c] = data;
+          return (a + b) * c;
+        })
+      );
+
+
+
+    setTimeout(() => a.next(2), 1000)
+    setTimeout(() => b.next(3), 1000)
+    setTimeout(() => c.next(5), 1000)
+    setTimeout(() => c.next(11), 1000)
+    d.subscribe(res => console.log(res));
+
+
   }
 }

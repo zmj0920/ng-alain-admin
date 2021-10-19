@@ -16,10 +16,10 @@ export type OnChangeType = any;
       useExisting: forwardRef(() => InputNumberComponent),
       multi: true,
     },
-  ],
+  ]
 })
 export class InputNumberComponent implements OnInit, ControlValueAccessor {
-  constructor() {}
+  constructor() { }
   @Output() readonly nzBlur = new EventEmitter();
   @Output() readonly nzFocus = new EventEmitter();
   @ViewChild('inputElement', { static: true }) inputElement!: NzInputNumberComponent;
@@ -54,5 +54,5 @@ export class InputNumberComponent implements OnInit, ControlValueAccessor {
     this.inputElement.registerOnTouched(fn);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

@@ -49,8 +49,8 @@ const COMPONENTS = [DashboardV1Component, DashboardAnalysisComponent, DashboardM
     TrendModule,
     QuickMenuModule,
     OnboardingModule,
-    AvatarListModule,
+    AvatarListModule
   ],
-  declarations: [...COMPONENTS],
+  declarations: [...COMPONENTS]
 })
-export class DashboardModule {}
+export class DashboardModule { }

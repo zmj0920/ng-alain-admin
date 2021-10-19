@@ -4,11 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { GlobalFooterModule } from '@delon/abc/global-footer';
 import { NoticeIconModule } from '@delon/abc/notice-icon';
+import { AlainThemeModule } from '@delon/theme';
 import { LayoutDefaultModule } from '@delon/theme/layout-default';
 import { SettingDrawerModule } from '@delon/theme/setting-drawer';
 import { ThemeBtnModule } from '@delon/theme/theme-btn';
-import { TranslateModule } from '@ngx-translate/core';
-import { SharedModule, STWidgetModule } from '@shared';
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
@@ -19,6 +18,7 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { SharedModule, STWidgetModule } from '@shared';
 
 import { LayoutBasicComponent } from './basic/basic.component';
 import { HeaderClearStorageComponent } from './basic/widgets/clear-storage.component';
@@ -31,9 +31,8 @@ import { HeaderSearchComponent } from './basic/widgets/search.component';
 import { HeaderTaskComponent } from './basic/widgets/task.component';
 import { HeaderUserComponent } from './basic/widgets/user.component';
 import { LayoutBlankComponent } from './blank/blank.component';
-import { LayoutPassportComponent } from './passport/passport.component';
 
-const COMPONENTS = [LayoutBasicComponent, LayoutBlankComponent, LayoutPassportComponent];
+const COMPONENTS = [LayoutBasicComponent, LayoutBlankComponent];
 
 const HEADERCOMPONENTS = [
   HeaderSearchComponent,
@@ -44,20 +43,22 @@ const HEADERCOMPONENTS = [
   HeaderI18nComponent,
   HeaderClearStorageComponent,
   HeaderUserComponent,
-  HeaderRTLComponent,
+  HeaderRTLComponent
 ];
+
+// passport
+import { LayoutPassportComponent } from './passport/passport.component';
+const PASSPORT = [LayoutPassportComponent];
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     RouterModule,
+    AlainThemeModule.forChild(),
     ThemeBtnModule,
     SettingDrawerModule,
     LayoutDefaultModule,
-    TranslateModule,
-    SharedModule,
-    STWidgetModule,
     NoticeIconModule,
     GlobalFooterModule,
     NzDropDownModule,
@@ -70,8 +71,10 @@ const HEADERCOMPONENTS = [
     NzAvatarModule,
     NzIconModule,
     NzCardModule,
+    SharedModule,
+    STWidgetModule,
   ],
-  declarations: [...COMPONENTS, ...HEADERCOMPONENTS],
-  exports: [...COMPONENTS, SharedModule, STWidgetModule],
+  declarations: [...COMPONENTS, ...HEADERCOMPONENTS, ...PASSPORT],
+  exports: [...COMPONENTS, ...PASSPORT]
 })
-export class LayoutModule {}
+export class LayoutModule { }
