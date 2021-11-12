@@ -2,6 +2,7 @@
 
 // Utils
 export * from './utils/yuan';
+export * from './utils/copy';
 
 // Module
 export * from './shared.module';

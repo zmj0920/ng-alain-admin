@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { _Validators } from 'src/app/shared/utils/validators';
 
 @Component({
   selector: 'app-basic-form',
@@ -11,7 +12,7 @@ export class BasicFormComponent implements OnInit {
   form!: FormGroup;
   submitting = false;
 
-  constructor(private fb: FormBuilder, private msg: NzMessageService, private cdr: ChangeDetectorRef) {}
+  constructor(private fb: FormBuilder, private msg: NzMessageService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -23,7 +24,8 @@ export class BasicFormComponent implements OnInit {
       invites: [null, []],
       weight: [null, []],
       public: [1, [Validators.min(1), Validators.max(3)]],
-      publicUsers: [null, []]
+      publicUsers: [null, []],
+      mobile: [null, Validators.compose([Validators.required, _Validators.mobile])]
     });
   }
 

@@ -7,4 +7,4 @@ import { Component } from '@angular/core';
     '[class.alain-blank]': 'true'
   }
 })
-export class LayoutBlankComponent {}
+export class LayoutBlankComponent { }

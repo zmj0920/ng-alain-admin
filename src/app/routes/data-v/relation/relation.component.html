@@ -7,7 +7,13 @@
   <nz-timeline-item nzColor="green">
     <nz-tag [nzColor]="'magenta'">扩展按钮样式</nz-tag>
     <nz-divider></nz-divider>
-    <zm-button (click)="runParent()" nzType="success">
+    <zm-button
+      (click)="onCopy('test')"
+      nz-tooltip
+      [nzTooltipTitle]="copyText"
+      (nzTooltipVisibleChange)="onTooltipVisibleChange($event)"
+      nzType="success"
+    >
       <i nz-icon nzType="plus" style="color: #d4d4da" nzTheme="outline"></i>
     </zm-button>
     <nz-divider nzType="vertical"></nz-divider>

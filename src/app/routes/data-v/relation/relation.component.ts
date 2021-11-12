@@ -1,6 +1,8 @@
 import { Clipboard } from '@angular/cdk/clipboard';
 import { Component, OnInit } from '@angular/core';
 import { BookService } from '@services/book/book.service';
+import { copy } from '@shared';
+import { NzMessageService } from 'ng-zorro-antd/message';
 @Component({
   selector: 'app-data-v-relation',
   styleUrls: ['./relation.component.scss'],
@@ -10,7 +12,8 @@ export class RelationComponent implements OnInit {
   public alertMsg!: string;
   demoValue = 1;
   public title = '我是父组件标题';
-  constructor(private bookService: BookService, private clipboard: Clipboard) { }
+  copyText = '复制';
+  constructor(private bookService: BookService, private clipboard: Clipboard, private msg: NzMessageService) { }
   ngOnInit(): void {
     // 消息提示 从service获取消息内容
     this.bookService.getMessage().subscribe((value) => {
@@ -39,5 +42,18 @@ export class RelationComponent implements OnInit {
   copy(): void {
     const pending = this.clipboard.copy('复制这段文本1');
     //  pending.destroy();
+  }
+
+  onCopy(str: string): void {
+    copy(str).then(() => {
+      this.msg.success(`Copied Success!`)
+      this.copyText = '成功拷贝至粘贴板';
+    });
+  }
+
+  onTooltipVisibleChange(visible: boolean) {
+    if (!visible) {
+      this.copyText = '复制';
+    }
   }
 }
