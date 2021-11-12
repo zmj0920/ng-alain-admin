@@ -352,6 +352,12 @@
               "link": "/data-v/relation",
               "i18n": "menu.report.relation",
               "reuse": false
+            },
+            {
+              "text": "Relation",
+              "link": "/data-v/list",
+              "i18n": "列表",
+              "reuse": false
             }
           ]
         },

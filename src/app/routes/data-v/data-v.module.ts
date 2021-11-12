@@ -7,9 +7,10 @@ import { InputNumberComponent } from './input-number/input-number.component';
 import { OperatorsComponent } from './operators/operators.component';
 import { RelationComponent } from './relation/relation.component';
 import { ZmButtonComponent } from './zm-button/zm-button.component';
+import { ListComponent } from './list/list.component';
 
 @NgModule({
   imports: [SharedModule, DataVRoutingModule],
-  declarations: [RelationComponent, HeaderComponent, OperatorsComponent, InputNumberComponent, ZmButtonComponent]
+  declarations: [RelationComponent, HeaderComponent, OperatorsComponent, InputNumberComponent, ZmButtonComponent, ListComponent]
 })
 export class DataVModule {}

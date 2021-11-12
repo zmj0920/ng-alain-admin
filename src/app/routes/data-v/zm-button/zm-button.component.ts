@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChild, ViewEncapsulation } from '@angular/core';
-import { NzButtonType, NzButtonShape, NzButtonSize, NzButtonComponent } from 'ng-zorro-antd/button';
+import { AfterViewInit, Component, ElementRef, Input, Renderer2, ViewChild } from '@angular/core';
+import { NzButtonShape, NzButtonSize, NzButtonComponent } from 'ng-zorro-antd/button';
 import { InputBoolean } from 'ng-zorro-antd/core/util';
 
 @Component({
@@ -7,7 +7,7 @@ import { InputBoolean } from 'ng-zorro-antd/core/util';
   styleUrls: [],
   templateUrl: './zm-button.component.html'
 })
-export class ZmButtonComponent implements AfterViewInit, OnInit {
+export class ZmButtonComponent implements AfterViewInit {
   @ViewChild('buttonElement', { static: true }) buttonElement!: NzButtonComponent;
   @Input() @InputBoolean() nzBlock = false;
   @Input() @InputBoolean() nzGhost = false;
@@ -21,8 +21,6 @@ export class ZmButtonComponent implements AfterViewInit, OnInit {
   @Input() nzSize: NzButtonSize = 'default';
 
   constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
-
-  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
     this.buttonElement.assertIconOnly(this.elementRef.nativeElement, this.renderer);

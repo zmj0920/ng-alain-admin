@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, OnInit, Output, TemplateRef, ViewChild, ViewEncapsulation, Inject } from '@angular/core';
+import { Component, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
 import { BookService } from '@services/book/book.service';
 
 @Component({
@@ -7,8 +7,8 @@ import { BookService } from '@services/book/book.service';
   styleUrls: ['./header.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class HeaderComponent implements OnInit, AfterViewInit {
-  @Output() private outer = new EventEmitter<string>();
+export class HeaderComponent {
+  @Output() readonly outer = new EventEmitter<string>();
   lessons = false;
   heroListLessons = true;
   loginText = '登录';
@@ -19,13 +19,8 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   }
   // @ViewChild('defaultTabButtons', { static: true }) private defaultTabButtons!: TemplateRef<any>;
 
-  ngOnInit(): void {}
   sendParent(): void {
     this.outer.emit('msg from child');
-  }
-
-  ngAfterViewInit(): void {
-    // console.log(this.defaultTabButtons.elementRef);
   }
 
   login(): void {}

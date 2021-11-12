@@ -1,4 +1,4 @@
-import { Component, EventEmitter, forwardRef, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, forwardRef, Input, Output, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NzSizeLDSType } from 'ng-zorro-antd/core/types';
 import { InputBoolean } from 'ng-zorro-antd/core/util';
@@ -18,7 +18,7 @@ export type OnChangeType = any;
     }
   ]
 })
-export class InputNumberComponent implements OnInit, ControlValueAccessor {
+export class InputNumberComponent implements ControlValueAccessor {
   constructor() {}
   @Output() readonly nzBlur = new EventEmitter();
   @Output() readonly nzFocus = new EventEmitter();
@@ -53,6 +53,4 @@ export class InputNumberComponent implements OnInit, ControlValueAccessor {
   registerOnTouched(fn: OnChangeType): void {
     this.inputElement.registerOnTouched(fn);
   }
-
-  ngOnInit(): void {}
 }

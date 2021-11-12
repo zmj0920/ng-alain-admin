@@ -26,10 +26,11 @@ interface ChunkMeta {
 type Action = 'pause' | 'resume' | 'progress' | 'complete';
 
 @Component({
-  selector: 'app-table-list',
+  selector: 'app-list',
+  styleUrls: ['./list.component.less'],
   templateUrl: './list.component.html'
 })
-export class CrudListComponent implements OnInit {
+export class ListComponent implements OnInit {
   private action$ = new Subject<{ name: Action; payload?: any }>();
   // 暂停上传
   private pause$ = this.action$.pipe(filter(ac => ac.name === 'pause'));

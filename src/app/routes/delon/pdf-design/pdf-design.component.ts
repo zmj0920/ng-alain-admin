@@ -5,7 +5,6 @@ import { Subject } from 'rxjs';
 @Component({
   selector: 'app-pdf-design',
   templateUrl: './pdf-design.component.html',
-  styleUrls: ['./pdf-design.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PdfDesignComponent implements OnInit {

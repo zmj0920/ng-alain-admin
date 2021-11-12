@@ -3,8 +3,7 @@ import { Chart } from '@antv/g2';
 
 @Component({
   selector: 'app-chart-custom',
-  templateUrl: './chart-custom.component.html',
-  styleUrls: ['./chart-custom.component.less']
+  templateUrl: './chart-custom.component.html'
 })
 export class ChartCustomComponent {
   constructor(private ngZone: NgZone) {}
