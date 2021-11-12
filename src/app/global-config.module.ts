@@ -42,7 +42,7 @@ import { ReuseTabService, ReuseTabStrategy } from '@delon/abc/reuse-tab';
 alainProvides.push({
   provide: RouteReuseStrategy,
   useClass: ReuseTabStrategy,
-  deps: [ReuseTabService],
+  deps: [ReuseTabService]
 } as any);
 
 // #endregion
@@ -57,7 +57,7 @@ import { NzConfig, NZ_CONFIG } from 'ng-zorro-antd/core/config';
 const ngZorroConfig: NzConfig = {
   // message: { nzTop: 120 },
   form: { nzNoColon: true },
-  notification: { nzTop: 80 },
+  notification: { nzTop: 80 }
 };
 
 const zorroProvides = [{ provide: NZ_CONFIG, useValue: ngZorroConfig }];

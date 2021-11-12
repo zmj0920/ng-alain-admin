@@ -25,7 +25,7 @@ import {
   takeUntil,
   tap,
   withLatestFrom,
-  zipAll,
+  zipAll
 } from 'rxjs/operators';
 @Component({
   selector: 'app-operators',
@@ -34,29 +34,24 @@ import {
 })
 export class OperatorsComponent implements OnInit {
   isLoadingOne = false;
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     const a: Subject<number> = new Subject();
     const b: Subject<number> = new Subject();
     const c: Subject<number> = new Subject();
 
-    const d = combineLatest([a, b, c])
-      .pipe(
-        map(data => {
-          let [a, b, c] = data;
-          return (a + b) * c;
-        })
-      );
+    const d = combineLatest([a, b, c]).pipe(
+      map(data => {
+        let [a, b, c] = data;
+        return (a + b) * c;
+      })
+    );
 
-
-
-    setTimeout(() => a.next(2), 1000)
-    setTimeout(() => b.next(3), 1000)
-    setTimeout(() => c.next(5), 1000)
-    setTimeout(() => c.next(11), 1000)
+    setTimeout(() => a.next(2), 1000);
+    setTimeout(() => b.next(3), 1000);
+    setTimeout(() => c.next(5), 1000);
+    setTimeout(() => c.next(11), 1000);
     d.subscribe(res => console.log(res));
-
-
   }
 }

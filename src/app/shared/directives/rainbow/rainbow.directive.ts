@@ -4,8 +4,8 @@ import { Directive, ElementRef, HostBinding, HostListener } from '@angular/core'
   selector: '[appRainbow]',
   // tslint:disable-next-line: no-host-metadata-property
   host: {
-    '(keyup)': 'keyupFun($event.target)',
-  },
+    '(keyup)': 'keyupFun($event.target)'
+  }
 })
 export class RainbowDirective {
   constructor(public elementRef: ElementRef) {}
@@ -18,7 +18,7 @@ export class RainbowDirective {
     'mediumspringgreen',
     'cornflowerblue',
     'blanchedalmond',
-    'lightslategrey',
+    'lightslategrey'
   ];
   @HostBinding('style.color')
   color!: string;

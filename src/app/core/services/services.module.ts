@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
-import { BookService } from '@services/book/book.service';
+
+import { BookService } from './book/book.service';
+import { NgModalHelperService } from './ng-modal-helper.service';
 
 @NgModule({
-  imports: [],
-  providers: [BookService],
+  providers: [BookService, NgModalHelperService]
 })
 export class ServicesModule {}

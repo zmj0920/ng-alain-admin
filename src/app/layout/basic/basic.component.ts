@@ -74,7 +74,7 @@ import { environment } from '@env/environment';
         </nz-dropdown-menu>
       </ng-template>
       <ng-template #contentTpl>
-      <reuse-tab #reuseTab nzSize="small" tabType="card" debug="true" [tabBarGutter]="1" max="20"> </reuse-tab>
+        <reuse-tab #reuseTab nzSize="small" tabType="card" debug="true" [tabBarGutter]="1" max="20"> </reuse-tab>
         <router-outlet (activate)="reuseTab.activate($event)"></router-outlet>
       </ng-template>
     </layout-default>
@@ -94,5 +94,5 @@ export class LayoutBasicComponent {
     return this.settings.user;
   }
 
-  constructor(private settings: SettingsService) { }
+  constructor(private settings: SettingsService) {}
 }

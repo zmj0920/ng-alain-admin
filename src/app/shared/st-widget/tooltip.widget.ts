@@ -6,7 +6,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   // host: {
   //   '(click)': 'show()',
   // },
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class STTooltipWidget {
   static readonly KEY = 'tooltip';

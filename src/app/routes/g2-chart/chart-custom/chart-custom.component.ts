@@ -4,7 +4,7 @@ import { Chart } from '@antv/g2';
 @Component({
   selector: 'app-chart-custom',
   templateUrl: './chart-custom.component.html',
-  styleUrls: ['./chart-custom.component.less'],
+  styleUrls: ['./chart-custom.component.less']
 })
 export class ChartCustomComponent {
   constructor(private ngZone: NgZone) {}
@@ -19,34 +19,34 @@ export class ChartCustomComponent {
       container: el,
       autoFit: true,
       height: 500,
-      width: el.clientWidth,
+      width: el.clientWidth
     });
     chart.legend(false).tooltip({
-      showMarkers: false,
+      showMarkers: false
     });
 
     const view1 = chart.createView({
       region: {
         start: {
           x: 0,
-          y: 0,
+          y: 0
         },
         end: {
           x: 0.5,
-          y: 1,
-        },
-      },
+          y: 1
+        }
+      }
     });
     view1.coordinate('theta', {
       radius: 0.7,
       startAngle: 0 + otherOffsetAngle,
-      endAngle: Math.PI * 2 + otherOffsetAngle,
+      endAngle: Math.PI * 2 + otherOffsetAngle
     });
 
     view1
       .data([
         { type: '微博', value: 93.33 },
-        { type: '其他', value: 6.67 },
+        { type: '其他', value: 6.67 }
       ])
       .interaction('element-highlight')
       .interval()
@@ -56,9 +56,9 @@ export class ChartCustomComponent {
       .label('value', () => {
         return {
           offset: -10,
-          content: (obj) => {
-            return obj.type + '\n' + obj.value + '%';
-          },
+          content: obj => {
+            return `${obj.type}\n${obj.value}%`;
+          }
         };
       });
 
@@ -66,13 +66,13 @@ export class ChartCustomComponent {
       region: {
         start: {
           x: 0.5,
-          y: 0.1,
+          y: 0.1
         },
         end: {
           x: 1,
-          y: 0.9,
-        },
-      },
+          y: 0.9
+        }
+      }
     });
     view2
       .axis(false)
@@ -84,7 +84,7 @@ export class ChartCustomComponent {
         { type: '新闻', value: 0.81 },
         { type: '视频', value: 0.39 },
         { type: '博客', value: 0.37 },
-        { type: '报刊', value: 0.17 },
+        { type: '报刊', value: 0.17 }
       ])
       .interaction('element-highlight')
       .interval()
@@ -95,40 +95,40 @@ export class ChartCustomComponent {
         position: 'right',
         offsetX: 5,
         offsetY: 10,
-        content: (obj) => {
-          return obj.type + ' ' + obj.value + '%';
-        },
+        content: obj => {
+          return `${obj.type} ${obj.value}%`;
+        }
       });
     chart.render();
     chart.on('afterpaint', () => {
       const pie_start1 = {
         x: view1.getCoordinate().getCenter().x + Math.cos(Math.PI * 2 - otherOffsetAngle) * view1.getCoordinate().getRadius(),
-        y: view1.getCoordinate().getCenter().y + Math.sin(Math.PI * 2 - otherOffsetAngle) * view1.getCoordinate().getRadius(),
+        y: view1.getCoordinate().getCenter().y + Math.sin(Math.PI * 2 - otherOffsetAngle) * view1.getCoordinate().getRadius()
       };
       const pie_start2 = {
         x: view1.getCoordinate().getCenter().x + Math.cos(otherOffsetAngle) * view1.getCoordinate().getRadius(),
-        y: view1.getCoordinate().getCenter().y + Math.sin(otherOffsetAngle) * view1.getCoordinate().getRadius(),
+        y: view1.getCoordinate().getCenter().y + Math.sin(otherOffsetAngle) * view1.getCoordinate().getRadius()
       };
       const interval_end1 = {
         x: view2.geometries[0].container.getBBox().minX,
-        y: view2.getCoordinate().end.y,
+        y: view2.getCoordinate().end.y
       };
       const interval_end2 = {
         x: view2.geometries[0].container.getBBox().minX,
-        y: view2.getCoordinate().start.y,
+        y: view2.getCoordinate().start.y
       };
       const path = [
         ['M', pie_start1.x, pie_start1.y],
         ['L', pie_start2.x, pie_start2.y],
         ['L', interval_end2.x, interval_end2.y],
         ['L', interval_end1.x, interval_end1.y],
-        ['Z'],
+        ['Z']
       ];
       chart.backgroundGroup.addShape('path', {
         attrs: {
           path,
-          fill: '#e9f4fe',
-        },
+          fill: '#e9f4fe'
+        }
       });
       chart.getCanvas().draw();
     });

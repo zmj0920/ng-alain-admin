@@ -13,17 +13,17 @@ export class RelationComponent implements OnInit {
   demoValue = 1;
   public title = '我是父组件标题';
   copyText = '复制';
-  constructor(private bookService: BookService, private clipboard: Clipboard, private msg: NzMessageService) { }
+  constructor(private bookService: BookService, private clipboard: Clipboard, private msg: NzMessageService) {}
   ngOnInit(): void {
     // 消息提示 从service获取消息内容
-    this.bookService.getMessage().subscribe((value) => {
+    this.bookService.getMessage().subscribe(value => {
       this.alertMsg = value;
     });
 
     const observableAsny = this.bookService.observableAsny();
 
     // 订阅
-    observableAsny.subscribe((data) => {
+    observableAsny.subscribe(data => {
       // console.log(data);
     });
     this.bookService.subscribeSub();
@@ -46,7 +46,7 @@ export class RelationComponent implements OnInit {
 
   onCopy(str: string): void {
     copy(str).then(() => {
-      this.msg.success(`Copied Success!`)
+      this.msg.success(`Copied Success!`);
       this.copyText = '成功拷贝至粘贴板';
     });
   }

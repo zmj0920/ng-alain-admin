@@ -15,13 +15,13 @@ import { GuardAuthComponent } from './guard/auth.component';
 import { CanLeaveProvide } from './guard/can-leave.provide';
 import { GuardComponent } from './guard/guard.component';
 import { GuardLeaveComponent } from './guard/leave.component';
+import { PdfDesignComponent } from './pdf-design/pdf-design.component';
 import { PrintComponent } from './print/print.component';
 import { QRComponent } from './qr/qr.component';
 import { STDemoComponent } from './st/st.component';
 import { UtilComponent } from './util/util.component';
 import { XlsxComponent } from './xlsx/xlsx.component';
 import { ZipComponent } from './zip/zip.component';
-import { PdfDesignComponent } from './pdf-design/pdf-design.component';
 
 const COMPONENTS = [
   STDemoComponent,
@@ -46,4 +46,4 @@ const COMPONENTS = [
   providers: [CanLeaveProvide],
   declarations: COMPONENTS
 })
-export class DelonModule { }
+export class DelonModule {}

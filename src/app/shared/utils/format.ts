@@ -1,4 +1,4 @@
-import { AbstractControl, ValidatorFn } from "@angular/forms";
+import { AbstractControl, ValidatorFn } from '@angular/forms';
 
 const REGEX_STR = {
   num: `((-?\\d+\\.\\d+)|(-?\\d+)|(-?\\.\\d+))`,
@@ -21,7 +21,6 @@ const REGEX = {
   color: genRegex(REGEX_STR.color),
   chinese: genRegex(REGEX_STR.chinese)
 };
-
 
 /**
  * Wheter is number
@@ -119,8 +118,7 @@ export function MatchControl(controlName: string, matchingControlName: string): 
     }
     if (control?.value !== matchingControl?.value) {
       matchingControl?.setErrors({ matchControl: true });
-    }
-    else {
+    } else {
       matchingControl?.setErrors(null);
     }
     return null;

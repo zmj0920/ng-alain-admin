@@ -25,12 +25,12 @@ import {
   takeUntil,
   tap,
   withLatestFrom,
-  zipAll,
+  zipAll
 } from 'rxjs/operators';
 @Component({
   selector: 'app-operators',
   templateUrl: './operators.component.html',
-  styles: [],
+  styles: []
 })
 export class OperatorsComponent implements OnInit {
   isLoadingOne = false;
@@ -52,7 +52,7 @@ export class OperatorsComponent implements OnInit {
     // 点击后发出最近的点击
     // clicks.pipe(debounce(() => interval(1000))).subscribe((x) => console.log(x));
 
-    clicks.pipe(debounceTime(1000)).subscribe((x) => console.log(x));
+    clicks.pipe(debounceTime(1000)).subscribe(x => console.log(x));
 
     this.ofTest();
   }

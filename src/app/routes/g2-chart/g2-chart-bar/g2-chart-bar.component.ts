@@ -4,7 +4,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-g2-chart-g2-chart-bar',
-  templateUrl: './g2-chart-bar.component.html',
+  templateUrl: './g2-chart-bar.component.html'
 })
 export class G2ChartG2ChartBarComponent {
   constructor(private msg: NzMessageService) {}
@@ -15,7 +15,7 @@ export class G2ChartG2ChartBarComponent {
     return new Array(12).fill({}).map((_i, idx) => ({
       x: `${idx + 1}月`,
       y: Math.floor(Math.random() * 1000) + 200,
-      color: idx > 5 ? '#f50' : undefined,
+      color: idx > 5 ? '#f50' : undefined
     }));
   }
 

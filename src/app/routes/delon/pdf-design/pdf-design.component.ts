@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
   selector: 'app-pdf-design',
   templateUrl: './pdf-design.component.html',
   styleUrls: ['./pdf-design.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PdfDesignComponent implements OnInit {
   @ViewChild('pdf')
@@ -28,7 +28,7 @@ export class PdfDesignComponent implements OnInit {
   q = '';
   search$ = new Subject<string>();
 
-  constructor(private cdr: ChangeDetectorRef) { }
+  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.search$.subscribe((q: string) => {
@@ -36,12 +36,12 @@ export class PdfDesignComponent implements OnInit {
         this.q = q;
         this.comp.findController.executeCommand('find', {
           query: this.q,
-          highlightAll: true,
+          highlightAll: true
         });
       } else {
         this.comp.findController.executeCommand('findagain', {
           query: this.q,
-          highlightAll: true,
+          highlightAll: true
         });
       }
     });
@@ -58,7 +58,9 @@ export class PdfDesignComponent implements OnInit {
         break;
     }
 
-    if (ev.type !== 'load-progress') { console.log(ev); }
+    if (ev.type !== 'load-progress') {
+      console.log(ev);
+    }
   }
 
   uploadSrc(src: string): void {
@@ -77,7 +79,7 @@ export class PdfDesignComponent implements OnInit {
     };
     reader.readAsArrayBuffer(file as any);
     return false;
-  }
+  };
 
   loadOutline(): void {
     this.comp.pdf.getOutline().then((outline: any[]) => {

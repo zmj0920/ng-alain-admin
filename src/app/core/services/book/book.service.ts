@@ -12,7 +12,7 @@ import {
   ReplaySubject,
   Subject,
   throwError,
-  zip,
+  zip
 } from 'rxjs';
 import { mapTo, mergeMap, multicast, retry, take, tap } from 'rxjs/operators';
 
@@ -22,7 +22,7 @@ export interface Hero {
   tid: string; // tax id
 }
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class BookService {
   constructor(public http: HttpClient) {}
@@ -52,7 +52,7 @@ export class BookService {
 
   observableAsny(): Observable<any> {
     // 异步处理
-    return new Observable((observer) => {
+    return new Observable(observer => {
       setTimeout(() => {
         const userName = '姓名';
         observer.next(userName);
@@ -76,10 +76,10 @@ export class BookService {
 
   subjectTest(): void {
     this.subject.subscribe({
-      next: (v) => console.log(`ObsA${v}`),
+      next: v => console.log(`ObsA${v}`)
     });
     this.subject.subscribe({
-      next: (v) => console.log(`ObsB${v}`),
+      next: v => console.log(`ObsB${v}`)
     });
 
     this.subject.next(1);
@@ -88,8 +88,8 @@ export class BookService {
 
     from([1, 2, 3]).subscribe(this.subject);
 
-    const subscription = interval(400).subscribe((x) => console.log('first: ' + x));
-    const childSubscription = interval(300).subscribe((x) => console.log('second: ' + x));
+    const subscription = interval(400).subscribe(x => console.log(`first: ${x}`));
+    const childSubscription = interval(300).subscribe(x => console.log(`second: ${x}`));
 
     subscription.add(childSubscription);
 
@@ -105,13 +105,13 @@ export class BookService {
      * 第二个观察者订阅时会得到值2,每次接受者只会接受最新最送的那个消息：。
      */
     this.behaviorSubject.subscribe({
-      next: (v) => console.log(`BehA${v}`),
+      next: v => console.log(`BehA${v}`)
     });
 
     this.behaviorSubject.next(1);
 
     this.behaviorSubject.subscribe({
-      next: (v) => console.log(`BehB${v}`),
+      next: v => console.log(`BehB${v}`)
     });
 
     this.behaviorSubject.next(2);
@@ -122,7 +122,7 @@ export class BookService {
     const replaySubject = new ReplaySubject(3); // 为新的订阅者缓冲3个值
 
     replaySubject.subscribe({
-      next: (v) => console.log('observerA: ' + v),
+      next: v => console.log(`observerA: ${v}`)
     });
 
     replaySubject.next(1);
@@ -131,7 +131,7 @@ export class BookService {
     replaySubject.next(4);
     console.log('新的订阅者');
     replaySubject.subscribe({
-      next: (v) => console.log('observerB: ' + v),
+      next: v => console.log(`observerB: ${v}`)
     });
 
     replaySubject.next(5);
@@ -147,7 +147,7 @@ export class BookService {
     const asyncSubject = new AsyncSubject();
 
     asyncSubject.subscribe({
-      next: (v) => console.log('observerA: ' + v),
+      next: v => console.log(`observerA: ${v}`)
     });
 
     asyncSubject.next(1);
@@ -156,7 +156,7 @@ export class BookService {
     asyncSubject.next(4);
 
     asyncSubject.subscribe({
-      next: (v) => console.log('observerB: ' + v),
+      next: v => console.log(`observerB: ${v}`)
     });
 
     asyncSubject.next(5);
@@ -164,11 +164,11 @@ export class BookService {
   }
 
   operatorsTest(input: any): Observable<any> {
-    return new Observable((observer) => {
+    return new Observable(observer => {
       input.subscribe({
         next: (v: any) => observer.next(10 * v),
         error: (err: any) => observer.error(err),
-        complete: () => observer.complete(),
+        complete: () => observer.complete()
       });
     });
   }
@@ -178,10 +178,10 @@ export class BookService {
     // 将Observable转换为一个multicast（组播）
     const multi = from([1, 2, 3]).pipe(multicast(this.subject)) as ConnectableObservable<number>;
     multi.subscribe({
-      next: (v) => console.log(`A:${v}`),
+      next: v => console.log(`A:${v}`)
     });
     multi.subscribe({
-      next: (v) => console.log(`B:${v}`),
+      next: v => console.log(`B:${v}`)
     });
     // 使用 subject 订阅 source
     multi.connect();
@@ -194,8 +194,8 @@ export class BookService {
     // 使用 ReplaySubject 的示例
     const example = source.pipe(
       // 因为我们在下面进行了多播，所以副作用只会调用一次
-      tap((_) => console.log('Side Effect #2')),
-      mapTo('Result Two!'),
+      tap(_ => console.log('Side Effect #2')),
+      mapTo('Result Two!')
     );
     // 可以使用任何类型的 subject
     const multi = example.pipe(multicast(() => new ReplaySubject(5))) as ConnectableObservable<number>;
@@ -233,7 +233,7 @@ export class BookService {
 
   heroes: Hero[] = [
     { id: 1, name: 'RubberMan', tid: '082-27-5678' },
-    { id: 2, name: 'Tornado', tid: '099-42-4321' },
+    { id: 2, name: 'Tornado', tid: '099-42-4321' }
   ];
 
   getHeroes(): Observable<Hero[]> {

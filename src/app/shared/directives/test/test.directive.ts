@@ -4,8 +4,8 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
   selector: '[appTest]',
   // tslint:disable-next-line: no-host-metadata-property
   host: {
-    name: 'appTest指令扩展属性',
-  },
+    name: 'appTest指令扩展属性'
+  }
 })
 export class TestDirective {
   constructor(private el: ElementRef) {

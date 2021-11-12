@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   }
   // @ViewChild('defaultTabButtons', { static: true }) private defaultTabButtons!: TemplateRef<any>;
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
   sendParent(): void {
     this.outer.emit('msg from child');
   }
@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     // console.log(this.defaultTabButtons.elementRef);
   }
 
-  login(): void { }
+  login(): void {}
 
-  signUp(): void { }
+  signUp(): void {}
 }

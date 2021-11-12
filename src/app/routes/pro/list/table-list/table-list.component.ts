@@ -45,7 +45,12 @@ export class ProTableListComponent implements OnInit {
   st!: STComponent;
   columns: STColumn[] = [
     { title: '', index: 'key', type: 'checkbox' },
-    { title: '规则编号', index: 'no' },
+    {
+      title: '规则编号',
+      index: 'no',
+      type: 'widget',
+      widget: { type: 'tooltip', params: ({ record }) => ({ tooltipText: record.no }) }
+    },
     { title: '描述', index: 'description' },
     {
       title: '服务调用次数',

@@ -1,11 +1,11 @@
 import { Component, HostBinding, HostListener, OnInit } from '@angular/core';
+import { OnboardingService } from '@delon/abc/onboarding';
 import { STColumn } from '@delon/abc/st';
 import { G2MiniBarData } from '@delon/chart/mini-bar';
 import { _HttpClient } from '@delon/theme';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { switchMap } from 'rxjs/operators';
 import { from, fromEvent, interval, of, throwError, timer } from 'rxjs';
-import { OnboardingService } from '@delon/abc/onboarding';
+import { switchMap } from 'rxjs/operators';
 @Component({
   selector: 'app-st',
   templateUrl: './st.component.html',
@@ -20,8 +20,8 @@ import { OnboardingService } from '@delon/abc/onboarding';
       :host ::ng-deep .ant-input-number-input {
         text-align: center;
       }
-    `,
-  ],
+    `
+  ]
 })
 export class STDemoComponent implements OnInit {
   demoValue = 1;
@@ -41,9 +41,9 @@ export class STDemoComponent implements OnInit {
       title: 'Name',
       index: 'name.first',
       width: 150,
-      format: (item) => `${item.name.first} ${item.name.last}`,
+      format: item => `${item.name.first} ${item.name.last}`,
       type: 'link',
-      click: (item) => this.message.info(`${item.name.first}`),
+      click: item => this.message.info(`${item.name.first}`)
     },
     { title: 'Email', index: 'email' },
     {
@@ -54,9 +54,9 @@ export class STDemoComponent implements OnInit {
         truth: 'female',
         yes: '男',
         no: '女',
-        mode: 'text',
+        mode: 'text'
       },
-      width: 120,
+      width: 120
     },
     { title: 'Events', render: 'events', width: 90 },
     { title: 'Registered', index: 'registered.date', type: 'date', width: 170 },
@@ -66,16 +66,16 @@ export class STDemoComponent implements OnInit {
       buttons: [
         {
           text: 'Edit',
-          click: (item) => this.message.info(`edit [${item.id.value}]`),
-          iif: (item) => item.gender === 'female',
+          click: item => this.message.info(`edit [${item.id.value}]`),
+          iif: item => item.gender === 'female'
         },
         {
           text: 'Delete',
           type: 'del',
-          click: (item) => this.message.info(`deleted [${item.id.value}]`),
-        },
-      ],
-    },
+          click: item => this.message.info(`deleted [${item.id.value}]`)
+        }
+      ]
+    }
   ];
 
   counter = 0;
@@ -125,7 +125,7 @@ export class STDemoComponent implements OnInit {
           content: 'The user guidance is to help users better understand and use the product',
           width: 300,
           next: `Go to home`,
-          url: '/crud/list',
+          url: '/crud/list'
         },
         {
           selectors: '.test1-2',
@@ -133,21 +133,21 @@ export class STDemoComponent implements OnInit {
           content: 'The user guidance is to help users better understand and use the product',
           next: `Go to home`,
           url: '/',
-          before: 200,
+          before: 200
         },
         {
           selectors: '.test1-3',
           title: 'Test3',
           content: 'The user guidance is to help users better understand and use the product',
           next: `Go to home`,
-          url: '/crud/list',
-        },
-      ],
+          url: '/crud/list'
+        }
+      ]
     });
   }
 
   viaHttp(): void {
-    this.http.get(`./assets/tmp/on-boarding.json`).subscribe((res) => {
+    this.http.get(`./assets/tmp/on-boarding.json`).subscribe(res => {
       console.log(res);
       this.srv.start(res);
     });

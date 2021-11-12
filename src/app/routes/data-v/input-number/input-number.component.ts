@@ -14,12 +14,12 @@ export type OnChangeType = any;
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => InputNumberComponent),
-      multi: true,
-    },
+      multi: true
+    }
   ]
 })
 export class InputNumberComponent implements OnInit, ControlValueAccessor {
-  constructor() { }
+  constructor() {}
   @Output() readonly nzBlur = new EventEmitter();
   @Output() readonly nzFocus = new EventEmitter();
   @ViewChild('inputElement', { static: true }) inputElement!: NzInputNumberComponent;
@@ -40,7 +40,7 @@ export class InputNumberComponent implements OnInit, ControlValueAccessor {
       .trim()
       .replace(/。/g, '.')
       .replace(/[^\w\.-]+/g, '');
-  @Input() nzFormatter: (value: number) => string | number = (value) => value;
+  @Input() nzFormatter: (value: number) => string | number = value => value;
 
   writeValue(value: number): void {
     this.inputElement.writeValue(value);
@@ -54,5 +54,5 @@ export class InputNumberComponent implements OnInit, ControlValueAccessor {
     this.inputElement.registerOnTouched(fn);
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

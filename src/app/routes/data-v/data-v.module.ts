@@ -12,4 +12,4 @@ import { ZmButtonComponent } from './zm-button/zm-button.component';
   imports: [SharedModule, DataVRoutingModule],
   declarations: [RelationComponent, HeaderComponent, OperatorsComponent, InputNumberComponent, ZmButtonComponent]
 })
-export class DataVModule { }
+export class DataVModule {}

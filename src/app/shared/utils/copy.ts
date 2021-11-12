@@ -1,10 +1,10 @@
 /**
-* Copy text to clipboard
-*
-* 复制字符串文档至剪贴板
-*/
+ * Copy text to clipboard
+ *
+ * 复制字符串文档至剪贴板
+ */
 export function copy(value: string): Promise<string> {
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     let copyTextArea = null;
     try {
       copyTextArea = document.createElement('textarea');
@@ -16,8 +16,7 @@ export function copy(value: string): Promise<string> {
       copyTextArea.select();
       document.execCommand('copy');
       resolve(value);
-    }
-    finally {
+    } finally {
       if (copyTextArea && copyTextArea.parentNode) {
         copyTextArea.parentNode.removeChild(copyTextArea);
       }

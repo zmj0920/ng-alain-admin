@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { DelonACLModule } from '@delon/acl';
 import { DelonFormModule } from '@delon/form';
 import { AlainThemeModule } from '@delon/theme';
+
 import { SHARED_COMPOENT_MODULES } from './components/shared-component.module';
 import { DIRECTIVES_MODULES } from './directives/directive.module';
 import { PROVIDERS_PIPES_MODULES } from './pipes/pipe.module';
@@ -25,13 +26,9 @@ import { THIRDMODULES } from './third.module';
     ...SHARED_DELON_MODULES,
     ...SHARED_ZORRO_MODULES,
     ...THIRDMODULES,
-    ...SHARED_CDK_MODULES,
+    ...SHARED_CDK_MODULES
   ],
-  declarations: [
-    ...SHARED_COMPOENT_MODULES,
-    ...DIRECTIVES_MODULES,
-    ...PROVIDERS_PIPES_MODULES
-  ],
+  declarations: [...SHARED_COMPOENT_MODULES, ...DIRECTIVES_MODULES, ...PROVIDERS_PIPES_MODULES],
   exports: [
     CommonModule,
     FormsModule,
@@ -50,7 +47,7 @@ import { THIRDMODULES } from './third.module';
     ...DIRECTIVES_MODULES,
     // your pipe
     ...PROVIDERS_PIPES_MODULES,
-    ...SHARED_CDK_MODULES,
+    ...SHARED_CDK_MODULES
   ]
 })
-export class SharedModule { }
+export class SharedModule {}
