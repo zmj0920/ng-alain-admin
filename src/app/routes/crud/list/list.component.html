@@ -1,34 +1,64 @@
-<div>
-  点击上传文件:
-  <label id="attachment">
-    <a nz-button nzType="default">
-      <i *ngIf="btnStatus === 'paperclip'" nz-icon nzType="upload" nzTheme="outline"></i>
-      <i *ngIf="btnStatus === 'pause'" nz-icon nzType="pause-circle" nzTheme="outline"></i>
-      <i *ngIf="btnStatus === 'play'" nz-icon nzType="play-circle" nzTheme="outline"></i>
-    </a>
-    <input type="file" style="display: none" id="file" [disabled]="uploadDisable" />
-  </label>
-  <div>读取文件进度：<nz-progress [nzPercent]="readProgress"></nz-progress></div>
-  <div>上传文件进度： <nz-progress [nzPercent]="nzPercent"></nz-progress></div>
+<captcha-input></captcha-input>
+<!-- <nz-page-header
+  [title]="'查询数据'"
+  [description]="'描述信息描述信息描述信息描述信息描述信息描述信息描述信息描述信息描述信息描述信息'"
+></nz-page-header>
+<div class="box">
+  <div class="item">1 思否</div>
+  <div class="item">2 掘金</div>
+  <div class="item">3 前端乱炖</div>
 </div>
-<!-- <div>
-  <ellipsis-tooltip [length]="50" [tooltip]="true">
-    1111111111111111111111111111111111111111111111111111111111111111111111111111111
-  </ellipsis-tooltip>
-</div> -->
-<!-- <ellipsis-tooltip [length]="50" [tooltip]="true"
-  >1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
-  111
-</ellipsis-tooltip>
-<div style="width: 800px; margin: auto">
-  <ellipsis lines="3" tooltip>
-    <p>
-      There were injuries alleged in three <a href="#cover">cases in 2015</a>, and a fourth incident in September, according to the safety
-      recall report. After meeting with US regulators in October, the firm decided to issue arecall report. After meeting with US regulators
-      in October, the firm decided to issue arecall report. After meeting with US regulators in October, the firm decided to issue arecall
-      report. After meeting with US regulators in October, the firm decided to issue arecall report. After meeting with US regulators in
-      October, the firm decided to issue arecall report. After meeting with US regulators in October, the firm decided to issue arecall
-      report. After meeting with US regulators in October, the firm decided to issue arecall report.
-    </p>
-  </ellipsis>
-</div> -->
+<text-ellipsis
+  [lines]="1"
+  [width]="'calc(100% - 108px)'"
+  nz-tooltip
+  title="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo delectus repellat quisquam sint, animi a corrupti repudiandae vero dolorem
+consectetur libero modi nostrum facilis nobis, praesentium porro quibusdam sequi officia? Lorem, ipsum dolor sit amet consectetur
+adipisicing elit. Debitis exercitationem repellendus dolor cumque velit recusandae vitae corporis, possimus non odit sit a suscipit
+doloribus quasi alias? Amet similique inventore tenetur!"
+>
+  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo delectus repellat quisquam sint, animi a corrupti repudiandae vero dolorem
+  consectetur libero modi nostrum facilis nobis, praesentium porro quibusdam sequi officia? Lorem, ipsum dolor sit amet consectetur
+  adipisicing elit. Debitis exercitationem repellendus dolor cumque velit recusandae vitae corporis, possimus non odit sit a suscipit
+  doloribus quasi alias? Amet similique inventore tenetur!
+</text-ellipsis>
+<div #myBox> 我是一个dom节点 </div>
+<ng-table
+  #table
+  [tableHeaderActions]="moreRowActions"
+  [displayActionsLimit]="6"
+  [columns]="columns"
+  [customColumns]="customColumns"
+  [groupActions]="groupActions"
+  [selectedRows]="selectedRows"
+  (refresh)="refresh()"
+  (export)="export()"
+  [st]="st"
+  mat-fab
+>
+  <ng-template t-row="setting" let-i>
+    <i nz-icon nzType="setting" nzTheme="outline"></i>
+  </ng-template>
+  <ng-template t-row="vertical-align-bottom" let-i>
+    <i nz-icon nzType="vertical-align-bottom" nzTheme="outline"></i>
+  </ng-template>
+  <ng-template t-row="plus" let-i>
+    <i nz-icon nzType="plus" nzTheme="outline"></i>
+  </ng-template>
+  <st
+    #st
+    [columns]="columns"
+    [data]="data"
+    [loading]="loading"
+    (change)="stChange($event)"
+    [widthMode]="{ type: 'strict', strictBehavior: 'truncate' }"
+    [page]="{ showSize: true, pageSizes: [10, 20, 30, 40, 50] }"
+    [expand]="expand"
+    expandRowByClick
+    expandAccordion
+  >
+    <ng-template #expand let-item let-index="index" let-column="column">
+      {{ item.description }}
+    </ng-template>
+  </st>
+</ng-table> -->

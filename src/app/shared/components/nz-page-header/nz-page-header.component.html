@@ -1,0 +1,12 @@
+<page-header [title]="title" [autoBreadcrumb]="false" [action]="action" [content]="content" style="padding: 16px">
+  <ng-template #action>
+    <div class="action">
+      <button nz-button [nzType]="'primary'">主操作</button>
+    </div>
+  </ng-template>
+  <ng-template #content>
+    <div class="desc">
+      {{ description }}
+    </div>
+  </ng-template>
+</page-header>

@@ -1,0 +1,80 @@
+<button (click)="refreshList()" nz-button>
+  <i nz-icon nzType="reload" nzTheme="outline"></i>
+</button>
+<ng-container *ngIf="rowActions.length">
+  <ng-container *ngFor="let action of rowActions">
+    <div class="btn-container" [nzTooltipTitle]="action.tooltip" nzTooltipPlacement="top" nz-tooltip>
+      <button
+        nz-button
+        [nzType]="action?.type || 'default'"
+        [disabled]="action.disabled && action.disabled(selectedRows)"
+        (click)="action.onClick(selectedRows)"
+      >
+        <ng-template #renderIcon [ngTemplateOutlet]="action?.__renderIcon" [ngTemplateOutletContext]="{ $implicit: action }"> </ng-template>
+        <ng-container *ngIf="!action.renderIcon; else renderIcon"> </ng-container>
+        <span>{{ action.text }}</span>
+      </button>
+    </div>
+  </ng-container>
+</ng-container>
+<button
+  style="margin-left: 5px"
+  *ngIf="moreRowActions.length > 0 || groupActions.length > 0"
+  nz-dropdown
+  [nzClickHide]="false"
+  [nzPlacement]="'bottomLeft'"
+  [nzTrigger]="'click'"
+  [nzDropdownMenu]="moreRowActions.length > 0 ? btnMenu : btnGroupMenu"
+  nz-button
+  nzType="default"
+>
+  <i nz-icon nzType="more" nzTheme="outline"></i>Actions
+</button>
+<nz-dropdown-menu #btnMenu="nzDropdownMenu">
+  <ul nz-menu>
+    <ng-container *ngFor="let action of moreRowActions; let a = index">
+      <li
+        nz-menu-item
+        [nzDisabled]="action.disabled && action.disabled(selectedRows)"
+        [nzTooltipTitle]="action.tooltip"
+        nzTooltipPlacement="top"
+        nz-tooltip
+        (click)="action.onClick(selectedRows)"
+      >
+        <ng-template #renderIcon [ngTemplateOutlet]="action?.__renderIcon" [ngTemplateOutletContext]="{ $implicit: action }"> </ng-template>
+        <ng-container *ngIf="!action.renderIcon; else renderIcon"> </ng-container>
+        <span style="padding-left: 5px">{{ action.text }}</span>
+      </li>
+    </ng-container>
+  </ul>
+</nz-dropdown-menu>
+<nz-dropdown-menu #btnGroupMenu="nzDropdownMenu">
+  <ul nz-menu class="ng-table-ul-group-actions">
+    <ng-container *ngFor="let ga of groupActions; let gr = index">
+      <div class="action-groups action-groups-{{ currentLang | lowercase }}">
+        <div class="group-name">
+          <span>
+            {{ ga.name }}
+          </span>
+        </div>
+        <div class="actions">
+          <ng-container *ngFor="let action of ga.children; let a = index">
+            <li
+              nz-menu-item
+              [nzDisabled]="action.disabled && action.disabled(selectedRows)"
+              *ngIf="!(action.hidden && action.hidden())"
+              [nzTooltipTitle]="action.tooltip"
+              nzTooltipPlacement="top"
+              nz-tooltip
+            >
+              <ng-template #renderIcon [ngTemplateOutlet]="action?.__renderIcon" [ngTemplateOutletContext]="{ $implicit: action }">
+              </ng-template>
+              <ng-container *ngIf="!action.renderIcon; else renderIcon"> </ng-container>
+              <span>{{ action.text }}</span>
+            </li>
+          </ng-container>
+        </div>
+      </div>
+    </ng-container>
+  </ul>
+</nz-dropdown-menu>

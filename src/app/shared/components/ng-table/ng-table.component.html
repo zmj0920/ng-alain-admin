@@ -1,0 +1,23 @@
+<nz-card [nzBordered]="false" class="table-card">
+  <div class="st-actions mb-md">
+    <div style="flex: 1; display: flex">
+      <table-action
+        style="display: flex"
+        [selectedRows]="selectedRows"
+        [rowActions]="rowActions"
+        [moreRowActions]="moreRowActions"
+        [groupActions]="groupActions"
+        (refresh)="refreshList()"
+      >
+      </table-action>
+    </div>
+    <div style="width: 25%"> <input nz-input /> </div>
+    <div style="display: flex; width: 6%; justify-content: end">
+      <button nz-button (click)="exportXlsx()">
+        <i nz-icon nzType="export" nzTheme="outline"></i>
+      </button>
+      <table-custom-columns style="padding-left: 5px" [customColumns]="customColumns" [st]="st"></table-custom-columns>
+    </div>
+  </div>
+  <ng-content></ng-content>
+</nz-card>

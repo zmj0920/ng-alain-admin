@@ -1,228 +1,422 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { I18NService } from '@core';
+import { STChange, STColumn, STColumnBadge, STComponent, STData, _STColumn } from '@delon/abc/st';
+import { XlsxService } from '@delon/abc/xlsx';
+import { _HttpClient } from '@delon/theme';
+import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Observable, Subscriber, Subject, fromEvent, forkJoin, merge, from, timer } from 'rxjs';
-import { ajax } from 'rxjs/ajax';
-import { ajaxPost } from 'rxjs/internal/observable/dom/AjaxObservable';
-import { filter, map, mapTo, mergeAll, repeatWhen, retryWhen, switchMap, takeUntil, tap } from 'rxjs/operators';
-
-const SparkMD5 = require('spark-md5');
-const apiHost = 'http://127.0.0.1:5000';
-
-interface FileInfo {
-  fileSize: number;
-  fileMD5: string;
-  lastUpdated: string;
-  fileName: string;
-}
-
-interface ChunkMeta {
-  fileSize: number;
-  chunkSize: number;
-  chunks: number;
-  fileKey: string;
-  fileName: string;
-}
-// 暂停  继续 正在上传  上传完成
-type Action = 'pause' | 'resume' | 'progress' | 'complete';
-
+import { tap } from 'rxjs/operators';
 @Component({
-  selector: 'app-table-list',
-  templateUrl: './list.component.html'
+  selector: 't-table',
+  templateUrl: './list.component.html',
+  styleUrls: ['./list.less']
 })
 export class CrudListComponent implements OnInit {
-  private action$ = new Subject<{ name: Action; payload?: any }>();
-  // 暂停上传
-  private pause$ = this.action$.pipe(filter(ac => ac.name === 'pause'));
-  // 继续上传
-  private resume$ = this.action$.pipe(filter(ac => ac.name === 'resume'));
-  private concurrency = 20;
-  btnStatus = 'paperclip';
-  uploadDisable = false;
-  nzPercent = 0;
-  readProgress = 0;
+  @ViewChild('st', { static: true }) st!: STComponent;
+  // @ViewChild('myBox', { static: true }) myBox: any;
+  data: any[] = [];
+  moreRowActions: any[] = [
+    {
+      disabled: (data: any) => {
+        return data.some((i: { key: number }) => i.key === 2);
+      },
+      icon: 'rowAction1',
+      renderIcon: 'setting',
+      onClick: (data: any) => {
+        console.log(data);
+      },
+      text: 'rowAction1',
+      tooltip: 'rowAction1'
+    },
+    {
+      disabled: (data: any) => false,
+      icon: 'rowAction2',
+      renderIcon: 'vertical-align-bottom',
+      onClick: (data: any) => {},
+      text: 'rowAction2',
+      tooltip: 'rowAction2'
+    },
+    {
+      disabled: (data: any) => false,
+      icon: 'rowAction3',
+      renderIcon: 'plus',
+      onClick: (data: any) => {},
+      text: 'rowAction3',
+      tooltip: 'rowAction3'
+    },
+    {
+      disabled: (data: any) => {
+        return data.some((i: { key: number }) => i.key === 2);
+      },
+      icon: 'rowAction4',
+      renderIcon: 'plus',
+      onClick: (data: any) => {
+        console.log(data);
+      },
+      text: 'rowAction4',
+      tooltip: 'rowAction4'
+    },
+    {
+      disabled: (data: any) => {
+        return data.some((i: { key: number }) => i.key === 2);
+      },
+      icon: 'rowAction5',
+      renderIcon: 'setting',
+      onClick: (data: any) => {
+        console.log(data);
+      },
+      text: 'rowAction5',
+      tooltip: 'rowAction5'
+    },
+    {
+      disabled: (data: any) => {
+        return data.some((i: { key: number }) => i.key === 2);
+      },
+      icon: 'rowAction6',
+      renderIcon: 'vertical-align-bottom',
+      onClick: (data: any) => {
+        console.log(data);
+      },
+      text: 'rowAction6',
+      tooltip: 'rowAction6'
+    }
+  ];
+  loading = false;
+  selectedRows: STData[] = [];
 
-  constructor(public msgSrv: NzMessageService) {}
+  q: {
+    pi: number;
+    ps: number;
+    no: string;
+    sorter: string;
+    status: number | null;
+    statusList: NzSafeAny[];
+  } = {
+    pi: 1,
+    ps: 10,
+    no: '',
+    sorter: '',
+    status: null,
+    statusList: []
+  };
+  BADGE: STColumnBadge = {
+    0: { text: '关闭', color: 'default' },
+    1: { text: '成功', color: 'success' },
+    2: { text: '错误', color: 'error' },
+    3: { text: '进行中', color: 'processing' },
+    4: { text: '默认', color: 'default' },
+    5: { text: '警告', color: 'warning' }
+  };
+  columns: STColumn[] = [
+    { title: '', index: 'key', type: 'checkbox' },
+    {
+      title: '规则编号',
+      index: 'no',
+      type: 'link',
+      click: data => {
+        console.log(data);
+      },
+      // type: 'widget',
+      // widget: { type: 'tooltip', params: ({ record }) => ({ tooltipText: record.no }) },
+      iif: () => this.isChoose('no')
+    },
+    { title: '描述', index: 'description', iif: () => this.isChoose('description') },
+    {
+      title: { text: '佣金', optional: '（单位：元）', optionalHelp: '计算公式=订单金额 * 0.6%' },
+      index: 'callNo',
+      type: 'currency',
+      format: item => `${item.callNo} 万`,
+      sort: {
+        compare: (a, b) => a.callNo - b.callNo
+      },
+      iif: () => this.isChoose('callNo')
+    },
+    {
+      title: '状态',
+      type: 'badge',
+      index: 'status',
+      badge: this.BADGE,
+      // filter: {
+      //   menus: this.status,
+      //   fn: (filter, record) => record.status === filter.index
+      // },
+      iif: () => this.isChoose('status')
+    },
+    {
+      title: '更新时间',
+      index: 'updatedAt',
+      type: 'date',
+      filter: {
+        type: 'keyword'
+      },
+      sort: {
+        compare: (a, b) => a.updatedAt - b.updatedAt
+      },
+      iif: () => this.isChoose('updatedAt')
+    },
+    {
+      title: '操作区',
+      buttons: [
+        // {
+        //   text: 'Edit',
+        //   icon: 'edit',
+        //   type: 'modal',
+        //   modal: {
+        //     component: DemoModalComponent
+        //   },
+        //   click: (_record, modal) => this.message.success(`重新加载页面，回传值：${JSON.stringify(modal)}`)
+        // },
+        // {
+        //   text: 'Drawer',
+        //   type: 'drawer',
+        //   drawer: {
+        //     title: '编辑',
+        //     component: DemoDrawerComponent
+        //   },
+        //   click: (_record, modal) => this.message.success(`重新加载页面，回传值：${JSON.stringify(modal)}`)
+        // },
+        {
+          icon: 'check-circle',
+          click: record => this.message.info(`check-${record.name}`),
+          iif: record => record.id % 2 === 0,
+          iifBehavior: 'disabled',
+          tooltip: `Is disabled button`
+        },
+        {
+          icon: 'delete',
+          type: 'del',
+          pop: {
+            title: 'Yar you sure?',
+            okType: 'danger',
+            icon: 'star'
+          },
+          click: (record, _modal, comp) => {
+            this.message.success(`成功删除【${record.name}】`);
+            comp!.removeRow(record);
+          },
+          iif: record => record.id % 2 === 0
+        },
+        {
+          text: '更多',
+          children: [
+            {
+              text: record => (record.id === 1 ? `过期` : `正常`),
+              click: record => this.message.error(`${record.id === 1 ? `过期` : `正常`}【${record.name}】`)
+            },
+            {
+              text: `审核`,
+              click: record => this.message.info(`check-${record.name}`),
+              iif: record => record.id % 2 === 0,
+              iifBehavior: 'disabled',
+              tooltip: 'This is tooltip'
+            },
+            {
+              type: 'divider'
+            },
+            {
+              text: `重新开始`,
+              icon: 'edit',
+              click: record => this.message.success(`重新开始【${record.name}】`)
+            }
+          ]
+        }
+      ]
+    }
+  ];
+  customColumns = [
+    { label: '规则编号', value: 'no', checked: true, disableChecked: true },
+    { label: '描述', value: 'description', checked: true, disableChecked: false },
+    { label: '服务调用次数', value: 'callNo', checked: true, disableChecked: false },
+    { label: '状态', value: 'status', checked: true, disableChecked: false },
+    { label: '更新时间', value: 'updatedAt', checked: true, disableChecked: false }
+  ];
+  groupActions: any[] = [
+    {
+      name: 'group1',
+      children: [
+        {
+          disabled: (data: any) => {
+            return data.some((i: { key: number }) => i.key === 2);
+          },
+          icon: 'rowAction1',
+          renderIcon: 'setting',
+          onClick: (data: any) => {
+            console.log(data);
+          },
+          text: 'rowAction1',
+          tooltip: 'rowAction1'
+        },
+        {
+          disabled: (data: any) => false,
+          icon: 'rowAction2',
+          renderIcon: 'vertical-align-bottom',
+          onClick: (data: any) => {},
+          text: 'rowAction2',
+          tooltip: 'rowAction2'
+        },
+        {
+          disabled: (data: any) => false,
+          icon: 'rowAction3',
+          renderIcon: 'plus',
+          onClick: (data: any) => {},
+          text: 'rowAction3',
+          tooltip: 'rowAction3'
+        },
+        {
+          disabled: (data: any) => {
+            return data.some((i: { key: number }) => i.key === 2);
+          },
+          icon: 'rowAction4',
+          renderIcon: 'plus',
+          onClick: (data: any) => {
+            console.log(data);
+          },
+          text: 'rowAction4',
+          tooltip: 'rowAction4'
+        }
+      ]
+    },
+    {
+      name: 'group2',
+      children: [
+        {
+          disabled: (data: any) => {
+            return data.some((i: { key: number }) => i.key === 2);
+          },
+          icon: 'rowAction1',
+          renderIcon: 'setting',
+          onClick: (data: any) => {
+            console.log(data);
+          },
+          text: 'rowAction1',
+          tooltip: 'rowAction1'
+        },
+        {
+          disabled: (data: any) => {
+            return data.some((i: { key: number }) => i.key === 2);
+          },
+          icon: 'rowAction1',
+          renderIcon: 'setting',
+          onClick: (data: any) => {
+            console.log(data);
+          },
+          text: 'rowAction1',
+          tooltip: 'rowAction1'
+        },
+        {
+          disabled: (data: any) => {
+            return data.some((i: { key: number }) => i.key === 2);
+          },
+          icon: 'rowAction1',
+          renderIcon: 'setting',
+          onClick: (data: any) => {
+            console.log(data);
+          },
+          text: 'rowAction1',
+          tooltip: 'rowAction1'
+        },
+        {
+          disabled: (data: any) => false,
+          icon: 'rowAction2',
+          renderIcon: 'vertical-align-bottom',
+          onClick: (data: any) => {},
+          text: 'rowAction2',
+          tooltip: 'rowAction2'
+        },
+        {
+          disabled: (data: any) => false,
+          icon: 'rowAction3',
+          renderIcon: 'plus',
+          onClick: (data: any) => {},
+          text: 'rowAction3',
+          tooltip: 'rowAction3'
+        },
+        {
+          disabled: (data: any) => {
+            return data.some((i: { key: number }) => i.key === 2);
+          },
+          icon: 'rowAction4',
+          renderIcon: 'plus',
+          onClick: (data: any) => {
+            console.log(data);
+          },
+          text: 'rowAction4',
+          tooltip: 'rowAction4'
+        }
+      ]
+    }
+  ];
+
+  constructor(private http: _HttpClient, private message: NzMessageService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    const $attachment = document.getElementById('attachment') as HTMLElement;
-    const click$ = fromEvent($attachment, 'click').pipe(
-      filter(() => this.btnStatus !== 'paperclip'),
-      tap(() => {
-        if (this.btnStatus === 'pause') {
-          this.action$.next({ name: 'pause' });
-          this.btnStatus = 'play';
-        } else if (this.btnStatus === 'play') {
-          this.action$.next({ name: 'resume' });
-          this.buildPauseIcon();
-        }
-      }),
-      map(() => ({ action: this.btnStatus === 'pause' ? 'PAUSE' : 'RESUME', payload: null }))
-    );
-
-    const progress$ = this.action$.pipe(
-      filter(action => action.name === 'progress'),
-      map(action => action.payload),
-      tap((r: number) => {
-        const percent = Math.round(r * 100);
-        this.nzPercent = percent > 1 ? percent - 1 : percent;
-      }),
-      map(r => ({ action: 'PROGRESS', payload: r }))
-    );
-
-    const upload$ = fromEvent($attachment, 'change').pipe(
-      map((r: any) => r.target!.files[0]),
-      filter((f: any) => !!f),
-      tap(() => (this.uploadDisable = true)),
-      switchMap(i => this.readFileInfo(i)),
-      switchMap(i => this.postUploadChunk(i)),
-      filter((data: any) => {
-        if (data.chunkMeta.status === 0) {
-          this.nzPercent = 100;
-          this.msgSrv.success('文件已秒传');
-          this.resetStatus();
-        }
-        return data.chunkMeta.status === 1;
-      }),
-      tap(() => this.buildPauseIcon()),
-      switchMap(({ blobs, chunkMeta }) => this.uploadChunks(blobs, chunkMeta)),
-      switchMap((r: ChunkMeta) => this.postMergeStatus(r)),
-      tap(() => {
-        this.nzPercent = 100;
-        this.msgSrv.success('文件上传成功！');
-        this.resetStatus();
-      })
-    );
-    merge(...[upload$, click$, progress$]).subscribe();
+    this.refresh();
   }
 
-  // 上传切片文件 blob切片文件总数  chunkMeta 分片信息
-  private uploadChunks(blobs: Blob[], chunkMeta: ChunkMeta) {
-    const uploaded: number[] = [];
-    const dists = blobs.map((blob, index) => {
-      let currentLoaded = 0;
-      return this.uploadChunk(chunkMeta, index, blob).pipe(
-        tap(r => {
-          currentLoaded = r.loaded / chunkMeta.fileSize;
-          uploaded[index] = currentLoaded;
-          const percent = uploaded.reduce((acc, val) => acc + (val ? val : 0));
-          this.action$.next({ name: 'progress', payload: percent });
+  // ngAfterViewInit(): void {
+  //   console.log(this.myBox.nativeElement);
+  //   this.myBox.nativeElement.style.width = '100px';
+  //   this.myBox.nativeElement.style.height = '100px';
+  //   this.myBox.nativeElement.style.background = 'red';
+  //   console.log(this.myBox.nativeElement.innerHTML);
+  // }
+
+  refresh(): void {
+    this.loading = true;
+    this.http
+      .get('/rule', this.q)
+      .pipe(tap(() => (this.loading = false)))
+      .subscribe(res => {
+        this.data = res;
+        this.cdr.detectChanges();
+      });
+  }
+
+  stChange(e: STChange): void {
+    switch (e.type) {
+      case 'checkbox':
+        this.selectedRows = e.checkbox!;
+        this.cdr.detectChanges();
+        break;
+      case 'filter':
+        this.refresh();
+        break;
+    }
+  }
+
+  isChoose(key: string): boolean {
+    return !!this.customColumns.find(w => w.value === key && w.checked);
+  }
+
+  export(): void {
+    const data = [this.columns.map(i => i.title)];
+    this.data.map(i => {
+      return data.push(
+        this.columns.map(c => {
+          if (c.index) {
+            return i[c.index as string];
+          }
         })
       );
     });
-    // 控制并发数量  20 个分片同时上传
-    const uploadStream = from(dists).pipe(mergeAll(this.concurrency));
-    return forkJoin([uploadStream]).pipe(mapTo(chunkMeta));
-  }
+    // this.xlsx.export({
+    //   sheets: [
+    //     {
+    //       data,
+    //       name: 'sheet name'
+    //     }
+    //   ],
+    //   filename: '11111.xlsx',
+    //   opts: 'xlsx'
+    // });
 
-  // 重置上传状态
-  private resetStatus() {
-    const $file = document.getElementById('file') as HTMLInputElement;
-    timer(3000).subscribe(() => {
-      this.btnStatus = 'paperclip';
-      this.nzPercent = 0;
-      this.readProgress = 0;
-      this.uploadDisable = false;
-      $file.value = '';
+    // 表格默认配置导出方式
+    this.st.export(true, {
+      filename: 'via-data.xlsx',
+      sheetname: 'user',
+      callback: (wb: any) => {
+        console.log(wb);
+      }
     });
-  }
-  // 更新上传状态
-  private buildPauseIcon() {
-    this.btnStatus = 'pause';
-    this.uploadDisable = true;
-  }
-
-  // 读取文件信息
-  private readFileInfo(file: any): Observable<{ file: File; fileinfo: FileInfo }> {
-    const spark = new SparkMD5.ArrayBuffer();
-    const fileReader = new FileReader();
-    const chunks = 100;
-    let currentChunk = 0;
-    return new Observable((observer: Subscriber<{ file: File; fileinfo: FileInfo }>) => {
-      fileReader.onload = (e: Event) => {
-        spark.append((e.target as FileReader).result);
-        currentChunk++;
-        if (currentChunk < chunks) {
-          this.loadNext(file, currentChunk, fileReader);
-        } else {
-          const fileMD5 = spark.end();
-          observer.next({
-            file,
-            fileinfo: {
-              fileMD5,
-              fileSize: file.size,
-              lastUpdated: file.lastModifiedDate.toISOString(),
-              fileName: file.name
-            }
-          });
-          observer.complete();
-        }
-      };
-
-      fileReader.onerror = function () {
-        console.warn('oops, something went wrong.');
-      };
-      this.loadNext(file, currentChunk, fileReader);
-    });
-  }
-
-  // 读取分片文件信息
-  private loadNext(file: File, currentChunk: number, fileReader: FileReader) {
-    const blobSlice = File.prototype.slice;
-    const chunkSize = file.size / 100;
-    const start = currentChunk * chunkSize;
-    const end = start + chunkSize >= file.size ? file.size : start + chunkSize;
-    this.readProgress = currentChunk + 1;
-    fileReader.readAsArrayBuffer(blobSlice.call(file, start, end));
-  }
-
-  // 根据接口返回切片数据，处理文件分片数据
-  private slice(file: File, n: number, chunkSize: number): Blob[] {
-    const result: Blob[] = [];
-    for (let i = 0; i < n; i++) {
-      const startSize = i * chunkSize;
-      const slice = file.slice(startSize, i === n - 1 ? startSize + (file.size - startSize) : (i + 1) * chunkSize);
-      result.push(slice);
-    }
-    return result;
-  }
-
-  // 上传单个文件分片
-  private uploadChunk(meta: ChunkMeta, index: number, blob: Blob): Observable<ProgressEvent> {
-    return new Observable((subscriber: Subscriber<ProgressEvent>) => {
-      const ajax$ = ajax({
-        url: `${apiHost}/upload/chunk/${meta.fileKey}?chunk=${index + 1}&chunks=${meta.chunks}`,
-        body: blob,
-        method: 'POST',
-        crossDomain: true,
-        headers: { 'Content-Type': 'application/octet-stream' },
-        progressSubscriber: subscriber
-      })
-        .pipe(
-          takeUntil(this.pause$),
-          repeatWhen(() => this.resume$)
-        )
-        .subscribe();
-      return () => ajax$.unsubscribe();
-    }).pipe(retryWhen(() => this.resume$));
-  }
-
-  // 接口获取文件的分片信息
-  private postUploadChunk(i: { fileinfo: any; file: File }) {
-    return ajaxPost(`${apiHost}/upload/chunk`, i.fileinfo).pipe(
-      map(r => {
-        const blobs = this.slice(i.file, r.response.chunks, r.response.chunkSize);
-        return { blobs, chunkMeta: r.response, file: i.file };
-      })
-    );
-  }
-
-  // 文件上传完成，通知服务端上传完成，获取后端合并结果
-  private postMergeStatus(r: ChunkMeta) {
-    return ajaxPost(`${apiHost}/upload/merge`, r).pipe(
-      mapTo({
-        action: 'UPLOAD_SUCCESS',
-        payload: r
-      })
-    );
   }
 }

@@ -5,10 +5,12 @@ import { SharedModule } from '@shared';
 
 import { CrudRoutingModule } from './crud-routing.module';
 import { CrudListComponent } from './list/list.component';
-const COMPONENTS: Array<Type<void>> = [CrudListComponent];
+import { CaptchaInputComponent } from './captcha-input/captcha-input.component';
+import { StepFormComponent } from './step-form/step-form.component';
+const COMPONENTS: Array<Type<void>> = [CrudListComponent, StepFormComponent];
 
 @NgModule({
   imports: [SharedModule, CrudRoutingModule, FullContentModule, EllipsisModule],
-  declarations: [...COMPONENTS]
+  declarations: [...COMPONENTS, CaptchaInputComponent]
 })
 export class CrudModule {}

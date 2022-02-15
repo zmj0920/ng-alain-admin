@@ -1,0 +1,36 @@
+<form nz-form [formGroup]="form">
+  <nz-form-item>
+    <nz-form-control [nzErrorTip]="mobileErrorTip">
+      <input nz-input formControlName="mobile" placeholder="mobile number" />
+      <ng-template #mobileErrorTip let-i>
+        <ng-container *ngIf="form.get('mobile')!.hasError('required')">
+          {{ '请输入手机号！' }}
+        </ng-container>
+        <ng-container *ngIf="form.get('mobile')!.hasError('pattern')">
+          {{ '手机号格式错误！' }}
+        </ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control [nzErrorTip]="'请输入验证码！'" class="captcha">
+      <input type="text" size="30" nz-input formControlName="captcha" placeholder="captcha" />
+      <span class="item" (click)="getCaptcha()" style="color: #5f80f0; background: #fff">
+        {{ count ? '重新获取' + '(' + count + 's' + ')' : ('get-verification-code' | i18n) }}
+      </span>
+      <!-- <nz-row style="border: 1px solid #d9d9d9; background: #fff">
+        <nz-col>
+          <input nz-input formControlName="captcha" placeholder="captcha" nzBorderless />
+        </nz-col>
+        <nz-col>
+          <a nz-button nzType="link" (click)="getCaptcha()" [disabled]="count > 0" [nzLoading]="loading" style="color: #5f80f0">
+            {{ count ? '重新获取' + '(' + count + 's' + ')' : ('get-verification-code' | i18n) }}
+          </a>
+        </nz-col>
+      </nz-row> -->
+    </nz-form-control>
+  </nz-form-item>
+</form>
+<button nz-button nzType="primary" (click)="createModal()">
+  <span>更换手机号</span>
+</button>

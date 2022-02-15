@@ -1,0 +1,50 @@
+<button
+  nz-dropdown
+  [nzClickHide]="false"
+  [(nzVisible)]="showColumnSetting"
+  [nzPlacement]="'bottomRight'"
+  [nzTrigger]="'click'"
+  [nzDropdownMenu]="menu"
+  nz-button
+  nzType="default"
+>
+  <i nz-icon nzType="setting" nzTheme="outline"></i>
+</button>
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <ul nz-menu class="ng-table-ul-columns">
+    <div class="header" nz-row [nzJustify]="'space-between'" [nzGutter]="24">
+      <div class="title" nz-col> 列表展示 </div>
+      <div class="action" nz-col (click)="restoreColumn()">
+        <a>重置</a>
+      </div>
+    </div>
+    <div class="selected-group">
+      <ng-container *ngFor="let c of customColumns; let i = index">
+        <li nz-menu-item [nzDisabled]="c.disableChecked" (click)="updateColumnChecked(null, i)">
+          <label
+            nz-checkbox
+            [nzDisabled]="c.disableChecked"
+            [(ngModel)]="c.checked"
+            (ngModelChange)="updateColumnChecked($event, i)"
+            (click)="updateColumnChecked(null, i)"
+          >
+            {{ c.label }}
+          </label>
+        </li>
+      </ng-container>
+    </div>
+    <div nz-row class="footer" [nzJustify]="'space-between'">
+      <div nz-col class="select-all" (click)="updateAllChecked()">
+        <a>全选</a>
+      </div>
+      <div nz-col class="actions">
+        <button class="btn-cancel" [nzSize]="'small'" nz-button [nzType]="'default'" (click)="cancelSettingColumn()">
+          <span>取消</span>
+        </button>
+        <button nz-button [nzSize]="'small'" [nzType]="'primary'" (click)="updateColumn()">
+          <span>确定</span>
+        </button>
+      </div>
+    </div>
+  </ul>
+</nz-dropdown-menu>
