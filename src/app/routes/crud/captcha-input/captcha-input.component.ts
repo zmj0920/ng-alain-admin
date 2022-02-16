@@ -17,10 +17,10 @@ export class CaptchaInputComponent implements OnDestroy {
   }
 
   get mobile(): AbstractControl {
-    return this.form.controls.mobile;
+    return this.form.controls['mobile'];
   }
   get captcha(): AbstractControl {
-    return this.form.controls.captcha;
+    return this.form.controls['captcha'];
   }
   form: FormGroup;
   loading = false;

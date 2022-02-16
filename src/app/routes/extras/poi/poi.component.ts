@@ -1,5 +1,4 @@
 import { Component, ViewChild } from '@angular/core';
-import { NgModalHelperService } from '@core/services/ng-modal-helper.service';
 import { STColumn, STComponent } from '@delon/abc/st';
 import { ModalHelper } from '@delon/theme';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -45,7 +44,7 @@ export class ExtrasPoiComponent {
     }
   ];
 
-  constructor(private msg: NzMessageService, private modal: NgModalHelperService) {}
+  constructor(private msg: NzMessageService, private modal: ModalHelper) {}
 
   add(): void {
     this.modal.createStatic(ExtrasPoiEditComponent, { i: { id: 0 } }).subscribe(() => {

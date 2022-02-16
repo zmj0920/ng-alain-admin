@@ -55,7 +55,7 @@ export class ChartCustomComponent {
       .label('value', () => {
         return {
           offset: -10,
-          content: obj => {
+          content: (obj: any) => {
             return `${obj.type}\n${obj.value}%`;
           }
         };
@@ -94,7 +94,7 @@ export class ChartCustomComponent {
         position: 'right',
         offsetX: 5,
         offsetY: 10,
-        content: obj => {
+        content: (obj: any) => {
           return `${obj.type} ${obj.value}%`;
         }
       });

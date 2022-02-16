@@ -33,7 +33,7 @@
             <a (click)="show('标题：' + item.id)">{{ item.title }}</a>
           </ng-template>
           <ng-template #nzDescription>
-            <ellipsis length="50" tooltip>{{ item.description }}</ellipsis>
+            <ellipsis>{{ item.description }}</ellipsis>
           </ng-template>
         </nz-card-meta>
       </nz-card>

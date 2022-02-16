@@ -94,7 +94,7 @@ export class NgTableComponent implements OnInit {
     this.export.emit(true);
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(changes: any) {
     if (changes.tableHeaderActions) {
       const tableHeaderActions: any = changes.tableHeaderActions.currentValue;
       this.tableHeaderActionsChanges(tableHeaderActions);

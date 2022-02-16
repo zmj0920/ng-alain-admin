@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Observable, Subscriber, Subject, fromEvent, forkJoin, merge, from, timer } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
-import { ajaxPost } from 'rxjs/internal/observable/dom/AjaxObservable';
 import { filter, map, mapTo, mergeAll, repeatWhen, retryWhen, switchMap, takeUntil, tap } from 'rxjs/operators';
 
 const SparkMD5 = require('spark-md5');
@@ -93,7 +92,8 @@ export class ListComponent implements OnInit {
         this.resetStatus();
       })
     );
-    merge(...[upload$, click$, progress$]).subscribe();
+    const rest = [upload$, click$, progress$];
+    merge(...rest).subscribe();
   }
 
   // 上传切片文件 blob切片文件总数  chunkMeta 分片信息
@@ -209,8 +209,8 @@ export class ListComponent implements OnInit {
 
   // 接口获取文件的分片信息
   private postUploadChunk(i: { fileinfo: any; file: File }) {
-    return ajaxPost(`${apiHost}/upload/chunk`, i.fileinfo).pipe(
-      map(r => {
+    return ajax.post(`${apiHost}/upload/chunk`, i.fileinfo).pipe(
+      map((r: any) => {
         const blobs = this.slice(i.file, r.response.chunks, r.response.chunkSize);
         return { blobs, chunkMeta: r.response, file: i.file };
       })
@@ -219,7 +219,7 @@ export class ListComponent implements OnInit {
 
   // 文件上传完成，通知服务端上传完成，获取后端合并结果
   private postMergeStatus(r: ChunkMeta) {
-    return ajaxPost(`${apiHost}/upload/merge`, r).pipe(
+    return ajax.post(`${apiHost}/upload/merge`, r).pipe(
       mapTo({
         action: 'UPLOAD_SUCCESS',
         payload: r

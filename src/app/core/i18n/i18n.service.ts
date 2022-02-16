@@ -59,7 +59,7 @@ const LANGS: { [key: string]: LangConfigData } = {
 
 @Injectable({ providedIn: 'root' })
 export class I18NService extends AlainI18nBaseService {
-  protected _defaultLang = DEFAULT;
+  protected override _defaultLang = DEFAULT;
   private _langs = Object.keys(LANGS).map(code => {
     const item = LANGS[code];
     return { code, text: item.text, abbr: item.abbr };
@@ -76,9 +76,7 @@ export class I18NService extends AlainI18nBaseService {
     super(cogSrv);
 
     const defaultLang = this.getDefaultLang();
-    if (this._langs.findIndex(w => w.code === defaultLang)) {
-      this._defaultLang = defaultLang;
-    }
+    this._defaultLang = this._langs.findIndex(w => w.code === defaultLang) === -1 ? DEFAULT : defaultLang;
   }
 
   private getDefaultLang(): string {
@@ -97,10 +95,10 @@ export class I18NService extends AlainI18nBaseService {
     return this.http.get(`assets/tmp/i18n/${lang}.json`);
   }
 
-  use(lang: string, data: Record<string, string>): void {
+  use(lang: string, data: Record<string, unknown>): void {
     if (this._currentLang === lang) return;
 
-    this._data = data;
+    this._data = this.flatData(data, []);
 
     const item = LANGS[lang];
     registerLocaleData(item.ng);

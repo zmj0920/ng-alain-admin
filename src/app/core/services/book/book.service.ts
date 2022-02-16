@@ -43,7 +43,7 @@ export class BookService {
   }
   // 清除消息
   clearMessage(): void {
-    this.msg.next();
+    this.msg.next('');
   }
   // 获取消息
   getMessage(): Observable<string> {

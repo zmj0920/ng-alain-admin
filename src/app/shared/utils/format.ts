@@ -112,7 +112,7 @@ export function isChinese(value: string): boolean {
 export function MatchControl(controlName: string, matchingControlName: string): ValidatorFn {
   return (formGroup: AbstractControl) => {
     const control = formGroup.get(controlName);
-    const matchingControl = formGroup.get(matchingControlName);
+    const matchingControl: any = formGroup.get(matchingControlName);
     if (matchingControl?.errors && !matchingControl.errors?.matchControl) {
       return null;
     }

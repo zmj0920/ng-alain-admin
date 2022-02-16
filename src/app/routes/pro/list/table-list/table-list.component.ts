@@ -67,7 +67,7 @@ export class ProTableListComponent implements OnInit {
       render: 'status',
       filter: {
         menus: this.status,
-        fn: (filter, record) => record.status === filter.index
+        fn: (filter, record) => record.status === filter['index']
       }
     },
     {
@@ -132,7 +132,7 @@ export class ProTableListComponent implements OnInit {
     switch (e.type) {
       case 'checkbox':
         this.selectedRows = e.checkbox!;
-        this.totalCallNo = this.selectedRows.reduce((total, cv) => total + cv.callNo, 0);
+        this.totalCallNo = this.selectedRows.reduce((total, cv) => total + cv['callNo'], 0);
         this.cdr.detectChanges();
         break;
       case 'filter':
@@ -142,7 +142,7 @@ export class ProTableListComponent implements OnInit {
   }
 
   remove(): void {
-    this.http.delete('/rule', { nos: this.selectedRows.map(i => i.no).join(',') }).subscribe(() => {
+    this.http.delete('/rule', { nos: this.selectedRows.map(i => i['no']).join(',') }).subscribe(() => {
       this.getData();
       this.st.clearCheck();
     });

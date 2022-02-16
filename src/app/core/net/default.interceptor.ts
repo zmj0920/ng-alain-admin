@@ -80,7 +80,7 @@ export class DefaultInterceptor implements HttpInterceptor {
    */
   private refreshTokenRequest(): Observable<any> {
     const model = this.tokenSrv.get();
-    return this.http.post(`/api/auth/refresh`, null, null, { headers: { refresh_token: model?.refresh_token || '' } });
+    return this.http.post(`/api/auth/refresh`, null, null, { headers: { refresh_token: model?.['refresh_token'] || '' } });
   }
 
   // #region 刷新Token方式一：使用 401 重新刷新 Token
@@ -168,7 +168,7 @@ export class DefaultInterceptor implements HttpInterceptor {
 
   private toLogin(): void {
     this.notification.error(`未登录或登录已过期，请重新登录。`, ``);
-    this.goTo('/passport/login');
+    this.goTo(this.tokenSrv.login_url!);
   }
 
   private handleData(ev: HttpResponseBase, req: HttpRequest<any>, next: HttpHandler): Observable<any> {
@@ -209,7 +209,7 @@ export class DefaultInterceptor implements HttpInterceptor {
       case 403:
       case 404:
       case 500:
-        this.goTo(`/exception/${ev.status}`);
+        // this.goTo(`/exception/${ev.status}?url=${req.urlWithParams}`);
         break;
       default:
         if (ev instanceof HttpErrorResponse) {
@@ -241,7 +241,8 @@ export class DefaultInterceptor implements HttpInterceptor {
     // 统一加上服务端前缀
     let url = req.url;
     if (!url.startsWith('https://') && !url.startsWith('http://')) {
-      url = environment.api.baseUrl + url;
+      const { baseUrl } = environment.api;
+      url = baseUrl + (baseUrl.endsWith('/') && url.startsWith('/') ? url.substring(1) : url);
     }
 
     const newReq = req.clone({ url, setHeaders: this.getAdditionalHeaders(req.headers) });

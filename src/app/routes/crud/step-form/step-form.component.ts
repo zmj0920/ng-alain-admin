@@ -27,19 +27,19 @@ export class StepFormComponent implements AfterViewInit {
   interval$: any;
 
   get captcha(): AbstractControl {
-    return this.step1Form.controls.captcha;
+    return this.step1Form.controls['captcha'];
   }
 
   get mobile(): AbstractControl {
-    return this.step1Form.controls.mobile;
+    return this.step1Form.controls['mobile'];
   }
 
   get mobile2(): AbstractControl {
-    return this.step2Form.controls.mobile;
+    return this.step2Form.controls['mobile'];
   }
 
   get email(): AbstractControl {
-    return this.step1Form.controls.email;
+    return this.step1Form.controls['email'];
   }
 
   constructor(private fb: FormBuilder, private srv: TransferService, public modalRef: NzModalRef, private cdr: ChangeDetectorRef) {}
@@ -104,7 +104,7 @@ export class StepFormComponent implements AfterViewInit {
         this.countDown();
       }
     } else {
-      if (this.step1Form.controls.email.invalid) {
+      if (this.step1Form.controls['email'].invalid) {
         this.email.markAsDirty();
         this.email.updateValueAndValidity({ onlySelf: true });
         return;
