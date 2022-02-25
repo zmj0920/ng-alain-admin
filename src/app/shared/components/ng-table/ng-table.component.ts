@@ -1,34 +1,17 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  SimpleChanges,
-  ViewChild,
-  ViewEncapsulation
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { I18NService } from '@core';
-import { STChange, STColumn, STComponent, STData, _STColumn } from '@delon/abc/st';
-import { XlsxService } from '@delon/abc/xlsx';
+import { STColumn, STComponent, STData, _STColumn } from '@delon/abc/st';
 import { _HttpClient } from '@delon/theme';
-import { NzSafeAny } from 'ng-zorro-antd/core/types';
-import { NzMessageService } from 'ng-zorro-antd/message';
-import { map, tap } from 'rxjs/operators';
 import { TColumnSource } from 'src/app/shared/components/ng-table/tcolumn-source.service';
-import { TRowSource } from '../../directives/t-row.directive';
+import { RenderIconSource } from '../../directives/render-icon.directive';
 
 @Component({
   selector: 'ng-table',
   templateUrl: './ng-table.component.html',
   styleUrls: ['./ng-table.component.less'],
-  providers: [TRowSource, TColumnSource],
+  providers: [RenderIconSource, TColumnSource],
   preserveWhitespaces: false,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NgTableComponent implements OnInit {
   @Input() st!: STComponent;
@@ -38,6 +21,7 @@ export class NgTableComponent implements OnInit {
   @Input() columns: STColumn[] = [];
   @Input() customColumns: any[] = [];
   @Input() groupActions: any[] = [];
+  @Input() globalActions: any[] = [];
   @Output() refresh = new EventEmitter<boolean>();
   @Output() export = new EventEmitter<boolean>();
   rowActions: any[] = [];
@@ -59,12 +43,7 @@ export class NgTableComponent implements OnInit {
 
   readonly isRoundButton: boolean = this._hasHostAttributes('mat-fab');
 
-  constructor(
-    private columnSource: TColumnSource,
-    private cdr: ChangeDetectorRef,
-    private i18n: I18NService,
-    public _elementRef: ElementRef
-  ) {}
+  constructor(private columnSource: TColumnSource, private i18n: I18NService, public _elementRef: ElementRef) {}
 
   ngOnInit(): void {
     console.log(this.isRoundButton);
@@ -72,18 +51,6 @@ export class NgTableComponent implements OnInit {
 
   refreshList(): void {
     this.refresh.emit(true);
-  }
-
-  stChange(e: STChange): void {
-    switch (e.type) {
-      case 'checkbox':
-        this.selectedRows = e.checkbox!;
-        this.cdr.detectChanges();
-        break;
-      case 'filter':
-        this.refreshList();
-        break;
-    }
   }
 
   isChoose(key: string): boolean {
@@ -100,6 +67,7 @@ export class NgTableComponent implements OnInit {
       this.tableHeaderActionsChanges(tableHeaderActions);
     }
   }
+
   ngAfterViewInit(): void {
     this.columnSource.restoreAllRender(this.tableHeaderActions);
     this.columnSource.restoreGroupsColumns(this.groupActions);

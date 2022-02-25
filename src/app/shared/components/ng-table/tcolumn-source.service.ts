@@ -1,14 +1,14 @@
 import { Host, Injectable, TemplateRef } from '@angular/core';
-import { TRowSource } from '../../directives/t-row.directive';
+import { RenderIconSource } from '../../directives/render-icon.directive';
 
 @Injectable()
 export class TColumnSource {
-  constructor(@Host() private rowSource: TRowSource) {}
+  constructor(@Host() private renderIconSource: RenderIconSource) {}
 
   private restoreRender(item: any): void {
     if (item.renderIcon) {
       item.__renderIcon =
-        typeof item.renderIcon === 'string' ? this.rowSource.getRow(item.renderIcon) : (item.renderIcon as TemplateRef<void>);
+        typeof item.renderIcon === 'string' ? this.renderIconSource.getRow(item.renderIcon) : (item.renderIcon as TemplateRef<void>);
     }
   }
 

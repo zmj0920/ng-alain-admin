@@ -1,14 +1,136 @@
-<captcha-input></captcha-input>
-<!-- <nz-page-header
+<ng-page-header
   [title]="'查询数据'"
   [description]="'描述信息描述信息描述信息描述信息描述信息描述信息描述信息描述信息描述信息描述信息'"
-></nz-page-header>
-<div class="box">
-  <div class="item">1 思否</div>
-  <div class="item">2 掘金</div>
-  <div class="item">3 前端乱炖</div>
-</div>
-<text-ellipsis
+  [tab]="tab"
+  [breadcrumbs]="breadcrumbs"
+  [contentTpl]="content"
+  [rowActions]="rowActions"
+  [moreRowActions]="moreRowActions"
+  [groupActions]="groupActions"
+>
+  <ng-template #tab>
+    <ng-tabs></ng-tabs>
+  </ng-template>
+  <ng-template render-icon="vertical-align-bottom" let-i>
+    <i nz-icon nzType="vertical-align-bottom" nzTheme="outline"></i>
+  </ng-template>
+  <ng-template #content>
+    <sv-container size="small" col="2">
+      <sv label="创建人">曲丽丽</sv>
+      <sv label="订购产品">XX 服务</sv>
+      <sv label="创建时间">2017-07-07</sv>
+      <sv label="关联单据"><a>12421</a></sv>
+      <sv label="生效日期">2017-07-07 ~ 2017-08-08</sv>
+      <sv label="备注">请于两个工作日内确认</sv>
+    </sv-container>
+  </ng-template>
+</ng-page-header>
+
+<!-- <page-header [title]="''" [breadcrumb]="breadcrumb" [content]="content" [tab]="tab" style="padding: 16px">
+  <ng-template #breadcrumb>
+    <div class="page-header__detail">
+      <div
+        class="page-header__logo"
+        style="
+          margin-top: 7px;
+          width: 22px;
+          height: 22px;
+          box-shadow: 0 1px 4px 0 rgb(0 0 0 / 20%);
+          border-radius: 10px;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        "
+      >
+        <svg
+          width="12px"
+          height="12px"
+          viewBox="0 0 12 12"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+        >
+          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g transform="translate(-268.000000, -84.000000)" fill="#5237D5" fill-rule="nonzero">
+              <g transform="translate(264.000000, 80.000000)">
+                <g transform="translate(4.000000, 4.000000)">
+                  <polygon
+                    points="4.68976144 0.7 5.7922411 1.55718166 2.81964058 5.30616509 11.5 5.30664119 11.5 6.69482786 2.83628463 6.69435176 5.79340227 10.4457564 4.68860028 11.3 0.5 5.98605949"
+                  ></polygon>
+                </g>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <div class="page-header__main">
+        <div class="page-header__row">
+          <div class="page-header__title">
+            <div> 单号：234231029431 </div>
+            <div>
+              <nz-breadcrumb>
+                <nz-breadcrumb-item><a>一级菜单</a></nz-breadcrumb-item>
+                <nz-breadcrumb-item><a>二级菜单</a></nz-breadcrumb-item>
+                <nz-breadcrumb-item><a>三级菜单</a></nz-breadcrumb-item>
+              </nz-breadcrumb>
+            </div>
+          </div>
+
+          <div class="page-header__action">
+            <button nz-button nzType="primary" nz-dropdown [nzDropdownMenu]="menu">
+              Actions
+              <i nz-icon nzType="down"></i>
+            </button>
+            <nz-dropdown-menu #menu="nzDropdownMenu">
+              <ul nz-menu>
+                <li nz-menu-item>
+                  <a>1st item</a>
+                </li>
+                <li nz-menu-item>
+                  <a>2nd item</a>
+                </li>
+                <li nz-menu-item>
+                  <a>3rd item</a>
+                </li>
+              </ul>
+            </nz-dropdown-menu>
+          </div>
+        </div>
+        <div class="page-header__row">
+          <div class="page-header__desc" hidden=""></div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #content>
+    <sv-container size="small" col="2">
+      <sv label="创建人">曲丽丽</sv>
+      <sv label="订购产品">XX 服务</sv>
+      <sv label="创建时间">2017-07-07</sv>
+      <sv label="关联单据"><a>12421</a></sv>
+      <sv label="生效日期">2017-07-07 ~ 2017-08-08</sv>
+      <sv label="备注">请于两个工作日内确认</sv>
+    </sv-container>
+  </ng-template>
+  <ng-template #extra>
+    <div nz-row>
+      <div nz-col nzXs="24" nzSm="12">
+        <p class="text-grey">状态</p>
+        <p class="text-lg">待审批</p>
+      </div>
+      <div nz-col nzXs="24" nzSm="12">
+        <p class="text-grey">订单金额</p>
+        <p class="text-lg">¥ 568.08</p>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #tab>
+    <ng-tabs></ng-tabs>
+  </ng-template>
+</page-header> -->
+
+<!-- <text-ellipsis
   [lines]="1"
   [width]="'calc(100% - 108px)'"
   nz-tooltip
@@ -21,12 +143,14 @@ doloribus quasi alias? Amet similique inventore tenetur!"
   consectetur libero modi nostrum facilis nobis, praesentium porro quibusdam sequi officia? Lorem, ipsum dolor sit amet consectetur
   adipisicing elit. Debitis exercitationem repellendus dolor cumque velit recusandae vitae corporis, possimus non odit sit a suscipit
   doloribus quasi alias? Amet similique inventore tenetur!
-</text-ellipsis>
-<div #myBox> 我是一个dom节点 </div>
+</text-ellipsis> -->
+<!-- <captcha-input></captcha-input>
+<div #myBox> 我是一个dom节点 </div> -->
 <ng-table
   #table
   [tableHeaderActions]="moreRowActions"
-  [displayActionsLimit]="6"
+  [globalActions]="globalActions"
+  [displayActionsLimit]="3"
   [columns]="columns"
   [customColumns]="customColumns"
   [groupActions]="groupActions"
@@ -36,13 +160,16 @@ doloribus quasi alias? Amet similique inventore tenetur!"
   [st]="st"
   mat-fab
 >
-  <ng-template t-row="setting" let-i>
+  <ng-template render-icon="setting" let-i>
     <i nz-icon nzType="setting" nzTheme="outline"></i>
   </ng-template>
-  <ng-template t-row="vertical-align-bottom" let-i>
+  <ng-template render-icon="reload" let-i>
+    <i nz-icon nzType="reload" nzTheme="outline"></i>
+  </ng-template>
+  <ng-template render-icon="vertical-align-bottom" let-i>
     <i nz-icon nzType="vertical-align-bottom" nzTheme="outline"></i>
   </ng-template>
-  <ng-template t-row="plus" let-i>
+  <ng-template render-icon="plus" let-i>
     <i nz-icon nzType="plus" nzTheme="outline"></i>
   </ng-template>
   <st
@@ -61,4 +188,9 @@ doloribus quasi alias? Amet similique inventore tenetur!"
       {{ item.description }}
     </ng-template>
   </st>
-</ng-table> -->
+</ng-table>
+
+<!-- <div class="box">
+  <div class="box-item"> </div>
+  <div class="box-item1"></div>
+</div> -->

@@ -5,13 +5,9 @@
 </nz-steps>
 <div *ngIf="item.step === 0">
   <nz-alert nzType="info" nzMessage="为确认本人操作，请选择验证方式。"></nz-alert>
-  <nz-radio-group [(ngModel)]="radioValue" style="margin-top: 30px; width: 100%">
-    <label nz-radio-button [nzValue]="false" style="display: block; margin-bottom: 15px; height: 50px; line-height: 50px"
-      >通过手机验证码验证</label
-    >
-    <label nz-radio-button [nzValue]="true" style="display: block; margin-bottom: 15px; height: 50px; line-height: 50px"
-      >通过邮箱验证码验证</label
-    >
+  <nz-radio-group [(ngModel)]="radioValue" class="radio-group-item">
+    <label class="radio-label-item" nz-radio-button [nzValue]="false">通过手机验证码验证</label>
+    <label class="radio-label-item" nz-radio-button [nzValue]="true">通过邮箱验证码验证</label>
   </nz-radio-group>
 </div>
 
@@ -31,7 +27,7 @@
       </nz-form-control>
     </nz-form-item>
 
-    <nz-form-item>
+    <!-- <nz-form-item>
       <nz-form-label nzRequired nzFor="captcha">{{ item.radioValue ? '邮箱验证码' : '短信验证码' }}</nz-form-label>
       <nz-form-control [nzErrorTip]="'请输入验证码！'" class="captcha">
         <nz-row nzGutter="8">
@@ -45,6 +41,26 @@
           </nz-col>
         </nz-row>
       </nz-form-control>
+    </nz-form-item> -->
+
+    <nz-form-item>
+      <nz-form-label nzRequired nzFor="captcha">{{ item.radioValue ? '邮箱验证码' : '短信验证码' }}</nz-form-label>
+      <nz-form-control [nzErrorTip]="'请输入验证码！'" class="captcha">
+        <input type="text" nz-input formControlName="captcha" placeholder="captcha" class="captcha-input" />
+        <a
+          class="item"
+          nz-button
+          nzType="link"
+          (click)="getCaptcha()"
+          [disabled]="count > 0"
+          [nzLoading]="loading"
+          [title]="count ? '重新获取' + '(' + count + 's' + ')' : item.radioValue ? '获取邮箱验证码' : '获取短信验证码'"
+          [class.font-color]="!(count > 0)"
+          [class.disabled-color]="count > 0"
+        >
+          {{ count ? '重新获取' + '(' + count + 's' + ')' : item.radioValue ? '获取邮箱验证码' : '获取短信验证码' }}
+        </a>
+      </nz-form-control>
     </nz-form-item>
   </form>
 </div>
@@ -53,23 +69,35 @@
   <form nz-form [formGroup]="step2Form" nzLayout="vertical">
     <nz-form-item>
       <nz-form-label nzRequired nzFor="mobile">手机号</nz-form-label>
-      <nz-form-control nzErrorTip="请输入手机号">
+      <nz-form-control [nzErrorTip]="mobileErrorTip">
         <input nz-input formControlName="mobile" />
+        <ng-template #mobileErrorTip let-i>
+          <ng-container *ngIf="step2Form.get('mobile')!.hasError('required')">
+            {{ '请输入手机号！' }}
+          </ng-container>
+          <ng-container *ngIf="step2Form.get('mobile')!.hasError('pattern')">
+            {{ '手机号格式错误！' }}
+          </ng-container>
+        </ng-template>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label nzRequired nzFor="captcha">短信验证码</nz-form-label>
-      <nz-form-control nzErrorTip="请输入验证码！">
-        <nz-row nzGutter="8">
-          <nz-col>
-            <input nz-input formControlName="captcha" placeholder="captcha" />
-          </nz-col>
-          <nz-col>
-            <a nz-button nzType="default" (click)="getCountDown()" [disabled]="count > 0" [nzLoading]="loading" style="color: #5f80f0">
-              {{ count ? '重新获取' + '(' + count + 's' + ')' : ('获取短信验证码' | i18n) }}
-            </a>
-          </nz-col>
-        </nz-row>
+      <nz-form-control [nzErrorTip]="'请输入验证码！'" class="captcha">
+        <input type="text" nz-input formControlName="captcha" placeholder="captcha" class="captcha-input" />
+        <a
+          class="item"
+          nz-button
+          nzType="link"
+          (click)="getCountDown()"
+          [disabled]="count > 0"
+          [nzLoading]="loading"
+          [title]="count ? '重新获取' + '(' + count + 's' + ')' : ('获取短信验证码' | i18n)"
+          [class.font-color]="!(count > 0)"
+          [class.disabled-color]="count > 0"
+        >
+          {{ count ? '重新获取' + '(' + count + 's' + ')' : ('获取短信验证码' | i18n) }}
+        </a>
       </nz-form-control>
     </nz-form-item>
   </form>

@@ -6,6 +6,8 @@ import { _HttpClient } from '@delon/theme';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { tap } from 'rxjs/operators';
+import { ArrayService } from '@delon/util/array';
+
 @Component({
   selector: 't-table',
   templateUrl: './list.component.html',
@@ -13,8 +15,22 @@ import { tap } from 'rxjs/operators';
 })
 export class CrudListComponent implements OnInit {
   @ViewChild('st', { static: true }) st!: STComponent;
-  // @ViewChild('myBox', { static: true }) myBox: any;
+  @ViewChild('myBox', { static: true }) myBox: any;
   data: any[] = [];
+  globalActions = [
+    {
+      disabled: (data: any) => {
+        return data.some((i: { key: number }) => i.key === 2);
+      },
+      icon: '',
+      renderIcon: 'reload',
+      onClick: (data: any) => {
+        console.log(data);
+      },
+      text: '',
+      tooltip: ''
+    }
+  ];
   moreRowActions: any[] = [
     {
       disabled: (data: any) => {
@@ -43,43 +59,43 @@ export class CrudListComponent implements OnInit {
       onClick: (data: any) => {},
       text: 'rowAction3',
       tooltip: 'rowAction3'
-    },
-    {
-      disabled: (data: any) => {
-        return data.some((i: { key: number }) => i.key === 2);
-      },
-      icon: 'rowAction4',
-      renderIcon: 'plus',
-      onClick: (data: any) => {
-        console.log(data);
-      },
-      text: 'rowAction4',
-      tooltip: 'rowAction4'
-    },
-    {
-      disabled: (data: any) => {
-        return data.some((i: { key: number }) => i.key === 2);
-      },
-      icon: 'rowAction5',
-      renderIcon: 'setting',
-      onClick: (data: any) => {
-        console.log(data);
-      },
-      text: 'rowAction5',
-      tooltip: 'rowAction5'
-    },
-    {
-      disabled: (data: any) => {
-        return data.some((i: { key: number }) => i.key === 2);
-      },
-      icon: 'rowAction6',
-      renderIcon: 'vertical-align-bottom',
-      onClick: (data: any) => {
-        console.log(data);
-      },
-      text: 'rowAction6',
-      tooltip: 'rowAction6'
     }
+    // {
+    //   disabled: (data: any) => {
+    //     return data.some((i: { key: number }) => i.key === 2);
+    //   },
+    //   icon: 'rowAction4',
+    //   renderIcon: 'plus',
+    //   onClick: (data: any) => {
+    //     console.log(data);
+    //   },
+    //   text: 'rowAction4',
+    //   tooltip: 'rowAction4'
+    // },
+    // {
+    //   disabled: (data: any) => {
+    //     return data.some((i: { key: number }) => i.key === 2);
+    //   },
+    //   icon: 'rowAction5',
+    //   renderIcon: 'setting',
+    //   onClick: (data: any) => {
+    //     console.log(data);
+    //   },
+    //   text: 'rowAction5',
+    //   tooltip: 'rowAction5'
+    // },
+    // {
+    //   disabled: (data: any) => {
+    //     return data.some((i: { key: number }) => i.key === 2);
+    //   },
+    //   icon: 'rowAction6',
+    //   renderIcon: 'vertical-align-bottom',
+    //   onClick: (data: any) => {
+    //     console.log(data);
+    //   },
+    //   text: 'rowAction6',
+    //   tooltip: 'rowAction6'
+    // }
   ];
   loading = false;
   selectedRows: STData[] = [];
@@ -230,6 +246,7 @@ export class CrudListComponent implements OnInit {
     { label: '状态', value: 'status', checked: true, disableChecked: false },
     { label: '更新时间', value: 'updatedAt', checked: true, disableChecked: false }
   ];
+
   groupActions: any[] = [
     {
       name: 'group1',
@@ -347,19 +364,64 @@ export class CrudListComponent implements OnInit {
     }
   ];
 
-  constructor(private http: _HttpClient, private message: NzMessageService, private cdr: ChangeDetectorRef) {}
+  breadcrumbs = [
+    {
+      url: '/crud/list',
+      label: '一级菜单',
+      active: true,
+      renderIcon: 'vertical-align-bottom'
+    },
+    {
+      url: '/crud/list',
+      label: '二级菜单'
+    }
+  ];
+
+  rowActions = [
+    {
+      disabled: (data: any) => {
+        return data.some((i: { key: number }) => i.key === 2);
+      },
+      icon: 'rowAction1',
+      renderIcon: 'vertical-align-bottom',
+      onClick: (data: any) => {
+        console.log(data);
+      },
+      text: 'rowAction1',
+      tooltip: 'rowAction1'
+    }
+  ];
+
+  constructor(private http: _HttpClient, private message: NzMessageService, private cdr: ChangeDetectorRef, private arr: ArrayService) {}
 
   ngOnInit(): void {
     this.refresh();
+
+    const MOCK_ARR: any[] = [
+      { id: 1, pid: 0, name: 'name1', other: 'value1', halfChecked: true },
+      { id: 2, pid: 0, name: 'name2', other: 'value2', disabled: true },
+      { id: 3, pid: 1, name: 'name3', other: 'value3', expanded: true },
+      { id: 4, pid: 1, name: 'name4', other: 'value4', selected: true },
+      { id: 5, pid: 2, name: 'name5', other: 'value5' },
+      { id: 6, pid: 0, name: 'name6', other: 'value6', checked: true }
+    ];
+
+    const options = {
+      pidMapName: 'id',
+      parentIdMapName: 'pid',
+      cb: (item: any) => {}
+    };
+
+    console.log(this.arr.arrToTree(MOCK_ARR, options));
   }
 
-  // ngAfterViewInit(): void {
-  //   console.log(this.myBox.nativeElement);
-  //   this.myBox.nativeElement.style.width = '100px';
-  //   this.myBox.nativeElement.style.height = '100px';
-  //   this.myBox.nativeElement.style.background = 'red';
-  //   console.log(this.myBox.nativeElement.innerHTML);
-  // }
+  ngAfterViewInit(): void {
+    console.log(this.myBox.nativeElement);
+    this.myBox.nativeElement.style.width = '50px';
+    this.myBox.nativeElement.style.height = '50px';
+    this.myBox.nativeElement.style.background = 'red';
+    console.log(this.myBox.nativeElement.innerHTML);
+  }
 
   refresh(): void {
     this.loading = true;

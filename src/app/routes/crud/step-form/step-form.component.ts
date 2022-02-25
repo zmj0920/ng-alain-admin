@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 
@@ -10,7 +10,7 @@ import { TransferService } from './transfer.service';
   styleUrls: ['./step-form.component.less'],
   providers: [TransferService]
 })
-export class StepFormComponent implements AfterViewInit {
+export class StepFormComponent implements OnInit {
   get item(): TransferService {
     return this.srv;
   }
@@ -51,7 +51,7 @@ export class StepFormComponent implements AfterViewInit {
       email: [{ value: '506499594@qq.com', disabled: true }, [Validators.required]]
     });
     this.step2Form = this.fb.group({
-      mobile: [null, Validators.compose([Validators.required, Validators.minLength(11)])],
+      mobile: [null, Validators.compose([Validators.required, Validators.minLength(11), Validators.pattern(/^1\d{10}$/)])],
       captcha: [null, Validators.compose([Validators.required, Validators.minLength(6)])]
     });
   }
@@ -128,15 +128,11 @@ export class StepFormComponent implements AfterViewInit {
 
   getCountDown() {
     if (this.mobile2.invalid) {
-      this.mobile.markAsDirty();
-      this.mobile.updateValueAndValidity({ onlySelf: true });
+      this.mobile2.markAsDirty();
+      this.mobile2.updateValueAndValidity({ onlySelf: true });
       return;
     } else {
       this.countDown();
     }
-  }
-
-  ngAfterViewInit(): void {
-    console.log('item', this.item);
   }
 }

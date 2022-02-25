@@ -1,7 +1,8 @@
-<form nz-form [formGroup]="form">
+<form nz-form [formGroup]="form" nzLayout="vertical">
   <nz-form-item>
+    <nz-form-label nzRequired nzFor="mobile">验证手机号</nz-form-label>
     <nz-form-control [nzErrorTip]="mobileErrorTip">
-      <input nz-input formControlName="mobile" placeholder="mobile number" />
+      <input nz-input formControlName="mobile" />
       <ng-template #mobileErrorTip let-i>
         <ng-container *ngIf="form.get('mobile')!.hasError('required')">
           {{ '请输入手机号！' }}
@@ -13,6 +14,7 @@
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
+    <nz-form-label nzRequired nzFor="captcha">短信验证码</nz-form-label>
     <nz-form-control [nzErrorTip]="'请输入验证码！'" class="captcha">
       <input type="text" nz-input formControlName="captcha" placeholder="captcha" class="captcha-input" />
       <a
@@ -31,10 +33,3 @@
     </nz-form-control>
   </nz-form-item>
 </form>
-<button nz-button nzType="primary" (click)="createModal()">
-  <span>更换手机号</span>
-</button>
-
-<button nz-button nzType="primary" (click)="bindModal()">
-  <span>绑定手机号</span>
-</button>

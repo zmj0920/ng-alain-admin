@@ -1,0 +1,8 @@
+<nz-breadcrumb>
+  <nz-breadcrumb-item [class.active]="breadcrumb.active" *ngFor="let breadcrumb of breadcrumbs">
+    <ng-template #renderIcon [ngTemplateOutlet]="breadcrumb?.__renderIcon" [ngTemplateOutletContext]="{ $implicit: breadcrumb }">
+    </ng-template>
+    <ng-container *ngIf="!breadcrumb.renderIcon; else renderIcon"> </ng-container>
+    <span (click)="navigate(breadcrumb.url, $event)">{{ breadcrumb.label }}</span>
+  </nz-breadcrumb-item>
+</nz-breadcrumb>

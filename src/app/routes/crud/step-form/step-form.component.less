@@ -1,15 +1,49 @@
 @import '@delon/theme/index';
 
-:host {
-  display: block;
-  ::ng-deep {
-    .ant-steps {
-      // max-width: 750px;
-      margin: 16px auto;
+:host ::ng-deep {
+  .ant-steps {
+    margin: 16px auto;
+  }
+
+  .captcha {
+    .disabled-color {
+      color: rgb(0 0 0 / 25%);
     }
-    // [nz-form] {
-    //   max-width: 500px;
-    //   margin: 40px auto 0;
-    // }
+
+    .font-color {
+      color: #5f80f0;
+    }
+
+    .captcha-input {
+      padding-right: 108px;
+    }
+
+    .item {
+      position: absolute;
+      top: 1px;
+      right: 3px;
+      height: 30px;
+      padding: 0;
+
+      span {
+        width: 100px;
+        height: 28px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+
+  .radio-group-item {
+    width: 100%;
+    margin-top: 30px;
+
+    .radio-label-item {
+      display: block;
+      height: 50px;
+      margin-bottom: 15px;
+      line-height: 50px;
+    }
   }
 }

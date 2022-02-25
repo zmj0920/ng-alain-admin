@@ -27,7 +27,7 @@ export interface Hero {
 export class BookService {
   constructor(public http: HttpClient) {}
 
-  private msg = new Subject<string>();
+  private msg1 = new Subject<string>();
 
   //  多播给多个观察者,允许将值多播给多个观察者，
   //  所以 Subject 是多播的，而普通的 Observables
@@ -39,15 +39,15 @@ export class BookService {
 
   // 发送消息
   sendMessage(message: string): void {
-    this.msg.next(message);
+    this.msg1.next(message);
   }
   // 清除消息
   clearMessage(): void {
-    this.msg.next('');
+    this.msg1.next('');
   }
   // 获取消息
   getMessage(): Observable<string> {
-    return this.msg.asObservable();
+    return this.msg1.asObservable();
   }
 
   observableAsny(): Observable<any> {

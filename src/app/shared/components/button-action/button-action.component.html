@@ -1,6 +1,9 @@
-<button (click)="refreshList()" nz-button>
-  <i nz-icon nzType="reload" nzTheme="outline"></i>
-</button>
+<ng-container *ngIf="globalActions.length">
+  <button (click)="globalActions[0].onClick()" nz-button>
+    <i nz-icon nzType="reload" nzTheme="outline"></i>
+  </button>
+</ng-container>
+
 <ng-container *ngIf="rowActions.length">
   <ng-container *ngFor="let action of rowActions">
     <div class="btn-container" [nzTooltipTitle]="action.tooltip" nzTooltipPlacement="top" nz-tooltip>
@@ -17,19 +20,37 @@
     </div>
   </ng-container>
 </ng-container>
-<button
-  style="margin-left: 5px"
-  *ngIf="moreRowActions.length > 0 || groupActions.length > 0"
-  nz-dropdown
-  [nzClickHide]="false"
-  [nzPlacement]="'bottomLeft'"
-  [nzTrigger]="'click'"
-  [nzDropdownMenu]="moreRowActions.length > 0 ? btnMenu : btnGroupMenu"
-  nz-button
-  nzType="default"
->
-  <i nz-icon nzType="more" nzTheme="outline"></i>Actions
-</button>
+<ng-container *ngIf="btnType === 'default'">
+  <button
+    style="margin-left: 5px"
+    *ngIf="moreRowActions.length > 0 || groupActions.length > 0"
+    nz-dropdown
+    [nzClickHide]="false"
+    [nzPlacement]="'bottomLeft'"
+    [nzTrigger]="'click'"
+    [nzDropdownMenu]="moreRowActions.length > 0 ? btnMenu : btnGroupMenu"
+    nz-button
+    nzType="default"
+  >
+    <i nz-icon nzType="more" nzTheme="outline"></i>更多
+  </button>
+</ng-container>
+<ng-container *ngIf="btnType === 'primary'">
+  <button
+    style="margin-left: 5px"
+    *ngIf="moreRowActions.length > 0 || groupActions.length > 0"
+    nz-dropdown
+    [nzClickHide]="false"
+    [nzPlacement]="'bottomLeft'"
+    [nzTrigger]="'click'"
+    [nzDropdownMenu]="moreRowActions.length > 0 ? btnMenu : btnGroupMenu"
+    nz-button
+    nzType="primary"
+  >
+    更多操作
+    <i nz-icon nzType="down"></i>
+  </button>
+</ng-container>
 <nz-dropdown-menu #btnMenu="nzDropdownMenu">
   <ul nz-menu>
     <ng-container *ngFor="let action of moreRowActions; let a = index">

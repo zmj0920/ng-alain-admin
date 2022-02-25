@@ -3,6 +3,7 @@
 // Utils
 export * from './utils/yuan';
 export * from './utils/copy';
+export * from './utils/assert';
 
 // Module
 export * from './shared.module';

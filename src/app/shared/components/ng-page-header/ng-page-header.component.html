@@ -1,0 +1,87 @@
+<page-header [title]="''" [breadcrumb]="breadcrumb" [content]="content" [tab]="tabTemplate" style="padding: 16px">
+  <ng-template #breadcrumb>
+    <div class="page-header__detail">
+      <div class="page-header__logo page-logo">
+        <svg
+          width="12px"
+          height="12px"
+          viewBox="0 0 12 12"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+        >
+          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g transform="translate(-268.000000, -84.000000)" fill="#5237D5" fill-rule="nonzero">
+              <g transform="translate(264.000000, 80.000000)">
+                <g transform="translate(4.000000, 4.000000)">
+                  <polygon
+                    points="4.68976144 0.7 5.7922411 1.55718166 2.81964058 5.30616509 11.5 5.30664119 11.5 6.69482786 2.83628463 6.69435176 5.79340227 10.4457564 4.68860028 11.3 0.5 5.98605949"
+                  ></polygon>
+                </g>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <div class="page-header__main">
+        <div class="page-header__row">
+          <div class="page-header__title">
+            <div> {{ title }} </div>
+            <div>
+              <breadcrumb [breadcrumbs]="breadcrumbs"> </breadcrumb>
+            </div>
+          </div>
+          <div class="page-header__action">
+            <button-action
+              style="display: inline-flex"
+              (refresh)="refresh()"
+              [rowActions]="rowActions"
+              [moreRowActions]="moreRowActions"
+              [groupActions]="groupActions"
+              [btnType]="'primary'"
+            >
+            </button-action>
+            <!-- <button nz-button nzType="primary" nz-dropdown [nzDropdownMenu]="menu">
+              Actions
+              <i nz-icon nzType="down"></i>
+            </button>
+            <nz-dropdown-menu #menu="nzDropdownMenu">
+              <ul nz-menu>
+                <li nz-menu-item>
+                  <a>1st item</a>
+                </li>
+                <li nz-menu-item>
+                  <a>2nd item</a>
+                </li>
+                <li nz-menu-item>
+                  <a>3rd item</a>
+                </li>
+              </ul>
+            </nz-dropdown-menu> -->
+          </div>
+        </div>
+        <div class="page-header__row">
+          <div class="page-header__desc" hidden=""></div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #content>
+    <ng-container [ngTemplateOutlet]="contentTpl"> </ng-container>
+  </ng-template>
+  <ng-template #extra>
+    <div nz-row>
+      <div nz-col nzXs="24" nzSm="12">
+        <p class="text-grey">状态</p>
+        <p class="text-lg">待审批</p>
+      </div>
+      <div nz-col nzXs="24" nzSm="12">
+        <p class="text-grey">订单金额</p>
+        <p class="text-lg">¥ 568.08</p>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #tabTemplate>
+    <ng-container [ngTemplateOutlet]="tab"> </ng-container>
+  </ng-template>
+</page-header>

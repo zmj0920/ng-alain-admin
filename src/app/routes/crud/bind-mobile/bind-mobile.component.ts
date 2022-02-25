@@ -1,21 +1,20 @@
-import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzModalService } from 'ng-zorro-antd/modal';
-import { BindMobileComponent } from '../bind-mobile/bind-mobile.component';
-import { StepFormComponent } from '../step-form/step-form.component';
 
 @Component({
-  selector: 'captcha-input',
-  templateUrl: './captcha-input.component.html',
-  styleUrls: ['./captcha-input.component.less']
+  selector: 'bind-mobile',
+  templateUrl: './bind-mobile.component.html',
+  styleUrls: ['./bind-mobile.component.less']
 })
-export class CaptchaInputComponent implements OnDestroy {
+export class BindMobileComponent implements OnInit, OnDestroy {
   constructor(fb: FormBuilder, private cdr: ChangeDetectorRef, private modal: NzModalService) {
     this.form = fb.group({
       mobile: [null, [Validators.required, Validators.pattern(/^1\d{10}$/)]],
       captcha: [null, [Validators.required]]
     });
   }
+  ngOnInit(): void {}
 
   get mobile(): AbstractControl {
     return this.form.controls['mobile'];
@@ -52,33 +51,17 @@ export class CaptchaInputComponent implements OnDestroy {
     }
   }
 
-  createModal(): void {
-    this.modal.create({
-      nzTitle: '修改手机号',
-      nzContent: StepFormComponent,
-      nzMaskClosable: false,
-      nzOnOk: instance => {
-        if (instance.step2FormInvalid()) {
-          console.log(instance.step2Form.value);
-          return new Promise(resolve => setTimeout(resolve, 1000));
+  formInvalid() {
+    if (this.form.invalid) {
+      Object.values(this.form.controls).forEach(control => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({ onlySelf: true });
         }
-        return false;
-      }
-    });
-  }
-
-  bindModal(): void {
-    this.modal.create({
-      nzTitle: '绑定手机号',
-      nzContent: BindMobileComponent,
-      nzMaskClosable: false,
-      nzOnOk: instance => {
-        if (instance.formInvalid()) {
-          console.log(instance.form.value);
-          return new Promise(resolve => setTimeout(resolve, 1000));
-        }
-        return false;
-      }
-    });
+      });
+      return;
+    } else {
+      return true;
+    }
   }
 }
