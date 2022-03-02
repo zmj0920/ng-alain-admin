@@ -148,15 +148,15 @@ doloribus quasi alias? Amet similique inventore tenetur!"
 <div #myBox> 我是一个dom节点 </div> -->
 <ng-table
   #table
+  [columns]="columns"
+  [customColumns]="customColumns"
   [tableHeaderActions]="moreRowActions"
   [globalActions]="globalActions"
   [displayActionsLimit]="3"
-  [columns]="columns"
-  [customColumns]="customColumns"
   [groupActions]="groupActions"
   [selectedRows]="selectedRows"
-  (refresh)="refresh()"
-  (export)="export()"
+  [exportOptions]="exportOptions"
+  [showSetupColumn]="true"
   [st]="st"
   mat-fab
 >

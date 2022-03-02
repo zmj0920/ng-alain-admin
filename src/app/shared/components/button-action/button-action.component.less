@@ -14,20 +14,9 @@
     .actions {
       & > li {
         width: 136px;
-      }
-    }
-  }
-
-  .action-groups-en-us {
-    width: 485px;
-
-    .group-name {
-      width: 95px;
-    }
-
-    .actions {
-      & > li {
-        width: 195px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
     }
   }
@@ -60,7 +49,7 @@
       padding: 3px 20px;
       color: #5f6167;
       font-weight: normal;
-      line-height: 1.42857;
+      line-height: 1.42;
       white-space: nowrap;
 
       &:hover,
@@ -70,8 +59,11 @@
         background-color: #f6f7f9;
       }
 
-      i {
-        margin-right: 8px;
+      ::ng-deep {
+        i {
+          margin-right: 5px;
+          vertical-align: middle;
+        }
       }
     }
 

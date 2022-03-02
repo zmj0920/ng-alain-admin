@@ -14,23 +14,20 @@ import { RenderIconSource } from '../../directives/render-icon.directive';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NgTableComponent implements OnInit {
-  @Input() st!: STComponent;
-  @Input() displayActionsLimit = 4;
-  @Input() tableHeaderActions!: any[];
-  @Input() data: any[] = [];
   @Input() columns: STColumn[] = [];
   @Input() customColumns: any[] = [];
+  @Input() data: any[] = [];
+  @Input() displayActionsLimit = 4;
+  @Input() exportOptions = { show: false, exportXlsx: () => {} };
   @Input() groupActions: any[] = [];
   @Input() globalActions: any[] = [];
-  @Output() refresh = new EventEmitter<boolean>();
-  @Output() export = new EventEmitter<boolean>();
+  @Input() tableHeaderActions!: any[];
   rowActions: any[] = [];
   moreRowActions: any[] = [];
   @Input() selectedRows: STData[] = [];
-
-  get currentLang(): string {
-    return this.i18n.defaultLang;
-  }
+  @Input() showSetupColumn = false;
+  @Input() st!: STComponent;
+  @Input() filterFacets: any[] = [];
 
   _getHostElement() {
     return this._elementRef.nativeElement;
@@ -47,18 +44,6 @@ export class NgTableComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.isRoundButton);
-  }
-
-  refreshList(): void {
-    this.refresh.emit(true);
-  }
-
-  isChoose(key: string): boolean {
-    return !!this.customColumns.find(w => w.value === key && w.checked);
-  }
-
-  exportXlsx(): void {
-    this.export.emit(true);
   }
 
   ngOnChanges(changes: any) {

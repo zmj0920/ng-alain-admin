@@ -7,6 +7,7 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { tap } from 'rxjs/operators';
 import { ArrayService } from '@delon/util/array';
+import { dateTimePickerUtil } from '@delon/util';
 
 @Component({
   selector: 't-table',
@@ -25,7 +26,7 @@ export class CrudListComponent implements OnInit {
       icon: '',
       renderIcon: 'reload',
       onClick: (data: any) => {
-        console.log(data);
+        this.refresh();
       },
       text: '',
       tooltip: ''
@@ -152,10 +153,18 @@ export class CrudListComponent implements OnInit {
       type: 'badge',
       index: 'status',
       badge: this.BADGE,
-      // filter: {
-      //   menus: this.status,
-      //   fn: (filter, record) => record.status === filter.index
-      // },
+      filter: {
+        menus: [
+          { text: '关闭', value: 0 },
+          { text: '成功', value: 1 },
+          { text: '错误', value: 2 },
+          { text: '进行中', value: 3 },
+          { text: '默认', value: 4 },
+          { text: '警告', value: 5 }
+        ],
+        fn: (filter, record) => record.status === filter.value,
+        multiple: true
+      },
       iif: () => this.isChoose('status')
     },
     {
@@ -163,7 +172,13 @@ export class CrudListComponent implements OnInit {
       index: 'updatedAt',
       type: 'date',
       filter: {
-        type: 'keyword'
+        type: 'date',
+        date: {
+          mode: 'date',
+          showToday: false,
+          disabledDate: dateTimePickerUtil.disabledAfterDate()
+        }
+        // fn: (filter, record) => record.updatedAt === filter.value
       },
       sort: {
         compare: (a, b) => a.updatedAt - b.updatedAt
@@ -392,6 +407,41 @@ export class CrudListComponent implements OnInit {
     }
   ];
 
+  exportOptions = {
+    show: true,
+    exportXlsx: () => {
+      const data = [this.columns.map(i => i.title)];
+      this.data.map(i => {
+        return data.push(
+          this.columns.map(c => {
+            if (c.index) {
+              return i[c.index as string];
+            }
+          })
+        );
+      });
+      // this.xlsx.export({
+      //   sheets: [
+      //     {
+      //       data,
+      //       name: 'sheet name'
+      //     }
+      //   ],
+      //   filename: '11111.xlsx',
+      //   opts: 'xlsx'
+      // });
+
+      // 表格默认配置导出方式
+      this.st.export(true, {
+        filename: 'via-data.xlsx',
+        sheetname: 'user',
+        callback: (wb: any) => {
+          console.log(wb);
+        }
+      });
+    }
+  };
+
   constructor(private http: _HttpClient, private message: NzMessageService, private cdr: ChangeDetectorRef, private arr: ArrayService) {}
 
   ngOnInit(): void {
@@ -416,11 +466,11 @@ export class CrudListComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
-    console.log(this.myBox.nativeElement);
-    this.myBox.nativeElement.style.width = '50px';
-    this.myBox.nativeElement.style.height = '50px';
-    this.myBox.nativeElement.style.background = 'red';
-    console.log(this.myBox.nativeElement.innerHTML);
+    // console.log(this.myBox.nativeElement);
+    // this.myBox.nativeElement.style.width = '50px';
+    // this.myBox.nativeElement.style.height = '50px';
+    // this.myBox.nativeElement.style.background = 'red';
+    // console.log(this.myBox.nativeElement.innerHTML);
   }
 
   refresh(): void {

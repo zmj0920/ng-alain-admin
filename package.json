@@ -1,8 +1,8 @@
 {
-  "name": "ng-alain",
+  "name": "ng-learning",
   "version": "13.2.0",
   "description": "ng-zorro-antd admin panel front-end framework",
-  "author": "cipchk <cipchk@qq.com>",
+  "author": "君吟 <mj960920@163.com>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ng-alain/ng-alain.git"

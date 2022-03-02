@@ -11,12 +11,18 @@
       >
       </button-action>
     </div>
-    <div style="width: 25%"> <input nz-input /> </div>
-    <div style="display: flex; width: 6%; justify-content: end">
-      <button nz-button (click)="exportXlsx()">
-        <i nz-icon nzType="export" nzTheme="outline"></i>
-      </button>
-      <table-custom-columns style="padding-left: 5px" [customColumns]="customColumns" [st]="st"></table-custom-columns>
+    <ng-container *ngIf="filterFacets.length > 0">
+      <div style="width: 25%"> <input nz-input /> </div>
+    </ng-container>
+    <div class="btn-right">
+      <ng-container *ngIf="exportOptions.show">
+        <button nz-button (click)="exportOptions.exportXlsx()">
+          <i nz-icon nzType="export" nzTheme="outline"></i>
+        </button>
+      </ng-container>
+      <ng-container *ngIf="showSetupColumn">
+        <table-custom-columns [customColumns]="customColumns" [st]="st" class="pd-l-5"></table-custom-columns>
+      </ng-container>
     </div>
   </div>
   <ng-content></ng-content>
