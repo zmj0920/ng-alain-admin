@@ -1,4 +1,4 @@
-<page-header [title]="''" [breadcrumb]="breadcrumb" [content]="content" [tab]="tabTemplate" style="padding: 16px">
+<page-header [title]="''" [breadcrumb]="breadcrumb" [content]="content" [tab]="tabTemplate" [extra]="extra">
   <ng-template #breadcrumb>
     <div class="page-header__detail">
       <div class="page-header__logo page-logo">
@@ -28,36 +28,21 @@
           <div class="page-header__title">
             <div> {{ title }} </div>
             <div>
-              <breadcrumb [breadcrumbs]="breadcrumbs"> </breadcrumb>
+              <ng-container *ngIf="breadcrumbs.length > 0">
+                <breadcrumb [breadcrumbs]="breadcrumbs"> </breadcrumb>
+              </ng-container>
             </div>
           </div>
           <div class="page-header__action">
             <button-action
               style="display: inline-flex"
-              (refresh)="refresh()"
               [rowActions]="rowActions"
               [moreRowActions]="moreRowActions"
               [groupActions]="groupActions"
+              [globalActions]="globalActions"
               [btnType]="'primary'"
             >
             </button-action>
-            <!-- <button nz-button nzType="primary" nz-dropdown [nzDropdownMenu]="menu">
-              Actions
-              <i nz-icon nzType="down"></i>
-            </button>
-            <nz-dropdown-menu #menu="nzDropdownMenu">
-              <ul nz-menu>
-                <li nz-menu-item>
-                  <a>1st item</a>
-                </li>
-                <li nz-menu-item>
-                  <a>2nd item</a>
-                </li>
-                <li nz-menu-item>
-                  <a>3rd item</a>
-                </li>
-              </ul>
-            </nz-dropdown-menu> -->
           </div>
         </div>
         <div class="page-header__row">
@@ -67,19 +52,13 @@
     </div>
   </ng-template>
   <ng-template #content>
-    <ng-container [ngTemplateOutlet]="contentTpl"> </ng-container>
+    <div *ngIf="description" class="desc">
+      {{ description }}
+    </div>
+    <ng-container *ngIf="!description" [ngTemplateOutlet]="contentTpl"> </ng-container>
   </ng-template>
   <ng-template #extra>
-    <div nz-row>
-      <div nz-col nzXs="24" nzSm="12">
-        <p class="text-grey">状态</p>
-        <p class="text-lg">待审批</p>
-      </div>
-      <div nz-col nzXs="24" nzSm="12">
-        <p class="text-grey">订单金额</p>
-        <p class="text-lg">¥ 568.08</p>
-      </div>
-    </div>
+    <ng-container [ngTemplateOutlet]="extraTpl"> </ng-container>
   </ng-template>
   <ng-template #tabTemplate>
     <ng-container [ngTemplateOutlet]="tab"> </ng-container>

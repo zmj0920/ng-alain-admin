@@ -1,35 +1,22 @@
-.ng-table-ul-group-actions.ant-dropdown-menu {
-  min-width: 366px;
+.action-groups {
+  width: 366px;
   border: 1px solid #d4d4da;
   border-radius: 4px;
   box-shadow: 0 2px 8px 0 rgb(0 0 0 / 15%);
 
-  .action-groups-zh-cn {
-    width: 364px;
-
-    .group-name {
-      width: 60px;
-    }
-
-    .actions {
-      & > li {
-        width: 136px;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-      }
-    }
-  }
-
-  .action-groups {
+  &-button {
     display: flex;
     padding-top: 4px;
 
     .group-name {
-      max-width: 95px;
+      width: 90px;
+      max-width: 90px;
       padding: 4px 0 0 16px;
+      overflow: hidden;
       font-weight: 600;
       font-size: 12px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
 
     .actions {
@@ -37,48 +24,58 @@
       flex: 1;
       flex-wrap: wrap;
     }
+  }
+}
 
-    &:not(:last-child) {
-      padding-bottom: 4px;
-      border-bottom: 1px solid rgb(234 238 245 / 100%);
+.actions-dropdown-menu {
+  li {
+    display: block;
+    width: 136px;
+    padding: 4px 20px;
+    overflow: hidden;
+    color: #5f6167;
+    line-height: 1.5;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    &:hover,
+    &:focus {
+      color: #595959;
+      background-color: #f6f7f9;
     }
+  }
 
-    li {
-      display: block;
-      clear: both;
-      padding: 3px 20px;
+  .ant-dropdown-menu-item-disabled {
+    color: #5f6167;
+    opacity: 0.3;
+
+    &:hover {
       color: #5f6167;
-      font-weight: normal;
-      line-height: 1.42;
-      white-space: nowrap;
-
-      &:hover,
-      &:focus {
-        color: #595959;
-        text-decoration: none;
-        background-color: #f6f7f9;
-      }
-
-      ::ng-deep {
-        i {
-          margin-right: 5px;
-          vertical-align: middle;
-        }
-      }
+      background-color: #fff;
     }
+  }
 
-    .ant-dropdown-menu-item-disabled {
-      color: #5f6167;
-      opacity: 0.3;
-
-      &:hover {
-        color: #5f6167;
-        background-color: #fff;
-      }
-    }
+  &:not(:last-child) {
+    padding-bottom: 4px;
+    border-bottom: 1px solid rgb(234 238 245 / 100%);
   }
 }
 
 .btn-container {
   padding-left: 5px;
+}
+
+.btn-space {
+  margin-left: 5px;
+}
+
+.actions-space {
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+:host ::ng-deep {
+  i {
+    vertical-align: middle;
+  }
 }

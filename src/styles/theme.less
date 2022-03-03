@@ -6,10 +6,10 @@
 
 // ==========The following is the custom theme variable area==========
 // The theme paraments can be generated at https://ng-alain.github.io/ng-alain/
-@primary-color: #722ed1;
-@alain-default-header-bg: #722ed1;
-@alain-default-aside-nav-text-hover-color: #722ed1;
-@alain-default-aside-nav-selected-text-color: #722ed1;
+@primary-color: #13c2c2;
+@alain-default-header-bg: #13c2c2;
+@alain-default-aside-nav-text-hover-color: #13c2c2;
+@alain-default-aside-nav-selected-text-color: #13c2c2;
 
 @btn-warning-color: rgba(0, 0, 0, 0.65);
 @btn-warning-bg: #fffbe6;
@@ -71,6 +71,10 @@
   &__action {
     margin-bottom: 0;
   }
+
+  & .ant-breadcrumb {
+    margin-bottom: 8px;
+  }
 }
 
 .alain-default .page-header {
@@ -78,10 +82,13 @@
   border-bottom: none;
 }
 
-.page-header .ant-breadcrumb {
-  margin-bottom: 8px;
-}
-
 .ant-btn {
   border-radius: 4px;
+
+  &[disabled],
+  &[disabled]:hover,
+  &[disabled]:focus,
+  &[disabled]:active {
+    background-color: #fff;
+  }
 }

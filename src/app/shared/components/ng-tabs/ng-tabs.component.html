@@ -1,9 +1,10 @@
-<nz-tabset class="header-tabset" [nzSelectedIndex]="tabSelectedIndex">
+<nz-tabset #tabset class="header-tabset" [nzSelectedIndex]="tabSelectedIndex">
   <nz-tab
-    *ngFor="let tab of tabs; let tindex = index"
+    *ngFor="let tab of tabs; let i = index"
     [nzTitle]="tab.name"
+    [nzDisabled]="tab.disabled"
+    (nzClick)="clickTab(tab, i)"
     [nzDisabled]="tab.disabled && tab.disabled()"
-    (nzClick)="clickTab(tindex)"
   >
   </nz-tab>
 </nz-tabset>

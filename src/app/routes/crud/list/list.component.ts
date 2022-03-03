@@ -23,7 +23,6 @@ export class CrudListComponent implements OnInit {
       disabled: (data: any) => {
         return data.some((i: { key: number }) => i.key === 2);
       },
-      icon: '',
       renderIcon: 'reload',
       onClick: (data: any) => {
         this.refresh();
@@ -37,66 +36,65 @@ export class CrudListComponent implements OnInit {
       disabled: (data: any) => {
         return data.some((i: { key: number }) => i.key === 2);
       },
-      icon: 'rowAction1',
       renderIcon: 'setting',
       onClick: (data: any) => {
-        console.log(data);
+        console.log(111);
+        this.tabSelectedIndex = 0;
       },
       text: 'rowAction1',
       tooltip: 'rowAction1'
     },
     {
       disabled: (data: any) => false,
-      icon: 'rowAction2',
       renderIcon: 'vertical-align-bottom',
-      onClick: (data: any) => {},
+      onClick: (data: any) => {
+        this.tabSelectedIndex = 1;
+      },
       text: 'rowAction2',
       tooltip: 'rowAction2'
     },
     {
       disabled: (data: any) => false,
-      icon: 'rowAction3',
       renderIcon: 'plus',
-      onClick: (data: any) => {},
+      onClick: (data: any) => {
+        this.tabSelectedIndex = 2;
+      },
       text: 'rowAction3',
       tooltip: 'rowAction3'
+    },
+    {
+      disabled: (data: any) => {
+        return data.some((i: { key: number }) => i.key === 2);
+      },
+      renderIcon: 'plus',
+      onClick: (data: any) => {
+        console.log(data);
+      },
+      text: 'rowAction41111111111111111111111111111111111111111111111111111',
+      tooltip: 'rowAction4'
+    },
+    {
+      disabled: (data: any) => {
+        return data.some((i: { key: number }) => i.key === 2);
+      },
+      renderIcon: 'setting',
+      onClick: (data: any) => {
+        console.log(data);
+      },
+      text: 'rowAction5',
+      tooltip: 'rowAction5'
+    },
+    {
+      disabled: (data: any) => {
+        return data.some((i: { key: number }) => i.key === 2);
+      },
+      renderIcon: 'vertical-align-bottom',
+      onClick: (data: any) => {
+        console.log(data);
+      },
+      text: 'rowAction6',
+      tooltip: 'rowAction6'
     }
-    // {
-    //   disabled: (data: any) => {
-    //     return data.some((i: { key: number }) => i.key === 2);
-    //   },
-    //   icon: 'rowAction4',
-    //   renderIcon: 'plus',
-    //   onClick: (data: any) => {
-    //     console.log(data);
-    //   },
-    //   text: 'rowAction4',
-    //   tooltip: 'rowAction4'
-    // },
-    // {
-    //   disabled: (data: any) => {
-    //     return data.some((i: { key: number }) => i.key === 2);
-    //   },
-    //   icon: 'rowAction5',
-    //   renderIcon: 'setting',
-    //   onClick: (data: any) => {
-    //     console.log(data);
-    //   },
-    //   text: 'rowAction5',
-    //   tooltip: 'rowAction5'
-    // },
-    // {
-    //   disabled: (data: any) => {
-    //     return data.some((i: { key: number }) => i.key === 2);
-    //   },
-    //   icon: 'rowAction6',
-    //   renderIcon: 'vertical-align-bottom',
-    //   onClick: (data: any) => {
-    //     console.log(data);
-    //   },
-    //   text: 'rowAction6',
-    //   tooltip: 'rowAction6'
-    // }
   ];
   loading = false;
   selectedRows: STData[] = [];
@@ -264,23 +262,21 @@ export class CrudListComponent implements OnInit {
 
   groupActions: any[] = [
     {
-      name: 'group1',
+      name: 'group111111111111111111111111111111111111',
       children: [
         {
           disabled: (data: any) => {
-            return data.some((i: { key: number }) => i.key === 2);
+            return true;
           },
-          icon: 'rowAction1',
           renderIcon: 'setting',
           onClick: (data: any) => {
             console.log(data);
           },
-          text: 'rowAction1',
+          text: 'rowAction1111111111111111111111111111111111111111111111',
           tooltip: 'rowAction1'
         },
         {
           disabled: (data: any) => false,
-          icon: 'rowAction2',
           renderIcon: 'vertical-align-bottom',
           onClick: (data: any) => {},
           text: 'rowAction2',
@@ -288,7 +284,6 @@ export class CrudListComponent implements OnInit {
         },
         {
           disabled: (data: any) => false,
-          icon: 'rowAction3',
           renderIcon: 'plus',
           onClick: (data: any) => {},
           text: 'rowAction3',
@@ -298,7 +293,6 @@ export class CrudListComponent implements OnInit {
           disabled: (data: any) => {
             return data.some((i: { key: number }) => i.key === 2);
           },
-          icon: 'rowAction4',
           renderIcon: 'plus',
           onClick: (data: any) => {
             console.log(data);
@@ -315,7 +309,6 @@ export class CrudListComponent implements OnInit {
           disabled: (data: any) => {
             return data.some((i: { key: number }) => i.key === 2);
           },
-          icon: 'rowAction1',
           renderIcon: 'setting',
           onClick: (data: any) => {
             console.log(data);
@@ -327,7 +320,6 @@ export class CrudListComponent implements OnInit {
           disabled: (data: any) => {
             return data.some((i: { key: number }) => i.key === 2);
           },
-          icon: 'rowAction1',
           renderIcon: 'setting',
           onClick: (data: any) => {
             console.log(data);
@@ -339,7 +331,6 @@ export class CrudListComponent implements OnInit {
           disabled: (data: any) => {
             return data.some((i: { key: number }) => i.key === 2);
           },
-          icon: 'rowAction1',
           renderIcon: 'setting',
           onClick: (data: any) => {
             console.log(data);
@@ -349,7 +340,6 @@ export class CrudListComponent implements OnInit {
         },
         {
           disabled: (data: any) => false,
-          icon: 'rowAction2',
           renderIcon: 'vertical-align-bottom',
           onClick: (data: any) => {},
           text: 'rowAction2',
@@ -357,7 +347,6 @@ export class CrudListComponent implements OnInit {
         },
         {
           disabled: (data: any) => false,
-          icon: 'rowAction3',
           renderIcon: 'plus',
           onClick: (data: any) => {},
           text: 'rowAction3',
@@ -367,7 +356,6 @@ export class CrudListComponent implements OnInit {
           disabled: (data: any) => {
             return data.some((i: { key: number }) => i.key === 2);
           },
-          icon: 'rowAction4',
           renderIcon: 'plus',
           onClick: (data: any) => {
             console.log(data);
@@ -397,11 +385,8 @@ export class CrudListComponent implements OnInit {
       disabled: (data: any) => {
         return data.some((i: { key: number }) => i.key === 2);
       },
-      icon: 'rowAction1',
       renderIcon: 'vertical-align-bottom',
-      onClick: (data: any) => {
-        console.log(data);
-      },
+      onClick: (data: any) => {},
       text: 'rowAction1',
       tooltip: 'rowAction1'
     }
@@ -442,6 +427,26 @@ export class CrudListComponent implements OnInit {
     }
   };
 
+  tabs: any[] = [
+    {
+      key: '1',
+      name: 'Tab1'
+    },
+    {
+      key: '2',
+      name: 'Tab2'
+    },
+    {
+      key: '3',
+      name: 'Tab3',
+      disabled: () => {
+        return true;
+      }
+    }
+  ];
+
+  tabSelectedIndex = 0;
+
   constructor(private http: _HttpClient, private message: NzMessageService, private cdr: ChangeDetectorRef, private arr: ArrayService) {}
 
   ngOnInit(): void {
@@ -462,7 +467,7 @@ export class CrudListComponent implements OnInit {
       cb: (item: any) => {}
     };
 
-    console.log(this.arr.arrToTree(MOCK_ARR, options));
+    // console.log(this.arr.arrToTree(MOCK_ARR, options));
   }
 
   ngAfterViewInit(): void {
@@ -530,5 +535,9 @@ export class CrudListComponent implements OnInit {
         console.log(wb);
       }
     });
+  }
+
+  tabClick(tab: any) {
+    console.log(tab);
   }
 }
