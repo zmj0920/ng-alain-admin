@@ -221,10 +221,7 @@ export class BookService {
     this.http
       .get('/api/notice')
       .pipe(retry(3))
-      .subscribe((res: any) => {
-        console.log(res);
-        return res;
-      });
+      .subscribe((res: any) => {});
   }
 
   getName() {

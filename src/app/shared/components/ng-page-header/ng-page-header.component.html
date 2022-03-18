@@ -1,7 +1,7 @@
-<page-header [title]="''" [breadcrumb]="breadcrumb" [content]="content" [tab]="tabTemplate" [extra]="extra">
+<page-header [title]="''" [breadcrumb]="breadcrumb" [content]="content" [tab]="tabTemplate">
   <ng-template #breadcrumb>
-    <div class="page-header__detail">
-      <div class="page-header__logo page-logo">
+    <div *ngIf="headerHidden" class="page-header__detail">
+      <div *ngIf="enableBack" class="page-header__logo page-logo">
         <svg
           width="12px"
           height="12px"
@@ -27,26 +27,23 @@
         <div class="page-header__row">
           <div class="page-header__title">
             <div> {{ title }} </div>
-            <div>
-              <ng-container *ngIf="breadcrumbs.length > 0">
-                <breadcrumb [breadcrumbs]="breadcrumbs"> </breadcrumb>
-              </ng-container>
+            <div *ngIf="breadcrumbs.length > 0">
+              <breadcrumb [breadcrumbs]="breadcrumbs"> </breadcrumb>
             </div>
           </div>
-          <div class="page-header__action">
-            <button-action
-              style="display: inline-flex"
-              [rowActions]="rowActions"
-              [moreRowActions]="moreRowActions"
-              [groupActions]="groupActions"
-              [globalActions]="globalActions"
-              [btnType]="'primary'"
-            >
-            </button-action>
-          </div>
-        </div>
-        <div class="page-header__row">
-          <div class="page-header__desc" hidden=""></div>
+          <ng-container *ngIf="rowActions.length > 0 || moreRowActions.length > 0 || groupActions.length > 0 || globalActions.length > 0">
+            <div class="page-header__action">
+              <button-action
+                style="display: inline-flex"
+                [rowActions]="rowActions"
+                [moreRowActions]="moreRowActions"
+                [groupActions]="groupActions"
+                [globalActions]="globalActions"
+                [btnType]="'primary'"
+              >
+              </button-action>
+            </div>
+          </ng-container>
         </div>
       </div>
     </div>
@@ -55,10 +52,7 @@
     <div *ngIf="description" class="desc">
       {{ description }}
     </div>
-    <ng-container *ngIf="!description" [ngTemplateOutlet]="contentTpl"> </ng-container>
-  </ng-template>
-  <ng-template #extra>
-    <ng-container [ngTemplateOutlet]="extraTpl"> </ng-container>
+    <ng-container [ngTemplateOutlet]="contentTpl"> </ng-container>
   </ng-template>
   <ng-template #tabTemplate>
     <ng-container [ngTemplateOutlet]="tab"> </ng-container>

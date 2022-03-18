@@ -8,9 +8,10 @@ import { OperatorsComponent } from './operators/operators.component';
 import { RelationComponent } from './relation/relation.component';
 import { ZmButtonComponent } from './zm-button/zm-button.component';
 import { ListComponent } from './list/list.component';
+import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.component';
 
 @NgModule({
   imports: [SharedModule, DataVRoutingModule],
-  declarations: [RelationComponent, HeaderComponent, OperatorsComponent, InputNumberComponent, ZmButtonComponent, ListComponent]
+  declarations: [RelationComponent, HeaderComponent, OperatorsComponent, InputNumberComponent, ZmButtonComponent, ListComponent, VirtualScrollComponent]
 })
 export class DataVModule {}

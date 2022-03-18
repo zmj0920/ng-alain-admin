@@ -1,4 +1,6 @@
 <ng-page-header
+  [enableBack]="true"
+  [headerHidden]="true"
   [title]="'查询数据'"
   [description]="'描述信息描述信息描述信息描述信息描述信息描述信息描述信息描述信息描述信息描述信息'"
   [tab]="tab"
@@ -6,7 +8,6 @@
   [contentTpl]="content"
   [rowActions]="rowActions"
   [groupActions]="groupActions"
-  [extraTpl]="extra"
   [globalActions]="globalActions"
 >
   <ng-template #tab>
@@ -25,36 +26,7 @@
       <sv label="备注">请于两个工作日内确认</sv>
     </sv-container>
   </ng-template>
-  <ng-template #extra>
-    <div nz-row>
-      <div nz-col nzXs="24" nzSm="12">
-        <p class="text-grey">状态</p>
-        <p class="text-lg">待审批</p>
-      </div>
-      <div nz-col nzXs="24" nzSm="12">
-        <p class="text-grey">订单金额</p>
-        <p class="text-lg">¥ 568.08</p>
-      </div>
-    </div>
-  </ng-template>
 </ng-page-header>
-
-<!-- <text-ellipsis
-  [lines]="1"
-  [width]="'calc(100% - 108px)'"
-  nz-tooltip
-  title="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo delectus repellat quisquam sint, animi a corrupti repudiandae vero dolorem
-consectetur libero modi nostrum facilis nobis, praesentium porro quibusdam sequi officia? Lorem, ipsum dolor sit amet consectetur
-adipisicing elit. Debitis exercitationem repellendus dolor cumque velit recusandae vitae corporis, possimus non odit sit a suscipit
-doloribus quasi alias? Amet similique inventore tenetur!"
->
-  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo delectus repellat quisquam sint, animi a corrupti repudiandae vero dolorem
-  consectetur libero modi nostrum facilis nobis, praesentium porro quibusdam sequi officia? Lorem, ipsum dolor sit amet consectetur
-  adipisicing elit. Debitis exercitationem repellendus dolor cumque velit recusandae vitae corporis, possimus non odit sit a suscipit
-  doloribus quasi alias? Amet similique inventore tenetur!
-</text-ellipsis> -->
-<!-- <captcha-input></captcha-input>
-<div #myBox> 我是一个dom节点 </div> -->
 <ng-table
   #table
   [columns]="columns"
@@ -103,3 +75,22 @@ doloribus quasi alias? Amet similique inventore tenetur!"
   <div class="box-item"> </div>
   <div class="box-item1"></div>
 </div> -->
+
+<div style="width: 200px">
+  <ellipsis
+    [lines]="1"
+    tooltip
+    title="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo delectus repellat quisquam sint, animi a corrupti repudiandae vero dolorem
+consectetur libero modi nostrum facilis nobis, praesentium porro quibusdam sequi officia? Lorem, ipsum dolor sit amet consectetur
+adipisicing elit. Debitis exercitationem repellendus dolor cumque velit recusandae vitae corporis, possimus non odit sit a suscipit
+doloribus quasi alias? Amet similique inventore tenetur!"
+  >
+    Lorem ipsum dolor sit, amet consectetur adipisicing elit. , animi a corrupti repudiandae vero dolorem consectetur libero modi nostrum
+    facilis nobis, praesentium porro quibusdam sequi officia? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Debitis
+    exercitationem repellendus dolor cumque velit recusandae vitae corporis, possimus non odit sit a suscipit doloribus quasi alias? Amet
+    similique inventore tenetur!
+  </ellipsis>
+</div>
+
+<!-- <captcha-input></captcha-input>
+<div #myBox> 我是一个dom节点 </div> -->

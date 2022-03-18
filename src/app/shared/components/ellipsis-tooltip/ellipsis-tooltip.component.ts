@@ -15,6 +15,9 @@ import {
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { take } from 'rxjs/operators';
 
+import { BooleanInput, InputBoolean, InputNumber, NumberInput } from '@delon/util/decorator';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+
 @Component({
   selector: 'ellipsis-tooltip',
   exportAs: 'ellipsis-tooltip',
@@ -25,46 +28,42 @@ import { take } from 'rxjs/operators';
   encapsulation: ViewEncapsulation.None
 })
 export class EllipsisTooltipComponent implements AfterViewInit, OnChanges {
+  static ngAcceptInputType_tooltip: BooleanInput;
+  static ngAcceptInputType_length: NumberInput;
+  static ngAcceptInputType_lines: NumberInput;
+  static ngAcceptInputType_fullWidthRecognition: BooleanInput;
+
   private isSupportLineClamp = this.doc.body.style['webkitLineClamp'] !== undefined;
-
-  @ViewChild('orgEl', { static: false })
-  private orgEl!: ElementRef;
-
-  @ViewChild('shadowOrgEl', { static: false })
-  private shadowOrgEl!: ElementRef;
-
-  @ViewChild('shadowTextEl', { static: false })
-  private shadowTextEl!: ElementRef;
-
+  @ViewChild('orgEl', { static: false }) private orgEl!: ElementRef;
+  @ViewChild('shadowOrgEl', { static: false }) private shadowOrgEl!: ElementRef;
+  @ViewChild('shadowTextEl', { static: false }) private shadowTextEl!: ElementRef;
   private inited = false;
-
   orgHtml!: SafeHtml;
   type = 'default';
   cls = {};
   text = '';
   targetCount = 0;
 
-  @Input()
-  tooltip = false;
-  @Input()
-  length!: number;
-  @Input()
-  lines!: number;
-  @Input()
-  fullWidthRecognition = false;
-  @Input()
-  tail = '...';
+  @Input() @InputBoolean() tooltip = false;
+  @Input() @InputNumber(null) length?: number;
+  @Input() @InputNumber(null) lines?: number;
+  @Input() @InputBoolean() fullWidthRecognition = false;
+  @Input() tail = '...';
 
   get linsWord(): string {
     const { targetCount, text, tail } = this;
     return (targetCount > 0 ? text.substring(0, targetCount) : '') + (targetCount > 0 && targetCount < text.length ? tail : '');
   }
 
+  private get win(): NzSafeAny {
+    return this.doc.defaultView || window;
+  }
+
   constructor(
     private el: ElementRef,
     private ngZone: NgZone,
     private dom: DomSanitizer,
-    @Inject(DOCUMENT) private doc: any,
+    @Inject(DOCUMENT) private doc: NzSafeAny,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -149,14 +148,14 @@ export class EllipsisTooltipComponent implements AfterViewInit, OnChanges {
       }
       const lengthText = el.textContent!;
       const textLength = fullWidthRecognition ? this.getStrFullLength(lengthText) : lengthText.length;
-      if (textLength <= length || length < 0) {
+      if (textLength <= length! || length! < 0) {
         this.text = lengthText;
       } else {
         let displayText: string;
-        if (length - tail.length <= 0) {
+        if (length! - tail.length <= 0) {
           displayText = '';
         } else {
-          displayText = fullWidthRecognition ? this.cutStrByFullLength(lengthText, length) : lengthText.slice(0, length);
+          displayText = fullWidthRecognition ? this.cutStrByFullLength(lengthText, length!) : lengthText.slice(0, length);
         }
         this.text = displayText + tail;
       }
@@ -165,8 +164,8 @@ export class EllipsisTooltipComponent implements AfterViewInit, OnChanges {
       const { shadowOrgEl, shadowTextEl } = this;
       const orgNode = shadowOrgEl.nativeElement as HTMLElement;
       const lineText = orgNode.innerText || orgNode.textContent!;
-      const lineHeight = parseInt(getComputedStyle(this.getEl('.ellipsis')).lineHeight!, 10);
-      const targetHeight = lines * lineHeight;
+      const lineHeight = parseInt(this.win.getComputedStyle(this.getEl('.ellipsis')).lineHeight!, 10);
+      const targetHeight = lines! * lineHeight;
       this.getEl('.ellipsis__handle').style.height = `${targetHeight}px`;
 
       if (orgNode.offsetHeight <= targetHeight) {

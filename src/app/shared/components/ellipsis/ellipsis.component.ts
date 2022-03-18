@@ -18,5 +18,5 @@ export class TextComponent {
 
   @Input()
   @HostBinding('style.width')
-  width: any = 'auto';
+  width: string | number = 'auto';
 }

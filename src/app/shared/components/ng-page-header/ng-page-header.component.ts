@@ -16,12 +16,13 @@ export class NgPageHeaderComponent implements OnInit {
   @Input() description!: string;
   @Input() tab!: TemplateRef<void>;
   @Input() contentTpl!: TemplateRef<void>;
-  @Input() extraTpl!: TemplateRef<void>;
   @Input() breadcrumbs: any[] = [];
   @Input() moreRowActions: any[] = [];
   @Input() groupActions: any[] = [];
   @Input() rowActions: any[] = [];
   @Input() globalActions: any[] = [];
+  @Input() enableBack = false;
+  @Input() headerHidden = true;
 
   constructor(private injector: Injector, private columnSource: TColumnSource) {}
   ngOnInit(): void {}

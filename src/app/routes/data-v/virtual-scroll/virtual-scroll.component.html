@@ -1,0 +1,22 @@
+<div class="infinite-scroller" infiniteScroller scrollPerecnt="70" [immediateCallback]="true" [scrollCallback]="scrollCallback">
+  <div sg-container="6" class="infinite-scroller-item" *ngFor="let item of news">
+    <div class="item">
+      {{ item.id }}
+    </div>
+    <div class="item">
+      {{ item.title }}
+    </div>
+    <div class="item">
+      {{ item.domain }}
+    </div>
+    <div class="item">
+      {{ item.user }}
+    </div>
+    <div class="item">
+      {{ item.time_ago }}
+    </div>
+    <div class="item">
+      {{ item.url }}
+    </div>
+  </div>
+</div>

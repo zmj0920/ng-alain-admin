@@ -1,18 +1,21 @@
-@ellipsis-prefix: ~'.ellipsis';
-@{ellipsis-prefix} {
+.ellipsis {
   display: inline-block;
   width: 100%;
   overflow: hidden;
   word-break: break-all;
+
   &__lines {
     position: relative;
   }
+
   &__line-clamp {
     position: relative;
+    /* stylelint-disable-next-line value-no-vendor-prefix */
     display: -webkit-box;
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
   &__shadow {
     position: absolute;
     z-index: -999;

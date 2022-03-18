@@ -1,5 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { I18NService } from '@core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { STChange, STColumn, STColumnBadge, STComponent, STData, _STColumn } from '@delon/abc/st';
 import { XlsxService } from '@delon/abc/xlsx';
 import { _HttpClient } from '@delon/theme';
@@ -369,7 +368,7 @@ export class CrudListComponent implements OnInit {
 
   breadcrumbs = [
     {
-      url: '/crud/list',
+      url: '/pro/list/table-list',
       label: '一级菜单',
       active: true,
       renderIcon: 'vertical-align-bottom'

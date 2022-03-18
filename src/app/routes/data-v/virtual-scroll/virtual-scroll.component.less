@@ -1,0 +1,31 @@
+.infinite-scroller {
+  width: 100%;
+  height: calc(100vh - 20px);
+  margin-top: 10px;
+  padding: 0;
+  overflow: auto;
+  border: 1px solid #f5ad7c;
+
+  .infinite-scroller-item {
+    margin-left: 0 !important;
+    padding: 10px 5px;
+
+    &:nth-child(odd) {
+      background: #ffe8d8;
+
+      .item {
+        padding: 15px;
+        border: 1px solid #f5ad7c;
+      }
+    }
+
+    &:nth-child(even) {
+      background: #f5ad7c;
+
+      .item {
+        padding: 15px;
+        border: 1px solid #ffe8d8;
+      }
+    }
+  }
+}

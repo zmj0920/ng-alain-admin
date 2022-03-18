@@ -8,6 +8,7 @@ import { ReuseTabModule } from '@delon/abc/reuse-tab';
 import { SEModule } from '@delon/abc/se';
 import { STModule } from '@delon/abc/st';
 import { SVModule } from '@delon/abc/sv';
+import { SGModule } from '@delon/abc/sg';
 import { DelonACLModule } from '@delon/acl';
 import { DelonFormModule } from '@delon/form';
 import { LayoutDefaultModule } from '@delon/theme/layout-default';
@@ -29,5 +30,6 @@ export const SHARED_DELON_MODULES = [
   LayoutDefaultModule,
   SettingDrawerModule,
   ThemeBtnModule,
-  AvatarListModule
+  AvatarListModule,
+  SGModule
 ];
