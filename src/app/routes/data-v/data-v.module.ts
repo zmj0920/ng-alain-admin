@@ -10,8 +10,18 @@ import { ZmButtonComponent } from './zm-button/zm-button.component';
 import { ListComponent } from './list/list.component';
 import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.component';
 
+const COMPONENTS = [
+  RelationComponent,
+  HeaderComponent,
+  OperatorsComponent,
+  InputNumberComponent,
+  ZmButtonComponent,
+  ListComponent,
+  VirtualScrollComponent
+];
+
 @NgModule({
   imports: [SharedModule, DataVRoutingModule],
-  declarations: [RelationComponent, HeaderComponent, OperatorsComponent, InputNumberComponent, ZmButtonComponent, ListComponent, VirtualScrollComponent]
+  declarations: [...COMPONENTS]
 })
 export class DataVModule {}
