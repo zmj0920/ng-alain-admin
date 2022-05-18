@@ -1,14 +1,22 @@
 import { Host, Injectable, TemplateRef } from '@angular/core';
-import { RenderIconSource } from '../../directives/render-icon.directive';
+import { RenderSource } from '../../directives/render.directive';
 
 @Injectable()
 export class TColumnSource {
-  constructor(@Host() private renderIconSource: RenderIconSource) {}
+  constructor(@Host() private render: RenderSource) {}
 
   private restoreRender(item: any): void {
     if (item.renderIcon) {
       item.__renderIcon =
-        typeof item.renderIcon === 'string' ? this.renderIconSource.getRow(item.renderIcon) : (item.renderIcon as TemplateRef<void>);
+        typeof item.renderIcon === 'string' ? this.render.getRow(item.renderIcon) : (item.renderIcon as TemplateRef<void>);
+    }
+    if (item.renderTitle) {
+      console.log(item.renderTitle);
+      item.__renderTitle =
+        typeof item.renderTitle === 'string' ? this.render.getRow(item.renderTitle) : (item.renderTitle as TemplateRef<void>);
+    }
+    if (item.render) {
+      item.__render = typeof item.render === 'string' ? this.render.getRow(item.render) : (item.render as TemplateRef<void>);
     }
   }
 

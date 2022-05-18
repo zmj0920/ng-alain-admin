@@ -1,7 +1,7 @@
 import { Directive, Host, Injectable, Input, OnInit, TemplateRef } from '@angular/core';
 
 @Injectable()
-export class RenderIconSource {
+export class RenderSource {
   private titles: { [key: string]: TemplateRef<void> } = {};
   private rows: { [key: string]: TemplateRef<void> } = {};
 
@@ -18,14 +18,13 @@ export class RenderIconSource {
   }
 }
 
-@Directive({ selector: '[render-icon]' })
-export class RenderIconDirective implements OnInit {
-  @Input('render-icon') id!: string;
+@Directive({ selector: '[templateRef]' })
+export class RenderDirective implements OnInit {
+  @Input('templateRef') id!: string;
 
-  @Input()
-  type!: 'title';
+  @Input() type!: 'title';
 
-  constructor(private ref: TemplateRef<void>, @Host() private source: RenderIconSource) {}
+  constructor(private ref: TemplateRef<void>, @Host() private source: RenderSource) {}
 
   ngOnInit(): void {
     this.source.add(this.type, this.id, this.ref);

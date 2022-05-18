@@ -1,11 +1,10 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { STChange, STColumn, STColumnBadge, STComponent, STData, _STColumn } from '@delon/abc/st';
+import { STChange, STColumn, STColumnBadge, STComponent, STData } from '@delon/abc/st';
 import { XlsxService } from '@delon/abc/xlsx';
 import { _HttpClient } from '@delon/theme';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { tap } from 'rxjs/operators';
-import { ArrayService } from '@delon/util/array';
 import { dateTimePickerUtil } from '@delon/util';
 
 @Component({
@@ -37,8 +36,8 @@ export class CrudListComponent implements OnInit {
       },
       renderIcon: 'setting',
       onClick: (data: any) => {
-        console.log(111);
-        this.tabSelectedIndex = 0;
+        console.log(data);
+        // this.tabSelectedIndex = 0;
       },
       text: 'rowAction1',
       tooltip: 'rowAction1'
@@ -47,7 +46,8 @@ export class CrudListComponent implements OnInit {
       disabled: (data: any) => false,
       renderIcon: 'vertical-align-bottom',
       onClick: (data: any) => {
-        this.tabSelectedIndex = 1;
+        console.log(data);
+        // this.tabSelectedIndex = 1;
       },
       text: 'rowAction2',
       tooltip: 'rowAction2'
@@ -56,7 +56,7 @@ export class CrudListComponent implements OnInit {
       disabled: (data: any) => false,
       renderIcon: 'plus',
       onClick: (data: any) => {
-        this.tabSelectedIndex = 2;
+        // this.tabSelectedIndex = 2;
       },
       text: 'rowAction3',
       tooltip: 'rowAction3'
@@ -123,6 +123,11 @@ export class CrudListComponent implements OnInit {
   };
   columns: STColumn[] = [
     { title: '', index: 'key', type: 'checkbox' },
+    {
+      title: '自定义',
+      renderTitle: 'customTitle',
+      render: 'custom'
+    },
     {
       title: '规则编号',
       index: 'no',
@@ -446,27 +451,10 @@ export class CrudListComponent implements OnInit {
 
   tabSelectedIndex = 0;
 
-  constructor(private http: _HttpClient, private message: NzMessageService, private cdr: ChangeDetectorRef, private arr: ArrayService) {}
+  constructor(private http: _HttpClient, private message: NzMessageService, private cdr: ChangeDetectorRef, private xlsx: XlsxService) {}
 
   ngOnInit(): void {
     this.refresh();
-
-    const MOCK_ARR: any[] = [
-      { id: 1, pid: 0, name: 'name1', other: 'value1', halfChecked: true },
-      { id: 2, pid: 0, name: 'name2', other: 'value2', disabled: true },
-      { id: 3, pid: 1, name: 'name3', other: 'value3', expanded: true },
-      { id: 4, pid: 1, name: 'name4', other: 'value4', selected: true },
-      { id: 5, pid: 2, name: 'name5', other: 'value5' },
-      { id: 6, pid: 0, name: 'name6', other: 'value6', checked: true }
-    ];
-
-    const options = {
-      pidMapName: 'id',
-      parentIdMapName: 'pid',
-      cb: (item: any) => {}
-    };
-
-    // console.log(this.arr.arrToTree(MOCK_ARR, options));
   }
 
   ngAfterViewInit(): void {
@@ -502,38 +490,6 @@ export class CrudListComponent implements OnInit {
 
   isChoose(key: string): boolean {
     return !!this.customColumns.find(w => w.value === key && w.checked);
-  }
-
-  export(): void {
-    const data = [this.columns.map(i => i.title)];
-    this.data.map(i => {
-      return data.push(
-        this.columns.map(c => {
-          if (c.index) {
-            return i[c.index as string];
-          }
-        })
-      );
-    });
-    // this.xlsx.export({
-    //   sheets: [
-    //     {
-    //       data,
-    //       name: 'sheet name'
-    //     }
-    //   ],
-    //   filename: '11111.xlsx',
-    //   opts: 'xlsx'
-    // });
-
-    // 表格默认配置导出方式
-    this.st.export(true, {
-      filename: 'via-data.xlsx',
-      sheetname: 'user',
-      callback: (wb: any) => {
-        console.log(wb);
-      }
-    });
   }
 
   tabClick(tab: any) {

@@ -13,7 +13,7 @@
   <ng-template #tab>
     <ng-tabs [tabs]="tabs" (tabClick)="tabClick($event)" [tabSelectedIndex]="tabSelectedIndex"></ng-tabs>
   </ng-template>
-  <ng-template render-icon="vertical-align-bottom" let-i>
+  <ng-template templateRef="vertical-align-bottom" let-i>
     <i nz-icon nzType="vertical-align-bottom" nzTheme="outline"></i>
   </ng-template>
   <ng-template #content>
@@ -38,19 +38,19 @@
   [selectedRows]="selectedRows"
   [exportOptions]="exportOptions"
   [showSetupColumn]="true"
-  [st]="st"
+  [data]="data"
   mat-fab
 >
-  <ng-template render-icon="setting" let-i>
+  <ng-template templateRef="setting" let-i>
     <i nz-icon nzType="setting" nzTheme="outline"></i>
   </ng-template>
-  <ng-template render-icon="reload" let-i>
+  <ng-template templateRef="reload" let-i>
     <i nz-icon nzType="reload" nzTheme="outline"></i>
   </ng-template>
-  <ng-template render-icon="vertical-align-bottom" let-i>
+  <ng-template templateRef="vertical-align-bottom" let-i>
     <i nz-icon nzType="vertical-align-bottom" nzTheme="outline"></i>
   </ng-template>
-  <ng-template render-icon="plus" let-i>
+  <ng-template templateRef="plus" let-i>
     <i nz-icon nzType="plus" nzTheme="outline"></i>
   </ng-template>
   <st
@@ -67,6 +67,10 @@
   >
     <ng-template #expand let-item let-index="index" let-column="column">
       {{ item.description }}
+    </ng-template>
+    <ng-template st-row="customTitle" let-item> <span>自定义</span> </ng-template>
+    <ng-template st-row="custom" let-item>
+      <span>{{ item.description }}</span>
     </ng-template>
   </st>
 </ng-table>

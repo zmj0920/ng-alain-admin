@@ -6,9 +6,7 @@ function throwError(msg: string | null | undefined): void;
 function throwError(msg: string | null | undefined, actual: unknown, expected: unknown, comparison: string): void;
 function throwError(msg: string | null | undefined, actual?: unknown, expected?: unknown, comparison?: string): void {
   if (ngDevMode) {
-    throw new Error(
-      `ASSERTION ERROR: ${msg}${comparison == null ? '' : ` [Expected=> ${expected} ${comparison} ${actual} <=Actual]`}`
-    );
+    throw new Error(`ASSERTION ERROR: ${msg}${comparison == null ? '' : ` [Expected=> ${expected} ${comparison} ${actual} <=Actual]`}`);
   }
 }
 

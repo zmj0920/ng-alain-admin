@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Injector, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { RenderIconSource } from '../../directives/render-icon.directive';
+import { RenderSource } from '../../directives/render.directive';
 import { TColumnSource } from '../ng-table/tcolumn-source.service';
 
 @Component({
   selector: 'ng-page-header',
   templateUrl: './ng-page-header.component.html',
   styleUrls: ['./ng-page-header.component.less'],
-  providers: [RenderIconSource, TColumnSource],
+  providers: [RenderSource, TColumnSource],
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush
 })

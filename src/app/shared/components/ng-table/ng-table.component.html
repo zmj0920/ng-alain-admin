@@ -1,20 +1,17 @@
 <nz-card [nzBordered]="false" class="table-card">
-  <div class="st-actions mb-md">
-    <div style="flex: 1; display: flex">
-      <button-action
-        style="display: flex"
-        [selectedRows]="selectedRows"
-        [rowActions]="rowActions"
-        [moreRowActions]="moreRowActions"
-        [groupActions]="groupActions"
-        [globalActions]="globalActions"
-      >
-      </button-action>
-    </div>
+  <div class="st-actions mb-bottom">
+    <button-action
+      [selectedRows]="selectedRows"
+      [rowActions]="rowActions"
+      [moreRowActions]="moreRowActions"
+      [groupActions]="groupActions"
+      [globalActions]="globalActions"
+    >
+    </button-action>
     <ng-container *ngIf="filterFacets.length > 0">
       <div style="width: 25%"> <input nz-input /> </div>
     </ng-container>
-    <div class="btn-right">
+    <div>
       <ng-container *ngIf="exportOptions.show">
         <button nz-button (click)="exportOptions.exportXlsx()">
           <i nz-icon nzType="export" nzTheme="outline"></i>
@@ -26,4 +23,5 @@
     </div>
   </div>
   <ng-content></ng-content>
+  <!-- <st #st [data]="data" [columns]="columns"> </st> -->
 </nz-card>

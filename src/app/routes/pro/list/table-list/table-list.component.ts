@@ -4,6 +4,8 @@ import { _HttpClient } from '@delon/theme';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { forkJoin, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
 @Component({
@@ -97,7 +99,13 @@ export class ProTableListComponent implements OnInit {
   totalCallNo = 0;
   expandForm = false;
 
-  constructor(private http: _HttpClient, public msg: NzMessageService, private modalSrv: NzModalService, private cdr: ChangeDetectorRef) {}
+  constructor(
+    private http: _HttpClient,
+    public msg: NzMessageService,
+    private modalSrv: NzModalService,
+    private cdr: ChangeDetectorRef,
+    private notification: NzNotificationService
+  ) {}
 
   ngOnInit(): void {
     this.getData();
@@ -152,15 +160,48 @@ export class ProTableListComponent implements OnInit {
     this.msg.success(`审批了 ${this.selectedRows.length} 笔`);
   }
 
-  add(tpl: TemplateRef<{}>): void {
-    this.modalSrv.create({
+  add(tpl: TemplateRef<{}>): Observable<any> {
+    return this.modalSrv.create({
       nzTitle: '新建规则',
       nzContent: tpl,
       nzOnOk: () => {
-        this.loading = true;
-        this.http.post('/rule', { description: this.description }).subscribe(() => this.getData());
+        const list = [
+          { description: `${this.description} ---1` },
+          { description: `${this.description} ---2` },
+          { description: `${this.description} ---3` },
+          { description: `${this.description} ---4` }
+        ];
+        return forkJoin(list.map(item => this.http.post('/rule', { description: item.description }).pipe(map(() => item))))
+          .pipe(
+            tap(data => {
+              data.map(i => {
+                this.notification.success(`添加成功${i.description}`, '');
+              });
+              this.getData();
+            })
+          )
+          .toPromise();
+
+        // return this.http
+        //   .post('/rule', { description: this.description })
+        //   .pipe(
+        //     tap(() => {
+        //       this.getData();
+        //     })
+        //   )
+        //   .toPromise();
       }
-    });
+    }).afterClose;
+  }
+
+  addTest(tpl: TemplateRef<{}>) {
+    this.add(tpl)
+      .pipe(
+        tap(() => {
+          console.log('guanbi');
+        })
+      )
+      .subscribe();
   }
 
   reset(): void {
