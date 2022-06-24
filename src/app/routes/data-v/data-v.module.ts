@@ -9,6 +9,7 @@ import { RelationComponent } from './relation/relation.component';
 import { ZmButtonComponent } from './zm-button/zm-button.component';
 import { ListComponent } from './list/list.component';
 import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.component';
+import { AnimationsComponent } from './animations/animations.component';
 
 const COMPONENTS = [
   RelationComponent,
@@ -17,7 +18,8 @@ const COMPONENTS = [
   InputNumberComponent,
   ZmButtonComponent,
   ListComponent,
-  VirtualScrollComponent
+  VirtualScrollComponent,
+  AnimationsComponent
 ];
 
 @NgModule({

@@ -158,6 +158,9 @@ import {
 })
 export class OperatorsComponent implements OnInit {
   isLoadingOne = false;
+
+  subject$ = new Subject();
+
   constructor(private elm: ElementRef) {}
 
   // 如果我们需要在等待完成的同时按顺序做事情，那么 concatMap 是正确的选择

@@ -1,3 +1,5 @@
+<app-animations [option]="option" [selectAllText]="'选中全部'" (onChange)="chage($event)"> </app-animations>
+
 <div class="infinite-scroller" infiniteScroller scrollPerecnt="70" [immediateCallback]="true" [scrollCallback]="scrollCallback">
   <div sg-container="6" class="infinite-scroller-item" *ngFor="let item of news">
     <div class="item">

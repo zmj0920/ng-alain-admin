@@ -16,10 +16,26 @@ export class VirtualScrollComponent implements OnInit {
 
   scrollCallback!: () => Observable<any>;
 
+  option = [
+    { value: '1', label: '1' },
+    { value: '2', label: '2' },
+    { value: '3', label: '3' },
+    { value: '4', label: '4' },
+    { value: '5', label: '5' },
+    { value: '6', label: '6' },
+    { value: '7', label: '7' },
+    { value: '8', label: '8' },
+    { value: '9', label: '9' }
+  ];
+
   constructor(private http: HttpClient) {
     this.scrollCallback = this.getStories.bind(this);
   }
   ngOnInit(): void {}
+
+  chage(val: any) {
+    console.log(val);
+  }
 
   getStories(): Observable<any> {
     return this.getLatestStories(this.currentPage).pipe(

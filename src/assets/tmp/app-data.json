@@ -358,6 +358,12 @@
               "link": "/data-v/list",
               "i18n": "列表",
               "reuse": false
+            },
+            {
+              "text": "Animations",
+              "link": "/data-v/animations",
+              "i18n": "动画",
+              "reuse": false
             }
           ]
         },
