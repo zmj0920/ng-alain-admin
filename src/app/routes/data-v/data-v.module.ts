@@ -10,6 +10,7 @@ import { ZmButtonComponent } from './zm-button/zm-button.component';
 import { ListComponent } from './list/list.component';
 import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.component';
 import { AnimationsComponent } from './animations/animations.component';
+import { NgSelectComponent } from './ng-select/ng-select.component';
 
 const COMPONENTS = [
   RelationComponent,
@@ -19,7 +20,8 @@ const COMPONENTS = [
   ZmButtonComponent,
   ListComponent,
   VirtualScrollComponent,
-  AnimationsComponent
+  AnimationsComponent,
+  NgSelectComponent
 ];
 
 @NgModule({

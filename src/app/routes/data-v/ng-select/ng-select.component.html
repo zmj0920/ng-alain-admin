@@ -1,0 +1,29 @@
+<nz-select
+  #nzSelect
+  [(ngModel)]="selectedArray"
+  (ngModelChange)="changeSelect($event)"
+  [nzDropdownRender]="renderTemplate"
+  [nzId]="nzId"
+  [nzOpen]="nzOpen"
+  [disabled]="nzDisabled"
+  [nzMode]="nzMode"
+  [nzPlaceHolder]="nzPlaceHolder"
+  [nzMaxTagPlaceholder]="nzMaxTagPlaceholder"
+  [nzRemoveIcon]="nzRemoveIcon"
+  [nzMaxTagCount]="nzMaxTagCount"
+  [nzCustomTemplate]="nzCustomTemplate"
+  [nzTokenSeparators]="nzTokenSeparators"
+  [nzShowSearch]="nzShowSearch"
+  [nzAutoFocus]="nzAutoFocus"
+  [nzOptions]="option"
+>
+</nz-select>
+
+<ng-template #renderTemplate>
+  <div *ngIf="nzMode !== 'default'" class="container" (click)="selectAll(!checked)">
+    <label nz-checkbox [(ngModel)]="checked" (ngModelChange)="selectAll($event)" class="checkbox"></label>
+    <div class="text" [title]="selectAllText | i18n">
+      {{ selectAllText | i18n }}
+    </div>
+  </div>
+</ng-template>
