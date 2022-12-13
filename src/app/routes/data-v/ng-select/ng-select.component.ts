@@ -63,7 +63,7 @@ export class NgSelectComponent implements OnInit {
   @Input() @InputBoolean() nzOpen = false;
   @Input() @WithConfig<boolean>() @InputBoolean() nzBackdrop = false;
   @Input() nzOptions: NzSelectOptionInterface[] = [];
-  @Output() onChange = new EventEmitter<any>();
+  @Output() ngModelChange = new EventEmitter<any>();
   checked = false;
   selectedArray: any[] = [];
 
@@ -84,7 +84,7 @@ export class NgSelectComponent implements OnInit {
       this.selectedArray = [];
     }
     this.checked = checked;
-    this.onChange.emit(this.selectedArray);
+    this.ngModelChange.emit(this.selectedArray);
   }
 
   changeSelect(value: any) {
@@ -93,7 +93,7 @@ export class NgSelectComponent implements OnInit {
     } else {
       this.checked = false;
     }
-    this.onChange.emit(this.selectedArray);
+    this.ngModelChange.emit(this.selectedArray);
   }
 
   writeValue(value: NzSafeAny | NzSafeAny[]): void {

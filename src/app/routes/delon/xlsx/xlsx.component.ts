@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { STColumn } from '@delon/abc/st';
 import { XlsxService } from '@delon/abc/xlsx';
+import { ArrayService } from '@delon/util';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 
 @Component({
@@ -8,9 +9,11 @@ import { NzSafeAny } from 'ng-zorro-antd/core/types';
   templateUrl: './xlsx.component.html'
 })
 export class XlsxComponent {
-  constructor(private xlsx: XlsxService) {}
+  constructor(private xlsx: XlsxService, private array: ArrayService) {}
 
   data: any;
+  password: any = [];
+  loading = false;
   users: Array<{ id: number; name: string; age: number }> = Array(100)
     .fill(0)
     .map((_item: number, idx: number) => {
@@ -28,7 +31,16 @@ export class XlsxComponent {
   ];
 
   url(): void {
-    this.xlsx.import(`./assets/tmp/demo.xlsx`).then(res => (this.data = res));
+    this.loading = true;
+    this.password = [];
+    this.xlsx.import(`./assets/tmp/6位数字密码.xlsx`).then(res => {
+      const arr = this.array.flat(res['Sheet1']);
+      const _num = Math.floor(Math.random() * arr.length);
+      this.password.push(arr[_num]);
+      if (this.password.length > 0) {
+        this.loading = false;
+      }
+    });
   }
 
   change(e: Event): void {

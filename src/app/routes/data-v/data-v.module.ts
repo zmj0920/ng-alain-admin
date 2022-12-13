@@ -11,6 +11,7 @@ import { ListComponent } from './list/list.component';
 import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.component';
 import { AnimationsComponent } from './animations/animations.component';
 import { NgSelectComponent } from './ng-select/ng-select.component';
+import { SizerComponent } from './sizer/sizer.component';
 
 const COMPONENTS = [
   RelationComponent,
@@ -26,6 +27,6 @@ const COMPONENTS = [
 
 @NgModule({
   imports: [SharedModule, DataVRoutingModule],
-  declarations: [...COMPONENTS]
+  declarations: [...COMPONENTS, SizerComponent]
 })
 export class DataVModule {}

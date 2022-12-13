@@ -18,6 +18,7 @@ scripts/var.less
 /.idea
 .project
 .classpath
+*.xlsx
 .c9/
 *.launch
 .settings/

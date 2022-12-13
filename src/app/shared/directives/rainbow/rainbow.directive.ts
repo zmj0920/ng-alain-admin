@@ -2,7 +2,6 @@ import { Directive, ElementRef, HostBinding, HostListener } from '@angular/core'
 
 @Directive({
   selector: '[appRainbow]',
-  // tslint:disable-next-line: no-host-metadata-property
   host: {
     '(keyup)': 'keyupFun($event.target)'
   }

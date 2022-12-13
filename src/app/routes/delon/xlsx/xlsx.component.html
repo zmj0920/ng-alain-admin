@@ -4,12 +4,17 @@
     <a href="//ng-alain.com/components/xlsx" target="_blank">Document</a>
   </h1>
 </div>
+<nz-card nzTitle="随机密码">
+  <button nz-button [nzLoading]="loading" (click)="url()">获取密码</button>
+  <p class="mt-sm">随机密码: {{ password | json }}</p>
+</nz-card>
+
 <nz-card nzTitle="Import">
-  <button nz-button (click)="url()">Via Url</button>
   <input type="file" (change)="change($event)" multiple="false" class="ml-sm" />
   <p class="mt-sm">result: {{ data | json }}</p>
 </nz-card>
 <nz-card nzTitle="Export">
+  <input type="file" (change)="change($event)" multiple="false" class="ml-sm" />
   <button nz-button (click)="download()">Export</button>
   <st [data]="users" [ps]="3" [columns]="columns" class="mt-sm"></st>
 </nz-card>

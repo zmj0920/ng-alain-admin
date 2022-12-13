@@ -77,3 +77,39 @@ export function foreachTree(data: string | any[], childrenName = 'children', cal
         }
     }
 }
+
+
+export function leDecorator(target: any, propertyKey: string, descriptor: PropertyDescriptor): any {
+    var oldValue = descriptor.value;
+
+    descriptor.value = function() {
+      console.log(`Calling "${propertyKey}" with`, arguments,target);
+      let value = oldValue.apply(null, [arguments[1], arguments[0]]);
+
+      console.log(`Function is executed`);
+      return value + "; This is awesome";
+    };
+
+    return descriptor;
+  }
+
+  export function realName(target:any, key: string): any {
+    // property value
+    var _val = target[key];
+
+    // property getter
+    var getter = function () {
+      return "Ragularuban(" + _val + ")";
+    };
+
+    // property setter
+    var setter = function (newVal:any) {
+      _val = newVal;
+    };
+
+    // Create new property with getter and setter
+    Object.defineProperty(target, key, {
+      get: getter,
+      set: setter
+    });
+  }

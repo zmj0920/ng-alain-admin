@@ -1,5 +1,45 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import {
+  animationFrames,
+  animationFrameScheduler,
+  asapScheduler,
+  asyncScheduler,
+  AsyncSubject,
+  BehaviorSubject,
+  bindNodeCallback,
+  combineLatest,
+  concat,
+  connectable,
+  defer,
+  firstValueFrom,
+  forkJoin,
+  from,
+  fromEvent,
+  fromEventPattern,
+  generate,
+  identity,
+  iif,
+  interval,
+  isObservable,
+  lastValueFrom,
+  merge,
+  noop,
+  observable,
+  of,
+  queueScheduler,
+  race,
+  range,
+  ReplaySubject,
+  scheduled,
+  Subject,
+  Subscriber,
+  Subscription,
+  throwError,
+  timer,
+  using,
+  zip
+} from 'rxjs';
+import {
   audit,
   auditTime,
   buffer,
@@ -110,47 +150,6 @@ import {
   zipWith
 } from 'rxjs/operators';
 
-import {
-  animationFrames,
-  animationFrameScheduler,
-  asapScheduler,
-  asyncScheduler,
-  AsyncSubject,
-  BehaviorSubject,
-  bindNodeCallback,
-  combineLatest,
-  concat,
-  connectable,
-  defer,
-  firstValueFrom,
-  forkJoin,
-  from,
-  fromEvent,
-  fromEventPattern,
-  generate,
-  identity,
-  iif,
-  interval,
-  isObservable,
-  lastValueFrom,
-  merge,
-  noop,
-  observable,
-  of,
-  queueScheduler,
-  race,
-  range,
-  ReplaySubject,
-  scheduled,
-  Subject,
-  Subscriber,
-  Subscription,
-  throwError,
-  timer,
-  using,
-  zip
-} from 'rxjs';
-
 @Component({
   selector: 'app-operators',
   templateUrl: './operators.component.html',
@@ -167,7 +166,15 @@ export class OperatorsComponent implements OnInit {
   // 如果我们需要取消逻辑，switchMap 是要走的路
   // 为了在当前的 Observables 仍在进行时忽略新的 Observables，exhaustMap 就是这样做的
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const source1 = of(1, 2, 3);
+    const source2 = of(4, 5, 6);
+
+    const example = forkJoin(source1.pipe(delay(1000)), source2.pipe(delay(2000)));
+
+    // 输出: [3, 6]
+    const subscribe = example.subscribe(val => console.log(val));
+  }
 
   withLatestFromTest() {
     // withLatestFrom 运行方式跟 combineLatest 有点像，只是他有主从的关系，只有在主要的 observable 送出新的值时，

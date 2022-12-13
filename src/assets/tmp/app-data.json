@@ -193,7 +193,6 @@
         {
           "text": "Form Page",
           "i18n": "menu.form",
-          "link": "/pro/form",
           "icon": "anticon-edit",
           "children": [
             {
@@ -294,7 +293,6 @@
         {
           "text": "Exception",
           "i18n": "menu.exception",
-          "link": "/",
           "icon": "anticon-exception",
           "children": [
             {
@@ -370,7 +368,6 @@
         {
           "text": "Extras",
           "i18n": "menu.extras",
-          "link": "/extras",
           "icon": "anticon-link",
           "children": [
             {
