@@ -1,7 +1,7 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
-import { ServicesModule } from '@core/services';
 
 import { throwIfAlreadyLoaded } from './module-import-guard';
+import { ServicesModule } from './services/services.module';
 
 @NgModule({
   imports: [ServicesModule]

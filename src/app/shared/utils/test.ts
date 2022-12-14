@@ -36,19 +36,19 @@ const initial = (arr: string | any[]) => arr.slice(0, -1);
 export function formatFileSize(fileSize: number) {
     let temp;
     if (fileSize < 1024) {
-        return fileSize + 'B';
+        return `${fileSize  }B`;
     } else if (fileSize < (1024 * 1024)) {
         temp = fileSize / 1024;
         temp = temp.toFixed(2);
-        return temp + 'KB';
+        return `${temp  }KB`;
     } else if (fileSize < (1024 * 1024 * 1024)) {
         temp = fileSize / (1024 * 1024);
         temp = temp.toFixed(2);
-        return temp + 'MB';
+        return `${temp  }MB`;
     } else {
         temp = fileSize / (1024 * 1024 * 1024);
         temp = temp.toFixed(2);
-        return temp + 'GB';
+        return `${temp  }GB`;
     }
 }
 
@@ -87,7 +87,7 @@ export function leDecorator(target: any, propertyKey: string, descriptor: Proper
       let value = oldValue.apply(null, [arguments[1], arguments[0]]);
 
       console.log(`Function is executed`);
-      return value + "; This is awesome";
+      return `${value  }; This is awesome`;
     };
 
     return descriptor;
@@ -99,7 +99,7 @@ export function leDecorator(target: any, propertyKey: string, descriptor: Proper
 
     // property getter
     var getter = function () {
-      return "Ragularuban(" + _val + ")";
+      return `Ragularuban(${  _val  })`;
     };
 
     // property setter

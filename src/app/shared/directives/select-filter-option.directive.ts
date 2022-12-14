@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/use-lifecycle-interface */
 import { Directive, Host, Optional } from '@angular/core';
 import { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzFilterOptionType, NzSelectComponent } from 'ng-zorro-antd/select';

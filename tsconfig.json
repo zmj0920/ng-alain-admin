@@ -15,7 +15,7 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2017",
+    "target": "es2020",
     "module": "es2020",
     "lib": ["es2020", "dom"],
     "paths": {
@@ -24,7 +24,8 @@
       "@core/*": ["src/app/core/*"],
       "@env/*": ["src/environments/*"],
       "@services/*": ["src/app/core/services/*"]
-    }
+    },
+    "allowSyntheticDefaultImports": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

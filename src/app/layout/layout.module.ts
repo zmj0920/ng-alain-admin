@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { GlobalFooterModule } from '@delon/abc/global-footer';
+import { HotkeyModule } from '@delon/abc/hotkey';
 import { NoticeIconModule } from '@delon/abc/notice-icon';
 import { AlainThemeModule } from '@delon/theme';
 import { LayoutDefaultModule } from '@delon/theme/layout-default';
@@ -61,6 +62,7 @@ const PASSPORT = [LayoutPassportComponent];
     SettingDrawerModule,
     LayoutDefaultModule,
     NoticeIconModule,
+    HotkeyModule,
     GlobalFooterModule,
     NzDropDownModule,
     NzInputModule,

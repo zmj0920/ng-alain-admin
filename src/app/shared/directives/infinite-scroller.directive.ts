@@ -84,7 +84,7 @@ export class InfiniteScrollerDirective implements AfterViewInit {
   }
 
   // 检查用户是否向下滚动，通过前一个滚动位置和当前滚动位置进行判断
-  private isUserScrollingDown = (positions: { sT: number }[]): boolean => {
+  private isUserScrollingDown = (positions: Array<{ sT: number }>): boolean => {
     return positions[0].sT < positions[1].sT;
   };
 

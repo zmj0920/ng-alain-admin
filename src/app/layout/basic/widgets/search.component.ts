@@ -10,8 +10,7 @@ import {
   OnDestroy,
   Output
 } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
+import { BehaviorSubject, debounceTime, distinctUntilChanged, tap } from 'rxjs';
 
 @Component({
   selector: 'header-search',
@@ -31,6 +30,7 @@ import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
         (input)="search($event)"
         (focus)="qFocus()"
         (blur)="qBlur()"
+        hotkey="F1"
         [attr.placeholder]="'menu.search.placeholder' | i18n"
       />
     </nz-input-group>

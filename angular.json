@@ -28,7 +28,13 @@
             "assets": ["src/assets", "src/favicon.ico"],
             "styles": ["src/styles.less"],
             "scripts": [],
-            "allowedCommonJsDependencies": ["ajv", "ajv-formats"],
+            "allowedCommonJsDependencies": [
+              "ajv",
+              "ajv-formats",
+              "mockjs",
+              "file-saver",
+              "extend"
+            ],
             "stylePreprocessorOptions": {
               "includePaths": [
                 "node_modules/"
@@ -125,6 +131,9 @@
   },
   "defaultProject": "ng-alain",
   "cli": {
-    "packageManager": "yarn"
+    "packageManager": "yarn",
+    "schematicCollections": [
+      "@schematics/angular", "ng-alain"
+    ]
   }
 }

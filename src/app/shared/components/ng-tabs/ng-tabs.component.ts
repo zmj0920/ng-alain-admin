@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/no-empty-lifecycle-method */
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
@@ -7,7 +8,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class NgTabsComponent implements OnInit {
   @Input() tabSelectedIndex = 0;
-  @Output() tabClick = new EventEmitter<any>();
+  @Output() readonly tabClick = new EventEmitter<any>();
   @Input() tabs: any[] = [];
 
   constructor() {}

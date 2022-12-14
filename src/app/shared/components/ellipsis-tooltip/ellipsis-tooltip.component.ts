@@ -13,10 +13,9 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { take } from 'rxjs/operators';
-
 import { BooleanInput, InputBoolean, InputNumber, NumberInput } from '@delon/util/decorator';
 import type { NzSafeAny } from 'ng-zorro-antd/core/types';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'ellipsis-tooltip',

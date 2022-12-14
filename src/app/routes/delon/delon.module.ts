@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { DownFileModule } from '@delon/abc/down-file';
 import { FullContentModule } from '@delon/abc/full-content';
+import { OnboardingService } from '@delon/abc/onboarding';
 import { QRModule } from '@delon/abc/qr';
 import { G2MiniBarModule } from '@delon/chart/mini-bar';
 import { SharedModule } from '@shared';
@@ -43,7 +44,7 @@ const COMPONENTS = [
 
 @NgModule({
   imports: [SharedModule, DelonRoutingModule, DownFileModule, FullContentModule, QRModule, G2MiniBarModule],
-  providers: [CanLeaveProvide],
+  providers: [CanLeaveProvide, OnboardingService],
   declarations: COMPONENTS
 })
 export class DelonModule {}

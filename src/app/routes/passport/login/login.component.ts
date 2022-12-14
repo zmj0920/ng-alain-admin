@@ -1,13 +1,14 @@
+import { HttpContext } from '@angular/common/http';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnDestroy, Optional } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { StartupService } from '@core';
 import { ReuseTabService } from '@delon/abc/reuse-tab';
-import { DA_SERVICE_TOKEN, ITokenService, SocialOpenType, SocialService } from '@delon/auth';
+import { ALLOW_ANONYMOUS, DA_SERVICE_TOKEN, ITokenService, SocialOpenType, SocialService } from '@delon/auth';
 import { SettingsService, _HttpClient } from '@delon/theme';
 import { environment } from '@env/environment';
 import { NzTabChangeEvent } from 'ng-zorro-antd/tabs';
-import { finalize } from 'rxjs/operators';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'passport-login',
@@ -18,7 +19,7 @@ import { finalize } from 'rxjs/operators';
 })
 export class UserLoginComponent implements OnDestroy {
   constructor(
-    fb: FormBuilder,
+    private fb: FormBuilder,
     private router: Router,
     private settingsService: SettingsService,
     private socialService: SocialService,
@@ -29,31 +30,17 @@ export class UserLoginComponent implements OnDestroy {
     private startupSrv: StartupService,
     private http: _HttpClient,
     private cdr: ChangeDetectorRef
-  ) {
-    this.form = fb.group({
-      userName: [null, [Validators.required, Validators.pattern(/^(admin|user)$/)]],
-      password: [null, [Validators.required, Validators.pattern(/^(ng\-alain\.com)$/)]],
-      mobile: [null, [Validators.required, Validators.pattern(/^1\d{10}$/)]],
-      captcha: [null, [Validators.required]],
-      remember: [true]
-    });
-  }
+  ) {}
 
   // #region fields
 
-  get userName(): AbstractControl {
-    return this.form.get('userName')!;
-  }
-  get password(): AbstractControl {
-    return this.form.get('password')!;
-  }
-  get mobile(): AbstractControl {
-    return this.form.get('mobile')!;
-  }
-  get captcha(): AbstractControl {
-    return this.form.get('captcha')!;
-  }
-  form: FormGroup;
+  form = this.fb.nonNullable.group({
+    userName: ['', [Validators.required, Validators.pattern(/^(admin|user)$/)]],
+    password: ['', [Validators.required, Validators.pattern(/^(ng\-alain\.com)$/)]],
+    mobile: ['', [Validators.required, Validators.pattern(/^1\d{10}$/)]],
+    captcha: ['', [Validators.required]],
+    remember: [true]
+  });
   error = '';
   type = 0;
   loading = false;
@@ -70,9 +57,10 @@ export class UserLoginComponent implements OnDestroy {
   }
 
   getCaptcha(): void {
-    if (this.mobile.invalid) {
-      this.mobile.markAsDirty({ onlySelf: true });
-      this.mobile.updateValueAndValidity({ onlySelf: true });
+    const mobile = this.form.controls.mobile;
+    if (mobile.invalid) {
+      mobile.markAsDirty({ onlySelf: true });
+      mobile.updateValueAndValidity({ onlySelf: true });
       return;
     }
     this.count = 59;
@@ -89,33 +77,42 @@ export class UserLoginComponent implements OnDestroy {
   submit(): void {
     this.error = '';
     if (this.type === 0) {
-      this.userName.markAsDirty();
-      this.userName.updateValueAndValidity();
-      this.password.markAsDirty();
-      this.password.updateValueAndValidity();
-      if (this.userName.invalid || this.password.invalid) {
+      const { userName, password } = this.form.controls;
+      userName.markAsDirty();
+      userName.updateValueAndValidity();
+      password.markAsDirty();
+      password.updateValueAndValidity();
+      if (userName.invalid || password.invalid) {
         return;
       }
     } else {
-      this.mobile.markAsDirty();
-      this.mobile.updateValueAndValidity();
-      this.captcha.markAsDirty();
-      this.captcha.updateValueAndValidity();
-      if (this.mobile.invalid || this.captcha.invalid) {
+      const { mobile, captcha } = this.form.controls;
+      mobile.markAsDirty();
+      mobile.updateValueAndValidity();
+      captcha.markAsDirty();
+      captcha.updateValueAndValidity();
+      if (mobile.invalid || captcha.invalid) {
         return;
       }
     }
 
     // 默认配置中对所有HTTP请求都会强制 [校验](https://ng-alain.com/auth/getting-started) 用户 Token
-    // 然一般来说登录请求不需要校验，因此可以在请求URL加上：`/login?_allow_anonymous=true` 表示不触发用户 Token 校验
+    // 然一般来说登录请求不需要校验，因此加上 `ALLOW_ANONYMOUS` 表示不触发用户 Token 校验
     this.loading = true;
     this.cdr.detectChanges();
     this.http
-      .post('/login/account?_allow_anonymous=true', {
-        type: this.type,
-        userName: this.userName.value,
-        password: this.password.value
-      })
+      .post(
+        '/login/account',
+        {
+          type: this.type,
+          userName: this.form.value.userName,
+          password: this.form.value.password
+        },
+        null,
+        {
+          context: new HttpContext().set(ALLOW_ANONYMOUS, true)
+        }
+      )
       .pipe(
         finalize(() => {
           this.loading = false;

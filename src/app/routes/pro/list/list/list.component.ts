@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivationEnd, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { Subscription, filter } from 'rxjs';
 
 @Component({
   selector: 'app-list-layout',
@@ -29,7 +28,7 @@ export class ProListLayoutComponent implements OnInit, OnDestroy {
   constructor(private router: Router) {}
 
   private setActive(): void {
-    const key = this.router.url.substr(this.router.url.lastIndexOf('/') + 1);
+    const key = this.router.url.substring(this.router.url.lastIndexOf('/') + 1);
     const idx = this.tabs.findIndex(w => w.key === key);
     if (idx !== -1) {
       this.pos = idx;

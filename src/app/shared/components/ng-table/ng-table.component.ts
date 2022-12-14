@@ -13,8 +13,9 @@ import {
 import { I18NService } from '@core';
 import { STChange, STColumn, STComponent, STData, STPage, STWidthMode, _STColumn } from '@delon/abc/st';
 import { _HttpClient } from '@delon/theme';
-import { TColumnSource } from 'src/app/shared/components/ng-table/tcolumn-source.service';
+
 import { RenderSource } from '../../directives/render.directive';
+import { TColumnSource } from './tcolumn-source.service';
 
 @Component({
   selector: 'ng-table',

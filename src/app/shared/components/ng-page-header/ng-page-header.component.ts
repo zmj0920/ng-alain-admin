@@ -1,5 +1,8 @@
+/* eslint-disable @angular-eslint/use-lifecycle-interface */
+/* eslint-disable @angular-eslint/no-empty-lifecycle-method */
 import { ChangeDetectionStrategy, Component, EventEmitter, Injector, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { RenderSource } from '../../directives/render.directive';
 import { TColumnSource } from '../ng-table/tcolumn-source.service';
 

@@ -19,7 +19,7 @@ export class ButtonActionComponent implements OnInit {
     return this.i18n.defaultLang;
   }
   constructor(private i18n: I18NService) {}
-
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnInit(): void {}
 
   // refreshList() {

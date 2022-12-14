@@ -1,15 +1,16 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { PdfChangeEvent, PdfComponent, PdfZoomScale } from '@delon/abc/pdf';
+import type { NzSafeAny } from 'ng-zorro-antd/core/types';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { Subject } from 'rxjs';
+
 @Component({
   selector: 'app-pdf-design',
   templateUrl: './pdf-design.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PdfDesignComponent implements OnInit {
-  @ViewChild('pdf')
-  private comp!: PdfComponent;
+  @ViewChild('pdf') private comp!: PdfComponent;
   src = `https://raw.githubusercontent.com/mozilla/pdf.js/master/web/compressed.tracemonkey-pldi-09.pdf`;
   pi = 1;
   total = 0;
@@ -23,7 +24,7 @@ export class PdfDesignComponent implements OnInit {
   zoom = 1;
   autoReSize = true;
   outline = false;
-  outlineList: any;
+  outlineList: NzSafeAny = null;
   q = '';
   search$ = new Subject<string>();
 
@@ -33,12 +34,12 @@ export class PdfDesignComponent implements OnInit {
     this.search$.subscribe((q: string) => {
       if (q !== this.q) {
         this.q = q;
-        this.comp.findController.executeCommand('find', {
+        this.comp.eventBus?.dispatch('find', {
           query: this.q,
           highlightAll: true
         });
       } else {
-        this.comp.findController.executeCommand('findagain', {
+        this.comp.eventBus?.dispatch('findagain', {
           query: this.q,
           highlightAll: true
         });
@@ -57,9 +58,7 @@ export class PdfDesignComponent implements OnInit {
         break;
     }
 
-    if (ev.type !== 'load-progress') {
-      console.log(ev);
-    }
+    if (ev.type !== 'load-progress') console.log(ev);
   }
 
   uploadSrc(src: string): void {
@@ -72,21 +71,21 @@ export class PdfDesignComponent implements OnInit {
 
   beforeUpload = (file: NzUploadFile): boolean => {
     const reader = new FileReader();
-    reader.onload = (e: any) => {
-      this.src = e.target.result;
+    reader.onload = (e: ProgressEvent<FileReader>) => {
+      this.src = e.target!.result as string;
       this.cdr.detectChanges();
     };
-    reader.readAsArrayBuffer(file as any);
+    reader.readAsArrayBuffer(file as unknown as Blob);
     return false;
   };
 
   loadOutline(): void {
-    this.comp.pdf.getOutline().then((outline: any[]) => {
+    this.comp.pdf?.getOutline().then(outline => {
       this.outlineList = outline;
     });
   }
 
-  navigateTo(dest: any): void {
-    this.comp.linkService.navigateTo(dest);
+  navigateTo(dest: string): void {
+    this.comp.linkService?.goToDestination(dest);
   }
 }

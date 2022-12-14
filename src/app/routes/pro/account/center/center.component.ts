@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivationEnd, Router } from '@angular/router';
 import { _HttpClient } from '@delon/theme';
-import { Subscription, zip } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { Subscription, zip, filter } from 'rxjs';
 
 @Component({
   selector: 'app-account-center',
@@ -35,7 +34,7 @@ export class ProAccountCenterComponent implements OnInit, OnDestroy {
   tagValue = '';
 
   private setActive(): void {
-    const key = this.router.url.substr(this.router.url.lastIndexOf('/') + 1);
+    const key = this.router.url.substring(this.router.url.lastIndexOf('/') + 1);
     const idx = this.tabs.findIndex(w => w.key === key);
     if (idx !== -1) {
       this.pos = idx;
@@ -72,7 +71,7 @@ export class ProAccountCenterComponent implements OnInit, OnDestroy {
   }
 
   tagEnter(e: KeyboardEvent): void {
-    if (e.keyCode === 13) {
+    if (e.key === 'Enter') {
       this.tagBlur();
     }
   }

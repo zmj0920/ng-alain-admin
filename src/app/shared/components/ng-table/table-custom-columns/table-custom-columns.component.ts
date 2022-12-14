@@ -1,3 +1,4 @@
+/* eslint-disable @angular-eslint/no-empty-lifecycle-method */
 import { Component, Input, OnInit } from '@angular/core';
 import { STComponent } from '@delon/abc/st';
 import { deepCopy } from '@delon/util';

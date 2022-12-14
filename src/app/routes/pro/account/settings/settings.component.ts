@@ -2,8 +2,7 @@ import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, E
 import { ActivationEnd, Router } from '@angular/router';
 import { _HttpClient } from '@delon/theme';
 import { NzMenuModeType } from 'ng-zorro-antd/menu';
-import { fromEvent, Subscription } from 'rxjs';
-import { debounceTime, filter } from 'rxjs/operators';
+import { fromEvent, Subscription, debounceTime, filter } from 'rxjs';
 
 @Component({
   selector: 'app-account-settings',
@@ -39,7 +38,7 @@ export class ProAccountSettingsComponent implements AfterViewInit, OnDestroy {
   }
 
   private setActive(): void {
-    const key = this.router.url.substr(this.router.url.lastIndexOf('/') + 1);
+    const key = this.router.url.substring(this.router.url.lastIndexOf('/') + 1);
     this.menus.forEach(i => {
       i.selected = i.key === key;
     });
